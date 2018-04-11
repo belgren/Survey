@@ -1,9 +1,8 @@
 /**
- * The interface for Question objects 
+ * The interface for Question objects.  This
  * @author belgren
  *
  */
 public interface Question {
-	public static void main(String[] args) {
-	}
+	public void processAnswers();
 }
