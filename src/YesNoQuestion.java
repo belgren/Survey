@@ -5,9 +5,11 @@
  */
 import java.util.ArrayList;
 public class YesNoQuestion implements Question{
-	
+	public ArrayList<String> validAnswers;
 	public YesNoQuestion() {
 		ArrayList<Answer> answers;
+		validAnswers = new ArrayList<String>(); //("T","F","True","False");
+		
 	}
 	public void processAnswers() {
 		 
