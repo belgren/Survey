@@ -183,7 +183,7 @@ public class EmailReader {
 		receiver.downloadEmails(protocol, host, port, userName, password);
 		
 		for(int i = 0; i < arrayOfEmails.size(); i++) {
-			System.out.println(arrayOfEmails.get(i));
+			System.out.println(arrayOfEmails.get(i)); 
 		}
 		
 	}
