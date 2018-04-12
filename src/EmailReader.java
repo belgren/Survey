@@ -57,6 +57,7 @@ public class EmailReader {
 
 		return properties;
 	}
+	
 
 	/**
 	 * Downloads new messages and fetches details for each message.
@@ -82,7 +83,8 @@ public class EmailReader {
 			inboxFolder.open(Folder.READ_ONLY);
 
 			// fetches new messages from server
-			Message[] messages = inboxFolder.getMessages();
+			Message[] messages = inboxFolder
+					.getMessages();
 
 			for (int i = 0; i < messages.length; i++) {
 				Message msg = messages[i];
@@ -176,7 +178,7 @@ public class EmailReader {
 		receiver.downloadEmails(protocol, host, port, userName, password);
 		
 		for(int i = 0; i < arrayOfEmails.size(); i++) {
-			System.out.println(arrayOfEmails.get(i));
+			System.out.println(arrayOfEmails.get(i)); 
 		}
 		
 	}
