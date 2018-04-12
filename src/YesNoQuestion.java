@@ -5,16 +5,17 @@
  */
 import java.util.ArrayList;
 public class YesNoQuestion implements Question{
-	 
+	
 	
 	public ArrayList<String> validAnswers;
 	private String questionText;
-	ArrayList<Answer> answers;
+	private ArrayList<Answer> answers;
 
 	
 	public YesNoQuestion(String questionText) {
 		this.questionText = questionText;
 		validAnswers = new ArrayList<String>(); //("T","F","True","False");
+		answers = new ArrayList<Answer>();
 		
 	}
 	
@@ -25,4 +26,17 @@ public class YesNoQuestion implements Question{
 	public void tallyAnswers() {
 		 
 	}
+	
+	public String getQuestionText() {
+		return this.questionText;
+	}
+	
+	public void addAnswer(Answer answer) {
+		answers.add(answer);
+	} 
+	
+	public ArrayList<Answer> getAnswers(){
+		return this.answers;
+	}
+	 
 }

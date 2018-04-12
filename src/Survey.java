@@ -1,13 +1,12 @@
-
+import java.util.ArrayList;
 public class Survey {
 	
 	private Question question;
-	
+	private ArrayList<Question> questionList = new ArrayList<Question>();
 	
 	public void addYesNoQuestion(String questionText) {
-		
-		
-		//question = new YesNoQuestion();
+		question = new YesNoQuestion(questionText);
+		questionList.add(question);
 	}
 	
 	/**
@@ -18,15 +17,18 @@ public class Survey {
 	 * be returned by the method.
 	 */
 	public void parseEmails() {
-		
+		//to be replaced by real email reading.
+		Answer answer = new Answer("Yes");
+		this.question.addAnswer(answer);
 	} 
 	
-	public void runSurvey() {
-		Survey survey = new Survey();
-		survey.addYesNoQuestion("Yes or No?");
-	}
 	
 	public static void main(String args[]) {
-		
+		Survey survey = new Survey();
+		survey.addYesNoQuestion("Yes or No?");
+		survey.parseEmails();
+		Question question = survey.questionList.get(0);
+		System.out.println(question.getQuestionText());
+		System.out.println(question.getAnswers().get(0).getAnswerText());
 	}
 }
