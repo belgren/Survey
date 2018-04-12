@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Survey {
 	
@@ -110,13 +111,34 @@ public class Survey {
 	
 	 
 	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
 		Survey survey = new Survey();
-		survey.addYesNoQuestion("Yes or no?");
-		survey.showSurvey();
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("                          Survey Maker                           ");
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("What type of question would you like to ask?");
+		System.out.println("1: Yes/No");
+		System.out.println("2: Custom Integer (Not implemented yet)");
+		System.out.println("3: Multiple Choice (Not implemented yet)");
+		int questionType = sc.nextInt();
+		if(questionType == 1) {
+			System.out.println("'Yes/No/' question selected");
+			System.out.println("Please Enter the Yes/No question you would like to add.");
+			String ynQuestion = sc.nextLine();
+			survey.addYesNoQuestion("Do you like dogs more than cats?");
+			survey.showSurvey();
+			
+			survey.getSurveyEmailData();
+			
+			survey.separateAnswers(survey.emailList, survey.questionList);
+			survey.tallySurvey();	
+		}
 		
-		survey.getSurveyEmailData();
 		
-		survey.separateAnswers(survey.emailList, survey.questionList);
-		survey.tallySurvey();		
+		
+		
+		
+		
+			
 	} 
 }
