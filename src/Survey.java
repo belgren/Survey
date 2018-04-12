@@ -5,10 +5,12 @@ public class Survey {
 	
 	private Question question;
 	private ArrayList<Question> questionList = new ArrayList<Question>();
+	private ArrayList<Email> emailList;
 	
 	public void addYesNoQuestion(String questionText) {
 		question = new YesNoQuestion(questionText);
 		questionList.add(question);
+		emailList = new ArrayList<Email>();
 	}
 	
 	/**
@@ -19,6 +21,14 @@ public class Survey {
 	 * be returned by the method.
 	 */
 	public void parseEmails() {
+		String protocol = "imap";
+		String host = "imap.gmail.com";
+		String port = "993";
+		String userName = "cp274survey@gmail.com";
+		String password = "DarrylBenJordan";
+		EmailReader reader = new EmailReader();
+		emailList = reader.downloadEmails(protocol, host, port, userName, password);
+		
 		//to be replaced by real email reading.
 		Answer answer = new Answer("Yes");
 		this.question.addAnswer(answer);
@@ -27,6 +37,7 @@ public class Survey {
 	
 	public static void main(String args[]) {
 		Survey survey = new Survey();
+		
 		survey.addYesNoQuestion("Yes or No?");
 		survey.parseEmails();
 		Question question = survey.questionList.get(0);
