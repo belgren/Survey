@@ -166,7 +166,7 @@ public class Survey {
 			}
 				
 		}
-		
+		 
 		System.out.println("\nPress enter to tally results");
 		Scanner in = new Scanner(System.in);
 		in.nextLine(); 
