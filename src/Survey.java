@@ -34,25 +34,19 @@ public class Survey {
 		this.question.addAnswer(answer);
 	} 
 	
-	public static ArrayList<ArrayList<String>> separateAnswers(ArrayList<Email> emailList){
-		
-		ArrayList<ArrayList<String>> allAnswers = new ArrayList<ArrayList<String>>();
-		ArrayList<String> answersPerPerson = new ArrayList<String>(); 
+	public ArrayList<ArrayList<Answer>> separateAnswers(ArrayList<Email> emailList){
+		ArrayList<ArrayList<Answer>> allAnswers = new ArrayList<ArrayList<Answer>>();
 		
 		for(Email email: emailList) {
+			ArrayList<Answer> answersPerPerson = new ArrayList<Answer>(); 
 			String surveyAnswers = email.getMessage();
-			String[] answersPerQuestion = surveyAnswers.split("\n");
-			for(int i=0; i<answersPerQuestion.length; i++) {
-				answersPerPerson.add(answersPerQuestion[i]);
+			String[] answersPerEmail = surveyAnswers.split("\n");
+			for(String singleAnswer : answersPerEmail) {
+				Answer answer = new Answer(singleAnswer);
+				answersPerPerson.add(answer);
 			}
-			
 			allAnswers.add(answersPerPerson);
-			
-			for(int i=0; i<answersPerPerson.size(); i++) {
-				System.out.print(answersPerPerson.get(i));
-			}
-			System.out.println("\n");
-		} 
+		}
 		
 		return allAnswers;
 	}
@@ -64,9 +58,6 @@ public class Survey {
 		survey.addYesNoQuestion("Yes or No?");
 		survey.parseEmails();
 		Question question = survey.questionList.get(0);
-		for (Answer answer: question.tallyAnswers().keySet()) {
-			System.out.print(answer.getAnswerText());
-		}
-		separateAnswers(emailList);
+		
 	} 
 }
