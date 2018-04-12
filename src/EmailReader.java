@@ -38,6 +38,7 @@ public class EmailReader {
 	
 	public static final String PROPER_SUBJECT = "Survey 1";
 	public static ArrayList<Email> arrayOfEmails;
+	
 	/**
 	 * Returns a Properties object which is configured for a POP3/IMAP server
 	 *
@@ -70,7 +71,8 @@ public class EmailReader {
 	 * @param userName
 	 * @param password
 	 */
-	public void downloadEmails(String protocol, String host, String port,String userName, String password) {
+	public ArrayList<Email> downloadEmails(String protocol, String host, String port,String userName, String password) {
+		arrayOfEmails = new ArrayList<Email>();
 		//Setting up email fetching
 		Properties serverProperties = getServerProperties(protocol, host, port);
 		Session emailSession = Session.getDefaultInstance(serverProperties);
@@ -136,7 +138,8 @@ public class EmailReader {
 			System.out.println("Could not connect to the message store");
 			ex.printStackTrace();
 		}
-		
+		return arrayOfEmails;
+
 	}
 	
 	
@@ -159,7 +162,6 @@ public class EmailReader {
 	 * Test downloading e-mail messages
 	 */
 	public static void main(String[] args) {
-		arrayOfEmails = new ArrayList<Email>();
 		
 		// for POP3
 		//String protocol = "pop3";
