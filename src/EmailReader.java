@@ -151,7 +151,7 @@ public class EmailReader {
 
 		return listAddress;
 	}
- 
+    
 	/**
 	 * Test downloading e-mail messages
 	 */
