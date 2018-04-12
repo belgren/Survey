@@ -5,7 +5,9 @@ public class Survey {
 	
 	
 	public void addYesNoQuestion(String questionText) {
-		question = new YesNoQuestion();
+		
+		
+		//question = new YesNoQuestion();
 	}
 	
 	/**
