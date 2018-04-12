@@ -7,7 +7,7 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
-import javax.mail.Store;
+import javax.mail.Store; 
 
 /**
  * This program demonstrates how to get e-mail messages from a POP3/IMAP server
