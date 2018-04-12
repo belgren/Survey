@@ -70,7 +70,7 @@ public class EmailReader {
 	 * @param userName
 	 * @param password
 	 */
-	public void downloadEmails(String protocol, String host, String port,String userName, String password) {
+	public ArrayList<Email> downloadEmails(String protocol, String host, String port,String userName, String password) {
 		//Setting up email fetching
 		Properties serverProperties = getServerProperties(protocol, host, port);
 		Session emailSession = Session.getDefaultInstance(serverProperties);
@@ -136,7 +136,8 @@ public class EmailReader {
 			System.out.println("Could not connect to the message store");
 			ex.printStackTrace();
 		}
-		
+		return arrayOfEmails;
+
 	}
 	
 	
