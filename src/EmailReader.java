@@ -21,6 +21,7 @@ import java.util.Properties;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
@@ -28,7 +29,8 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
-import javax.mail.internet.MimeMultipart;  
+import javax.mail.internet.MimeMultipart;
+import javax.mail.search.FlagTerm;  
 
 /**
  * Baseline code for fetching email messages using Javamail from www.codejava.net
@@ -41,28 +43,22 @@ public class EmailReader {
 	 * Returns a Properties object which is configured for a POP3/IMAP server
 	 *
 	 * @param protocol either "imap" or "pop3"
-	 * @param host
+	 * @param host - email host: gmail, yahoo, etc. 
 	 * @param port
 	 * @return a Properties object
 	 */
-	private Properties getServerProperties(String protocol, String host,
-			String port) {
+	private Properties getServerProperties(String protocol, String host, String port) {
 		Properties properties = new Properties();
 
 		// server setting
+		//format replaces "%s" with the string version of the protocol object
 		properties.put(String.format("mail.%s.host", protocol), host);
 		properties.put(String.format("mail.%s.port", protocol), port);
 
-		// SSL setting
-		properties.setProperty(
-				String.format("mail.%s.socketFactory.class", protocol),
-				"javax.net.ssl.SSLSocketFactory");
-		properties.setProperty(
-				String.format("mail.%s.socketFactory.fallback", protocol),
-				"false");
-		properties.setProperty(
-				String.format("mail.%s.socketFactory.port", protocol),
-				String.valueOf(port));
+		// SSL (secure sockets layer) setting
+		properties.setProperty(String.format("mail.%s.socketFactory.class", protocol),"javax.net.ssl.SSLSocketFactory");
+		properties.setProperty(String.format("mail.%s.socketFactory.fallback", protocol),"false");
+		properties.setProperty(String.format("mail.%s.socketFactory.port", protocol),String.valueOf(port));
 
 		return properties;
 	}
@@ -75,22 +71,22 @@ public class EmailReader {
 	 * @param userName
 	 * @param password
 	 */
-	public void downloadEmails(String protocol, String host, String port,
-			String userName, String password) {
-		Properties properties = getServerProperties(protocol, host, port);
-		Session session = Session.getDefaultInstance(properties);
+	public void downloadEmails(String protocol, String host, String port,String userName, String password) {
+		//Setting up email fetching
+		Properties serverProperties = getServerProperties(protocol, host, port);
+		Session emailSession = Session.getDefaultInstance(serverProperties);
 
 		try {
 			// connects to the message store
-			Store store = session.getStore(protocol);
-			store.connect(userName, password);
+			Store messageStore = emailSession.getStore(protocol);
+			messageStore.connect(userName, password);
 
 			// opens the inbox folder
-			Folder folderInbox = store.getFolder("INBOX");
-			folderInbox.open(Folder.READ_ONLY);
+			Folder inboxFolder = messageStore.getFolder("INBOX");
+			inboxFolder.open(Folder.READ_ONLY);
 
 			// fetches new messages from server
-			Message[] messages = folderInbox.getMessages();
+			Message[] messages = inboxFolder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
 
 			for (int i = 0; i < messages.length; i++) {
 				Message msg = messages[i];
@@ -109,7 +105,7 @@ public class EmailReader {
 							messageContent = content.toString();
 						}
 					} catch (Exception ex) {
-						messageContent = "[Error downloading content]";
+						messageContent = "Error downloading massage content";
 						ex.printStackTrace();
 					}
 				}
@@ -119,7 +115,7 @@ public class EmailReader {
 			        messageContent = getTextFromMimeMultipart(mimeMultipart);
 					}
 					catch(Exception ex) {
-						messageContent = "[Error downloading content]";
+						messageContent = "Error downloading massage content";
 						ex.printStackTrace();
 					}
 			    }
@@ -132,8 +128,8 @@ public class EmailReader {
 			
 
 			// disconnect
-			folderInbox.close(false);
-			store.close();
+			inboxFolder.close(false);
+			messageStore.close();
 		} catch (NoSuchProviderException ex) {
 			System.out.println("No provider for protocol: " + protocol);
 			ex.printStackTrace();
@@ -143,40 +139,18 @@ public class EmailReader {
 		}
 		
 	}
-
-	/**
-	 * Returns a list of addresses in String format separated by comma
-	 *
-	 * @param address an array of Address objects
-	 * @return a string represents a list of addresses
-	 */
-	private String parseAddresses(Address[] address) {
-		String listAddress = "";
-
-		if (address != null) {
-			for (int i = 0; i < address.length; i++) {
-				listAddress += address[i].toString() + ", ";
-			}
-		}
-		if (listAddress.length() > 1) {
-			listAddress = listAddress.substring(0, listAddress.length() - 2);
-		}
-
-		return listAddress;
-	}
-	
 	
 	
 	private String getTextFromMimeMultipart(MimeMultipart mimeMultipart)  throws MessagingException, IOException{
 	    String result = "";
 	    int count = mimeMultipart.getCount();
 	    for (int i = 0; i < count; i++) {
-	        BodyPart bodyPart = mimeMultipart.getBodyPart(i);
-	        if (bodyPart.isMimeType("text/plain")) {
-	            result = result + "\n" + bodyPart.getContent();
+	        BodyPart emailBody = mimeMultipart.getBodyPart(i);
+	        if (emailBody.isMimeType("text/plain")) {
+	            result = result + "\n" + emailBody.getContent();
 	            break; 
-	        } else if (bodyPart.getContent() instanceof MimeMultipart){
-	            result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
+	        } else if (emailBody.getContent() instanceof MimeMultipart){
+	            result = result + getTextFromMimeMultipart((MimeMultipart)emailBody.getContent());
 	        }
 	    }
 	    return result;
