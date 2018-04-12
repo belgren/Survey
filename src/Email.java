@@ -21,4 +21,8 @@ public class Email {
 		stringEmail += "\nMessage content: " + messageContent;
 		return stringEmail;
 	}
+	
+	public String getMessage() {
+		return messageContent;
+	}
 }
