@@ -101,7 +101,7 @@ public class Survey {
 				Integer occurances = entry.getValue();
 				
 				//int occurrances = answerTally.get(answerText);
-				System.out.println(key + " : " + occurances);
+				System.out.print(occurances + " : " + key);
 				//System.out.print(" : " + answerTally.get(answerText));
 			}
 		}
