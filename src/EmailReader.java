@@ -121,6 +121,7 @@ public class EmailReader {
 				System.out.println("\t Sent Date: " + sentDate);
 				System.out.println("\t Message: " + messageContent);
 			}
+			
 
 			// disconnect
 			folderInbox.close(false);
