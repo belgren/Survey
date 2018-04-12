@@ -65,9 +65,11 @@ public class Survey {
 			for(Email email: emailList) {
 				//ArrayList<Answer> answersPerPerson = new ArrayList<Answer>(); 
 				String surveyAnswers = email.getMessage();
-				String[] answersPerEmail = surveyAnswers.split("\n");
-				Answer answer = new Answer(answersPerEmail[i]);
-				question.addAnswer(answer);
+//				surveyAnswers.replaceAll("\n", ">");
+				System.out.println(surveyAnswers);
+//				String[] answersPerEmail = surveyAnswers.split("\n");
+//				Answer answer = new Answer(answersPerEmail[i]);
+//				question.addAnswer(answer);
 			}
 			i++;
 		} 
@@ -125,7 +127,7 @@ public class Survey {
 			System.out.println("'Yes/No/' question selected");
 			System.out.println("Please Enter the Yes/No question you would like to add.");
 			String ynQuestion = sc.nextLine();
-			survey.addYesNoQuestion("Do you like dogs more than cats?");
+			survey.addYesNoQuestion(ynQuestion);
 			survey.showSurvey();
 			
 			survey.getSurveyEmailData();
