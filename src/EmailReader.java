@@ -1,3 +1,20 @@
+/**
+ * Download javax.mail.jar from https://javaee.github.io/javamail/
+ * Download Source code (zip) from https://github.com/javaee/javamail/releases
+ * Right click on project > build path > configure build path
+ * Click on libraries, add external jars, select the javax.mail.jar file
+ * In the configure build path window, expand the javax.mail.jar file, and double click on source
+ * double click on source attachment, choose External location, click external file
+ * Select the Source code zip file
+ * Click ok
+ * Click apply and close
+ */
+
+
+
+
+
+
 import java.util.Properties;
 
 import javax.mail.Address;
