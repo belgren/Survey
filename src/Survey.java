@@ -52,7 +52,7 @@ public class Survey {
 				System.out.print(answersPerPerson.get(i));
 			}
 			System.out.println("\n");
-		}
+		} 
 		
 		return allAnswers;
 	}
@@ -68,5 +68,5 @@ public class Survey {
 			System.out.print(answer.getAnswerText());
 		}
 		separateAnswers(emailList);
-	}
+	} 
 }
