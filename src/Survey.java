@@ -1,11 +1,12 @@
-
+import java.util.ArrayList;
 public class Survey {
 	
 	private Question question;
-	
+	private ArrayList<Question> questions;
 	
 	public void addYesNoQuestion(String questionText) {
-		question = new YesNoQuestion();
+		question = new YesNoQuestion(questionText);
+		questions.add(question);
 	}
 	
 	/**
@@ -19,12 +20,10 @@ public class Survey {
 		
 	}
 	
-	public void runSurvey() {
-		Survey survey = new Survey();
-		survey.addYesNoQuestion("Yes or No?");
-	}
 	
 	public static void main(String args[]) {
-		
+		Survey survey = new Survey();
+		survey.addYesNoQuestion("Yes or No?");
+		System.out.println(survey.questions);
 	}
 }
