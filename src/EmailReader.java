@@ -189,7 +189,7 @@ public class EmailReader {
 		//String protocol = "pop3";
 		//String host = "pop.gmail.com";
 		//String port = "995";
-
+ 
 		// for IMAP
 		String protocol = "imap";
 		String host = "imap.gmail.com";
