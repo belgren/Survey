@@ -9,7 +9,7 @@ public class Answer {
 	private String answerText;
 	
 	public Answer(String answerText) {
-		this.answerText = answerText;
+		this.answerText = answerText.replaceAll("\\r|\\n", "");
 	}
 	
 	public String toString() {
