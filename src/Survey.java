@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -125,10 +126,12 @@ public class Survey {
 		}
 		return answerTallys;
 	}
+	
+	public ArrayList<Question> getQuestionList(){
+		return questionList;
+	}
 	 
 	public static void main(String args[]) {
-		Scanner sc = new Scanner(System.in);
-		boolean done = false;
 		
 		System.out.println("-----------------------------------------------------------------");
 		System.out.println("                          Survey Maker                           ");
@@ -139,32 +142,41 @@ public class Survey {
 		String surveyName = nameScanner.nextLine();
 		Survey survey = new Survey(surveyName);
 		
+		Scanner sc = new Scanner(System.in);
+		boolean done = false;
+		
 		while(!done) {
 			System.out.println("What would you like to do?");
 			System.out.println("1: Add a yes/no question");
 			System.out.println("2: Finish and create survey");
 
-			int questionType = sc.nextInt();
-			
-			switch(questionType) {
+			try {
+				int questionType = sc.nextInt();
+
+				switch(questionType) {
 				case 1:
 					System.out.println("Please Enter the Yes/No question you would like to add.");
 					Scanner s = new Scanner(System.in);
 					String ynQuestion = s.nextLine();
-					
-				
+
 					survey.addYesNoQuestion(ynQuestion);
-		
+
 					break;
-				
+
 				case 2:
+					//while(questionList.isEmpty()) {
+					//	System.out.println("Survey has no questions. Please add a question.");
+					//}
 					survey.showSurvey();
 					done = true;
 					break;
 				default:
-					System.out.println("Please Enter a number between 1 and 3");					
+					System.out.println("Please enter a valid option between 1 and 2\n");					
+				}
+			} catch(InputMismatchException ex){
+				sc.nextLine();
+				System.out.println("Please enter a valid option between 1 and 2\n");
 			}
-				
 		}
 		 
 		System.out.println("\nPress enter to tally results");
