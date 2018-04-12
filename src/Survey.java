@@ -5,7 +5,7 @@ public class Survey {
 	
 	private Question question;
 	private ArrayList<Question> questionList = new ArrayList<Question>();
-	private ArrayList<Email> emailList;
+	private static ArrayList<Email> emailList;
 	
 	public void addYesNoQuestion(String questionText) {
 		question = new YesNoQuestion(questionText);
@@ -34,7 +34,30 @@ public class Survey {
 		this.question.addAnswer(answer);
 	} 
 	
+	public static ArrayList<ArrayList<String>> separateAnswers(ArrayList<Email> emailList){
+		
+		ArrayList<ArrayList<String>> allAnswers = new ArrayList<ArrayList<String>>();
+		ArrayList<String> answersPerPerson = new ArrayList<String>(); 
+		
+		for(Email email: emailList) {
+			String surveyAnswers = email.getMessage();
+			String[] answersPerQuestion = surveyAnswers.split("\n");
+			for(int i=0; i<answersPerQuestion.length; i++) {
+				answersPerPerson.add(answersPerQuestion[i]);
+			}
+			
+			allAnswers.add(answersPerPerson);
+			
+			for(int i=0; i<answersPerPerson.size(); i++) {
+				System.out.print(answersPerPerson.get(i));
+			}
+			System.out.println("\n");
+		} 
+		
+		return allAnswers;
+	}
 	
+	 
 	public static void main(String args[]) {
 		Survey survey = new Survey();
 		
@@ -44,5 +67,6 @@ public class Survey {
 		for (Answer answer: question.tallyAnswers().keySet()) {
 			System.out.print(answer.getAnswerText());
 		}
-	}
+		separateAnswers(emailList);
+	} 
 }
