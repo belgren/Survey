@@ -105,6 +105,7 @@ public class EmailReader {
 						if (content != null) {
 							System.out.println(contentType);
 							messageContent = content.toString();
+						
 							
 						}
 					} catch (Exception ex) {
