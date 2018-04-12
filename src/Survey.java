@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Survey {
 	
 	private Question question;
-	private ArrayList<Question> questionList = new ArrayList<Question>();
+	private static ArrayList<Question> questionList = new ArrayList<Question>();
 	private static ArrayList<Email> emailList;
 	private int counter;
 	private ArrayList<HashMap<String, Integer>> answerTallys;
@@ -155,7 +155,7 @@ public class Survey {
 
 				switch(questionType) {
 				case 1:
-					System.out.println("Please Enter the Yes/No question you would like to add.");
+					System.out.println("Please enter the yes/no question you would like to add.");
 					Scanner s = new Scanner(System.in);
 					String ynQuestion = s.nextLine();
 
@@ -164,12 +164,15 @@ public class Survey {
 					break;
 
 				case 2:
-					//while(questionList.isEmpty()) {
-					//	System.out.println("Survey has no questions. Please add a question.");
-					//}
-					survey.showSurvey();
-					done = true;
-					break;
+					if(questionList.isEmpty()) {
+						System.out.println("Survey has no questions. Please add a question.\n");
+						break;
+					}
+					else {
+						survey.showSurvey();
+						done = true;
+						break;
+					}
 				default:
 					System.out.println("Please enter a valid option between 1 and 2\n");					
 				}
