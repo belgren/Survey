@@ -11,10 +11,6 @@
  */
 
 
-
-
-
-
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -158,7 +154,7 @@ public class EmailReader {
 
 		return listAddress;
 	}
-
+ 
 	/**
 	 * Test downloading e-mail messages
 	 */
