@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The interface for Question objects.  This
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public interface Question {
 	
 	
-	public void tallyAnswers();
+	public HashMap<Answer, Integer> tallyAnswers();
 
 	public String getQuestionText();
 	
