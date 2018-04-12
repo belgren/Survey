@@ -126,7 +126,7 @@ public class EmailReader {
 					arrayOfEmails.add(savedEmail);
 				}
 			}
-			
+			 
 
 			// disconnect
 			inboxFolder.close(false);
