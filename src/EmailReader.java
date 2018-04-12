@@ -24,7 +24,6 @@ import javax.mail.BodyPart;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
-import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
@@ -179,6 +178,9 @@ public class EmailReader {
 		EmailReader receiver = new EmailReader();
 		receiver.downloadEmails(protocol, host, port, userName, password);
 		
-		System.out.println(arrayOfEmails);
+		for(int i = 0; i < arrayOfEmails.size(); i++) {
+			System.out.println(arrayOfEmails.get(i));
+		}
+		
 	}
 }

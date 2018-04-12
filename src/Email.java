@@ -12,4 +12,13 @@ public class Email {
 		this.sentDate = sentDate;
 		this.messageContent = messageContent;
 	}
+	
+	public String toString() {
+		String stringEmail = "";
+		stringEmail += "From: " + fromAddress;
+		stringEmail += "\nDate: " + sentDate;
+		stringEmail += "\nSubject: " + subject;
+		stringEmail += "\nMessage content: " + messageContent;
+		return stringEmail;
+	}
 }
