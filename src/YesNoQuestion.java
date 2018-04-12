@@ -20,8 +20,8 @@ public class YesNoQuestion implements Question {
 
 		this.questionText = questionText;
 		validAnswers = new ArrayList<String>();
-		validAnswers.add("y");
-		validAnswers.add("n");
+		validAnswers.add("yes");
+		validAnswers.add("no");
 		answers = new ArrayList<Answer>();
 		tally = new HashMap<String, Integer>();
 
