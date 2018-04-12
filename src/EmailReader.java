@@ -27,7 +27,7 @@ import javax.mail.Session;
 import javax.mail.Store;
 
 /**
- * This program demonstrates how to get e-mail messages from a POP3/IMAP server
+ * Baseline code for fetching email messages using Javamail from 
  *
  * @author www.codejava.net
  *
@@ -94,33 +94,28 @@ public class EmailReader {
 				Address[] fromAddress = msg.getFrom();
 				String from = fromAddress[0].toString();
 				String subject = msg.getSubject();
-				String toList = parseAddresses(msg
-						.getRecipients(RecipientType.TO));
-				String ccList = parseAddresses(msg
-						.getRecipients(RecipientType.CC));
 				String sentDate = msg.getSentDate().toString();
-
 				String contentType = msg.getContentType();
 				String messageContent = "";
 
-				if (contentType.contains("TEXT/PLAIN")
-						|| contentType.contains("TEXT/HTML")) {
+//				if (contentType.contains("TEXT/PLAIN")
+//						|| contentType.contains("TEXT/HTML")) {
 					try {
 						Object content = msg.getContent();
 						if (content != null) {
+							System.out.println(contentType);
 							messageContent = content.toString();
+							
 						}
 					} catch (Exception ex) {
 						messageContent = "[Error downloading content]";
 						ex.printStackTrace();
-					}
+//					}
 				}
 
 				// print out details of each message
 				System.out.println("Message #" + (i + 1) + ":");
 				System.out.println("\t From: " + from);
-				System.out.println("\t To: " + toList);
-				System.out.println("\t CC: " + ccList);
 				System.out.println("\t Subject: " + subject);
 				System.out.println("\t Sent Date: " + sentDate);
 				System.out.println("\t Message: " + messageContent);
