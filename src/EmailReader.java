@@ -87,7 +87,7 @@ public class EmailReader {
 			inboxFolder.open(Folder.READ_ONLY);
 
 			// fetches new messages from server
-			Message[] messages = inboxFolder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
+			Message[] messages = inboxFolder.getMessages();
 
 			for (int i = 0; i < messages.length; i++) {
 				Message msg = messages[i];
