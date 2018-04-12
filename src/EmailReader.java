@@ -24,7 +24,7 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
-import javax.mail.Store;
+import javax.mail.Store;  
 
 /**
  * Baseline code for fetching email messages using Javamail from 
