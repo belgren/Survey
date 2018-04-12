@@ -97,13 +97,11 @@ public class Survey {
 			//Adding one question's tally map to a list of all maps for all question in a survey
 			answerTallys.add(answerTally); 
 			//print one 
-			for (Map.Entry<String, Integer> entry  : answerTally.entrySet()) {
-				String key = entry.getKey();
-				Integer occurances = entry.getValue();
+			for (String key : answerTally.keySet()) {
 				
-				//int occurrances = answerTally.get(answerText);
-				System.out.print(occurances + " : " + key);
-				//System.out.print(" : " + answerTally.get(answerText));
+				int occurances = answerTally.get(key);
+				System.out.println("occurrances:" + occurances + " --- " + "key: " + key);
+				
 			}
 		}
 		return answerTallys;
