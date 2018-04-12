@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Survey {
 	
 	private Question question;
@@ -28,7 +30,8 @@ public class Survey {
 		survey.addYesNoQuestion("Yes or No?");
 		survey.parseEmails();
 		Question question = survey.questionList.get(0);
-		System.out.println(question.getQuestionText());
-		System.out.println(question.getAnswers().get(0).getAnswerText());
+		for (Answer answer: question.tallyAnswers().keySet()) {
+			System.out.print(answer.getAnswerText());
+		}
 	}
 }

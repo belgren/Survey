@@ -18,8 +18,9 @@ public class YesNoQuestion implements Question{
 	
 	public YesNoQuestion(String questionText) {
 		this.questionText = questionText;
-		validAnswers = new ArrayList<String>(Arrays.asList("T","F","True","False")); 
+		validAnswers = new ArrayList<String>(Arrays.asList("Y","N","Yes","No")); 
 		answers = new ArrayList<Answer>();
+		tally = new HashMap<Answer, Integer>();
 		
 	}
 	
@@ -33,8 +34,12 @@ public class YesNoQuestion implements Question{
 			 
 			 if (validAnswers.contains(answerText)) {
 				 //Insert a new answer with one count into tally map if legal answer has not yet 
-				 //been counted, if it exists then incriment the value;
+				 //been counted. If it exists, then increment the value;
 				 tally.merge(answer, 1, Integer::sum);
+			 }
+			 //unnecessary, just here for testing
+			 else {
+				 System.out.print(answerText + " is not a valid answer");
 			 }
 		 }
 		 return tally;
@@ -51,5 +56,4 @@ public class YesNoQuestion implements Question{
 	public ArrayList<Answer> getAnswers(){
 		return this.answers;
 	}
-	 
 }
