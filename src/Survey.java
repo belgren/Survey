@@ -8,7 +8,15 @@ public class Survey {
 	 * Each of these arrays will be added to another array that will hold all responses and
 	 * be returned by the method.
 	 */
+	public void addQuestion() {
+		
+	}
+	
 	public void parseEmails() {
+		
+	}
+	
+	public static void main(String args[]) {
 		
 	}
 }
