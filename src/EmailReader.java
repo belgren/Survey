@@ -37,7 +37,7 @@ public class EmailReader {
 	public EmailReader(String name) {
 		surveyName = name;
 	}
-	
+	 
 	/**
 	 * Returns a Properties object which is configured for a POP3/IMAP server
 	 *
