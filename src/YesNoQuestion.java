@@ -5,7 +5,7 @@
  */
 import java.util.ArrayList;
 public class YesNoQuestion implements Question{
-	
+	 
 	
 	public ArrayList<String> validAnswers;
 	private String questionText;
