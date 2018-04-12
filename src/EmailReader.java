@@ -119,7 +119,7 @@ public class EmailReader {
 					}
 			    }
 
-				if(subject.equals(PROPER_SUBJECT)) {
+				if(subject.equalsIgnoreCase(PROPER_SUBJECT)) {
 					Email savedEmail = new Email(subject, from, sentDate, messageContent);
 					arrayOfEmails.add(savedEmail);
 				}
