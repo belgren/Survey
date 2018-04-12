@@ -31,8 +31,12 @@ import javax.mail.search.FlagTerm;
  */
 public class EmailReader {
 	
-	public static final String PROPER_SUBJECT = "Survey 2";
+	private String surveyName;
 	public static ArrayList<Email> arrayOfEmails;
+	
+	public EmailReader(String name) {
+		surveyName = name;
+	}
 	
 	/**
 	 * Returns a Properties object which is configured for a POP3/IMAP server
@@ -118,7 +122,7 @@ public class EmailReader {
 					}
 			    }
 
-				if(subject.equalsIgnoreCase(PROPER_SUBJECT)) {
+				if(subject.equalsIgnoreCase(surveyName)) {
 					Email savedEmail = new Email(subject, from, sentDate, messageContent);
 					arrayOfEmails.add(savedEmail);
 				}
@@ -157,7 +161,7 @@ public class EmailReader {
 
 	/**
 	 * Test downloading e-mail messages
-	 */
+	
 	public static void main(String[] args) {
 		
 		// for POP3
@@ -174,11 +178,11 @@ public class EmailReader {
 		String userName = "cp274survey@gmail.com";
 		String password = "DarrylBenJordan";
 		
-		EmailReader receiver = new EmailReader();
+		EmailReader receiver = new EmailReader(surveyName);
 		receiver.downloadEmails(protocol, host, port, userName, password);
 		for(int i = 0; i < arrayOfEmails.size(); i++) {
 			System.out.println(arrayOfEmails.get(i)); 
 		}
 		
-	}
+	}*/
 }

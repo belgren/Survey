@@ -10,8 +10,10 @@ public class Survey {
 	private static ArrayList<Email> emailList;
 	private int counter;
 	private ArrayList<HashMap<String, Integer>> answerTallys;
+	private String surveyName;
 	
-	public Survey() {
+	public Survey(String name) {
+		surveyName = name;
 		counter = 0;
 		answerTallys = new ArrayList<HashMap<String, Integer>>();
 	}
@@ -34,8 +36,16 @@ public class Survey {
 	 * Print all questions in survey;
 	 */
 	public void showSurvey() {
+		int i = 1;
+		System.out.println("\nWelcome to " + surveyName + "!");
+		System.out.println("\nInstructions:");
+		System.out.println("Please email your survey answers to cp274survey@gmail.com");
+		System.out.println("Email subject must be \"" + surveyName + "\"");
+		System.out.println("Separate question answers by line\n");
+		
 		for (Question question : questionList) {
-			System.out.println(question);
+			System.out.println("Question " + i + ": " + question);
+			i++;
 		}
 	}
 	/**
@@ -47,7 +57,7 @@ public class Survey {
 		String port = "993";
 		String userName = "cp274survey@gmail.com";
 		String password = "DarrylBenJordan";
-		EmailReader reader = new EmailReader();
+		EmailReader reader = new EmailReader(surveyName);
 		emailList = reader.downloadEmails(protocol, host, port, userName, password);
 	} 
 	
@@ -98,7 +108,7 @@ public class Survey {
 				System.out.println("No answers provided for question: " + question);
 			}
 			else {
-				System.out.println("Tally for question " + question +": ");
+				System.out.println("Tally for question: " + question);
 			}
 			//hashmap of answers and their tally for all answers for a given question
 			HashMap<String, Integer> answerTally = question.tallyAnswers();
@@ -115,26 +125,29 @@ public class Survey {
 		}
 		return answerTallys;
 	}
-	
 	 
 	public static void main(String args[]) {
 		Scanner sc = new Scanner(System.in);
 		boolean done = false;
-		Survey survey = new Survey();
+		
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("                          Survey Maker                           ");
+		System.out.println("-----------------------------------------------------------------");
 
+		System.out.println("Please enter survey name:");
+		Scanner nameScanner = new Scanner(System.in);
+		String surveyName = nameScanner.nextLine();
+		Survey survey = new Survey(surveyName);
+		
 		while(!done) {
-			System.out.println("-----------------------------------------------------------------");
-			System.out.println("                          Survey Maker                           ");
-			System.out.println("-----------------------------------------------------------------");
-			System.out.println("What type of question would you like to ask?");
-			System.out.println("1: Yes/No");
-			System.out.println("2: Custom Integer (Not implemented yet)");
-			System.out.println("3: Multiple Choice (Not implemented yet)");
+			System.out.println("What would you like to do?");
+			System.out.println("1: Add a yes/no question");
+			System.out.println("2: Finish and create survey");
+
 			int questionType = sc.nextInt();
 			
 			switch(questionType) {
 				case 1:
-					System.out.println("'Yes/No/' question selected");
 					System.out.println("Please Enter the Yes/No question you would like to add.");
 					Scanner s = new Scanner(System.in);
 					String ynQuestion = s.nextLine();
@@ -145,9 +158,7 @@ public class Survey {
 					break;
 				
 				case 2:
-					done = true;
-					break;
-				case 3:
+					survey.showSurvey();
 					done = true;
 					break;
 				default:
@@ -155,9 +166,10 @@ public class Survey {
 			}
 				
 		}
-
-		//survey.showSurvey();
 		
+		System.out.println("\nPress enter to tally results");
+		Scanner in = new Scanner(System.in);
+		in.nextLine(); 
 		
 		survey.getSurveyEmailData();
 		
