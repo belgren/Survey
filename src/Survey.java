@@ -57,7 +57,7 @@ public class Survey {
 		return allAnswers;
 	}
 	
-	
+	 
 	public static void main(String args[]) {
 		Survey survey = new Survey();
 		
