@@ -11,22 +11,26 @@
  */
 
 
+
+
+
+
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Address;
+import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
-import javax.mail.Store;  
+import javax.mail.Store;
+import javax.mail.internet.MimeMultipart;  
 
 /**
- * Baseline code for fetching email messages using Javamail from 
- *
- * @author www.codejava.net
- *
+ * Baseline code for fetching email messages using Javamail from www.codejava.net
  */
 public class EmailReader {
 
@@ -94,12 +98,10 @@ public class EmailReader {
 				String contentType = msg.getContentType();
 				String messageContent = "";
 
-//				if (contentType.contains("TEXT/PLAIN")
-//						|| contentType.contains("TEXT/HTML")) {
+				if (contentType.contains("TEXT/PLAIN")) {
 					try {
 						Object content = msg.getContent();
 						if (content != null) {
-							System.out.println(contentType);
 							messageContent = content.toString();
 						
 							
@@ -107,8 +109,18 @@ public class EmailReader {
 					} catch (Exception ex) {
 						messageContent = "[Error downloading content]";
 						ex.printStackTrace();
-//					}
+					}
 				}
+				else if (msg.isMimeType("multipart/*")) {
+					try {
+			        MimeMultipart mimeMultipart = (MimeMultipart) msg.getContent();
+			        messageContent = getTextFromMimeMultipart(mimeMultipart);
+					}
+					catch(Exception ex) {
+						messageContent = "[Error downloading content]";
+						ex.printStackTrace();
+					}
+			    }
 
 				// print out details of each message
 				System.out.println("Message #" + (i + 1) + ":");
@@ -151,7 +163,24 @@ public class EmailReader {
 
 		return listAddress;
 	}
-    
+	
+	
+	
+	private String getTextFromMimeMultipart(MimeMultipart mimeMultipart)  throws MessagingException, IOException{
+	    String result = "";
+	    int count = mimeMultipart.getCount();
+	    for (int i = 0; i < count; i++) {
+	        BodyPart bodyPart = mimeMultipart.getBodyPart(i);
+	        if (bodyPart.isMimeType("text/plain")) {
+	            result = result + "\n" + bodyPart.getContent();
+	            break; 
+	        } else if (bodyPart.getContent() instanceof MimeMultipart){
+	            result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
+	        }
+	    }
+	    return result;
+	}
+
 	/**
 	 * Test downloading e-mail messages
 	 */
@@ -167,7 +196,6 @@ public class EmailReader {
 		String port = "993";
 
 
-		
 		String userName = "cp274survey@gmail.com";
 		String password = "DarrylBenJordan";
 
