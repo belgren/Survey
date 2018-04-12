@@ -11,6 +11,11 @@ public class YesNoQuestion implements Question{
 		validAnswers = new ArrayList<String>(); //("T","F","True","False");
 		
 	}
+	
+	/**
+	 * This method will tally the answers for a specific question. This process will 
+	 * be unique to the type of question.
+	 */
 	public void tallyAnswers() {
 		 
 	}
