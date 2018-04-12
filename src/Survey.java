@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 public class Survey {
 	
-	private Question question;
-	private ArrayList<Question> questions;
+	//private Question question;
+	private ArrayList<Question> questions = new ArrayList<Question>();
 	
 	public void addYesNoQuestion(String questionText) {
-		question = new YesNoQuestion(questionText);
-		questions.add(question);
+		Question question = new YesNoQuestion(questionText);
+		questions.add(
+				question);
 	}
 	
 	/**
