@@ -7,14 +7,14 @@ import java.util.HashMap;
  *
  */
 public interface Question {
-	
-	
-	public HashMap<Answer, Integer> tallyAnswers();
 
-	public String getQuestionText();
+	public HashMap<String, Integer> tallyAnswers();
+
+	public String toString();
 	
 	public void addAnswer(Answer answer);
 	
 	public ArrayList<Answer> getAnswers();
 	
+	public void setQuestionNumber(int questionNumber);
 }

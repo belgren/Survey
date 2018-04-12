@@ -13,40 +13,38 @@ public class YesNoQuestion implements Question{
 	public ArrayList<String> validAnswers;
 	private String questionText;
 	private ArrayList<Answer> answers;
-	private HashMap<Answer, Integer> tally;
+	private HashMap<String, Integer> tally;
+	public int questionNumber;
 
 	
 	public YesNoQuestion(String questionText) {
+
 		this.questionText = questionText;
-		validAnswers = new ArrayList<String>(Arrays.asList("Y","N","Yes","No")); 
+		validAnswers = new ArrayList<String>(Arrays.asList("y","n","yes","no")); 
 		answers = new ArrayList<Answer>();
-		tally = new HashMap<Answer, Integer>();
+		tally = new HashMap<String, Integer>();
 		
+	}
+	
+	public void setQuestionNumber(int questionNumber) {
+		this.questionNumber = questionNumber;
 	}
 	
 	/**
 	 * This method will tally the answers for a specific question. This process will 
 	 * be unique to the type of question.
 	 */
-	public HashMap<Answer, Integer> tallyAnswers() {
+	public HashMap<String, Integer> tallyAnswers() {
 		 for (Answer answer : answers) {
-			 String answerText = answer.getAnswerText();
-			 
-			 if (validAnswers.contains(answerText)) {
-				 //Insert a new answer with one count into tally map if legal answer has not yet 
-				 //been counted. If it exists, then increment the value;
-				 tally.merge(answer, 1, Integer::sum);
-			 }
-			 //unnecessary, just here for testing
-			 else {
-				 System.out.print(answerText + " is not a valid answer");
-			 }
+			String answerText = answer.toString();
+			if (!tally.keySet().contains(answerText)) {
+				tally.put(answerText, 1);
+			}
+			else {
+				tally.put(answerText, tally.get(answerText) + 1);
+			}
 		 }
 		 return tally;
-	}
-	
-	public String getQuestionText() {
-		return this.questionText;
 	}
 	
 	public void addAnswer(Answer answer) {
@@ -55,5 +53,9 @@ public class YesNoQuestion implements Question{
 	
 	public ArrayList<Answer> getAnswers(){
 		return this.answers;
+	}
+	
+	public String toString() {
+		return this.questionText;
 	}
 }

@@ -31,7 +31,7 @@ import javax.mail.search.FlagTerm;
  */
 public class EmailReader {
 	
-	public static final String PROPER_SUBJECT = "Survey 1";
+	public static final String PROPER_SUBJECT = "Survey 2";
 	public static ArrayList<Email> arrayOfEmails;
 	
 	/**

@@ -12,7 +12,9 @@ public class Answer {
 		this.answerText = answerText;
 	}
 	
-	public String getAnswerText() {
-		return answerText;
+	public String toString() {
+		return this.answerText;
 	}
+	
+	
 }
