@@ -19,7 +19,7 @@ public class Survey {
 	 */
 	public void parseEmails() {
 		
-	}
+	} 
 	
 	
 	public static void main(String args[]) {
