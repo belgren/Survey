@@ -11,7 +11,7 @@ public class YesNoQuestion implements Question{
 		validAnswers = new ArrayList<String>(); //("T","F","True","False");
 		
 	}
-	public void processAnswers() {
+	public void tallyAnswers() {
 		 
 	}
 }

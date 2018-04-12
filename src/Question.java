@@ -4,5 +4,5 @@
  *
  */
 public interface Question {
-	public void processAnswers();
+	public void tallyAnswers();
 }
