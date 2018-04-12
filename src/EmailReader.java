@@ -16,6 +16,7 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -33,7 +34,9 @@ import javax.mail.internet.MimeMultipart;
  * Baseline code for fetching email messages using Javamail from www.codejava.net
  */
 public class EmailReader {
-
+	
+	public static final String PROPER_SUBJECT = "Survey 1";
+	public static ArrayList<Email> arrayOfEmails;
 	/**
 	 * Returns a Properties object which is configured for a POP3/IMAP server
 	 *
@@ -97,14 +100,13 @@ public class EmailReader {
 				String sentDate = msg.getSentDate().toString();
 				String contentType = msg.getContentType();
 				String messageContent = "";
-
+				
+				
 				if (contentType.contains("TEXT/PLAIN")) {
 					try {
 						Object content = msg.getContent();
 						if (content != null) {
 							messageContent = content.toString();
-						
-							
 						}
 					} catch (Exception ex) {
 						messageContent = "[Error downloading content]";
@@ -122,12 +124,10 @@ public class EmailReader {
 					}
 			    }
 
-				// print out details of each message
-				System.out.println("Message #" + (i + 1) + ":");
-				System.out.println("\t From: " + from);
-				System.out.println("\t Subject: " + subject);
-				System.out.println("\t Sent Date: " + sentDate);
-				System.out.println("\t Message: " + messageContent);
+				if(subject.equals(PROPER_SUBJECT)) {
+					Email savedEmail = new Email(subject, from, sentDate, messageContent);
+					arrayOfEmails.add(savedEmail);
+				}
 			}
 			
 
@@ -141,6 +141,7 @@ public class EmailReader {
 			System.out.println("Could not connect to the message store");
 			ex.printStackTrace();
 		}
+		
 	}
 
 	/**
@@ -185,6 +186,8 @@ public class EmailReader {
 	 * Test downloading e-mail messages
 	 */
 	public static void main(String[] args) {
+		arrayOfEmails = new ArrayList<Email>();
+		
 		// for POP3
 		//String protocol = "pop3";
 		//String host = "pop.gmail.com";
@@ -201,5 +204,7 @@ public class EmailReader {
 
 		EmailReader receiver = new EmailReader();
 		receiver.downloadEmails(protocol, host, port, userName, password);
+		
+		System.out.println(arrayOfEmails);
 	}
 }
