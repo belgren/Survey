@@ -1,13 +1,13 @@
-import java.util.ArrayList;
+
 public class Survey {
 	
-	//private Question question;
-	private ArrayList<Question> questions = new ArrayList<Question>();
+	private Question question;
+	
 	
 	public void addYesNoQuestion(String questionText) {
-		Question question = new YesNoQuestion(questionText);
-		questions.add(
-				question);
+		
+		
+		//question = new YesNoQuestion();
 	}
 	
 	/**
@@ -21,10 +21,12 @@ public class Survey {
 		
 	} 
 	
-	
-	public static void main(String args[]) {
+	public void runSurvey() {
 		Survey survey = new Survey();
 		survey.addYesNoQuestion("Yes or No?");
-		System.out.println(survey.questions);
+	}
+	
+	public static void main(String args[]) {
+		
 	}
 }
