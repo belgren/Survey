@@ -5,9 +5,15 @@
  */
 import java.util.ArrayList;
 public class YesNoQuestion implements Question{
+	
+	
 	public ArrayList<String> validAnswers;
-	public YesNoQuestion() {
-		ArrayList<Answer> answers;
+	private String questionText;
+	ArrayList<Answer> answers;
+
+	
+	public YesNoQuestion(String questionText) {
+		this.questionText = questionText;
 		validAnswers = new ArrayList<String>(); //("T","F","True","False");
 		
 	}
