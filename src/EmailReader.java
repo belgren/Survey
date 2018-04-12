@@ -180,6 +180,7 @@ public class EmailReader {
 	    }
 	    return result;
 	}
+	
 
 	/**
 	 * Test downloading e-mail messages
