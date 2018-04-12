@@ -66,8 +66,10 @@ public class Survey {
 				//ArrayList<Answer> answersPerPerson = new ArrayList<Answer>(); 
 				String surveyAnswers = email.getMessage();
 				String[] answersPerEmail = surveyAnswers.split("\n");
-				Answer answer = new Answer(answersPerEmail[i]);
-				question.addAnswer(answer);
+				if (answersPerEmail.length > i) {
+					Answer answer = new Answer(answersPerEmail[i]);
+					question.addAnswer(answer);
+				}
 			}
 			i++;
 		} 
@@ -92,6 +94,12 @@ public class Survey {
 	
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
 		for (Question question : this.questionList) {
+			if (question.getAnswers().isEmpty()) {
+				System.out.println("No answers provided for question: " + question);
+			}
+			else {
+				System.out.println("Tally for question " + question +": ");
+			}
 			//hashmap of answers and their tally for all answers for a given question
 			HashMap<String, Integer> answerTally = question.tallyAnswers();
 			//Adding one question's tally map to a list of all maps for all question in a survey
@@ -100,7 +108,8 @@ public class Survey {
 			for (String key : answerTally.keySet()) {
 				
 				int occurances = answerTally.get(key);
-				System.out.println("occurrances:" + occurances + " --- " + "key: " + key);
+		
+				System.out.println("Response: '" + key + "' ---  occurrances: " + occurances);
 				
 			}
 		}
@@ -110,33 +119,50 @@ public class Survey {
 	 
 	public static void main(String args[]) {
 		Scanner sc = new Scanner(System.in);
+		boolean done = false;
 		Survey survey = new Survey();
-		System.out.println("-----------------------------------------------------------------");
-		System.out.println("                          Survey Maker                           ");
-		System.out.println("-----------------------------------------------------------------");
-		System.out.println("What type of question would you like to ask?");
-		System.out.println("1: Yes/No");
-		System.out.println("2: Custom Integer (Not implemented yet)");
-		System.out.println("3: Multiple Choice (Not implemented yet)");
-		int questionType = sc.nextInt();
-		if(questionType == 1) {
-			System.out.println("'Yes/No/' question selected");
-			System.out.println("Please Enter the Yes/No question you would like to add.");
-			String ynQuestion = sc.nextLine();
-			survey.addYesNoQuestion("Do you like dogs more than cats?");
-			survey.showSurvey();
+
+		while(!done) {
+			System.out.println("-----------------------------------------------------------------");
+			System.out.println("                          Survey Maker                           ");
+			System.out.println("-----------------------------------------------------------------");
+			System.out.println("What type of question would you like to ask?");
+			System.out.println("1: Yes/No");
+			System.out.println("2: Custom Integer (Not implemented yet)");
+			System.out.println("3: Multiple Choice (Not implemented yet)");
+			int questionType = sc.nextInt();
 			
-			survey.getSurveyEmailData();
-			
-			survey.separateAnswers(survey.emailList, survey.questionList);
-			survey.tallySurvey();	
+			switch(questionType) {
+				case 1:
+					System.out.println("'Yes/No/' question selected");
+					System.out.println("Please Enter the Yes/No question you would like to add.");
+					Scanner s = new Scanner(System.in);
+					String ynQuestion = s.nextLine();
+					
+				
+					survey.addYesNoQuestion(ynQuestion);
+		
+					break;
+				
+				case 2:
+					done = true;
+					break;
+				case 3:
+					done = true;
+					break;
+				default:
+					System.out.println("Please Enter a number between 1 and 3");					
+			}
+				
 		}
+
+		//survey.showSurvey();
 		
 		
+		survey.getSurveyEmailData();
 		
-		
-		
-		
+		survey.separateAnswers(survey.emailList, survey.questionList);
+		survey.tallySurvey();			
 			
 	} 
 }
