@@ -73,7 +73,7 @@ public class Survey {
 		//ArrayList<ArrayList<Answer>> allAnswers = new ArrayList<ArrayList<Answer>>();
 		int i = 0;
 		for (Question question : questionList) {
-			System.out.println("Question !!!!!" + question);
+			//System.out.println("Question !!!!!" + question);
 			for(Email email: emailList) {
 				
 				//ArrayList<Answer> answersPerPerson = new ArrayList<Answer>(); 
@@ -82,7 +82,7 @@ public class Survey {
 				if (answersPerEmail.length > i) {
 					Answer answer = new Answer(answersPerEmail[i]);
 					question.addAnswer(answer);
-					System.out.println("Answer !!!!!" + question);
+					//System.out.println("Answer !!!!!" + answer);
 
 				}
 			}
@@ -189,8 +189,8 @@ public class Survey {
 		System.out.println("\nPress enter to tally results");
 		Scanner in = new Scanner(System.in);
 		in.nextLine(); 
-		System.out.println("\n Fetching Email data. . . . .");
-		
+		System.out.println("Fetching Email data. . . . .");
+
 		survey.getSurveyEmailData();
 		
 		survey.separateAnswers(survey.emailList, survey.questionList);
