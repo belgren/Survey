@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * The interface for Question objects.  This
+ * The interface for Question objects.  Implements strategy pattern
  * @author belgren
  *
  */

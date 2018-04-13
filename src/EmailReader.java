@@ -1,22 +1,9 @@
-/**
- * Download javax.mail.jar from https://javaee.github.io/javamail/
- * Download Source code (zip) from https://github.com/javaee/javamail/releases
- * Right click on project > build path > configure build path
- * Click on libraries, add external jars, select the javax.mail.jar file
- * In the configure build path window, expand the javax.mail.jar file, and double click on source
- * double click on source attachment, choose External location, click external file
- * Select the Source code zip file
- * Click ok
- * Click apply and close
- */
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
-import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -24,23 +11,25 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.search.FlagTerm;  
 
 /**
- * Baseline code for fetching email messages using Javamail from www.codejava.net
+ * Baseline code for fetching email messages using Javamail
  */
 public class EmailReader {
 	
 	private String surveyName;
 	public static ArrayList<Email> arrayOfEmails;
 	
+	/**
+	 * Constructor initializes survey name
+	 * @param name
+	 */
 	public EmailReader(String name) {
 		surveyName = name;
 	}
 	 
 	/**
-	 * Returns a Properties object which is configured for a POP3/IMAP server
-	 *
+	 * Returns a Properties object which is configured for a POP3 or IMAP server
 	 * @param protocol either "imap" or "pop3"
 	 * @param host - email host: gmail, yahoo, etc. 
 	 * @param port
@@ -143,7 +132,13 @@ public class EmailReader {
 
 	}
 	
-	
+	/**
+	 * Message that converts a MimeMultipart body to a string
+	 * @param mimeMultipart
+	 * @return
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
 	private String getTextFromMimeMultipart(MimeMultipart mimeMultipart)  throws MessagingException, IOException{
 	    String result = "";
 	    int count = mimeMultipart.getCount();
@@ -156,34 +151,6 @@ public class EmailReader {
 	            result = result + getTextFromMimeMultipart((MimeMultipart)emailBody.getContent());
 	        }
 	    }
-	    return result;
-	    
+	    return result;   
 	}
-
-	/**
-	 * Test downloading e-mail messages
-	
-	public static void main(String[] args) {
-		
-		// for POP3
-		//String protocol = "pop3";
-		//String host = "pop.gmail.com";
-		//String port = "995";
-
-		// for IMAP
-		String protocol = "imap";
-		String host = "imap.gmail.com";
-		String port = "993";
-
-
-		String userName = "cp274survey@gmail.com";
-		String password = "DarrylBenJordan";
-		
-		EmailReader receiver = new EmailReader("surveyName");
-		receiver.downloadEmails(protocol, host, port, userName, password);
-		for(int i = 0; i < arrayOfEmails.size(); i++) {
-			System.out.println(arrayOfEmails.get(i)); 
-		}
-		
-	}*/
 }

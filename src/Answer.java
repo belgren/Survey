@@ -7,10 +7,14 @@
 public class Answer {
 
 	private String answerText;
-	
+	private int questionNumber;
+	 
 	public Answer(String answerText) {
 		this.answerText = answerText.replaceAll("\\r|\\n", "").toLowerCase();
-		
+	}
+	
+	public void setQuestionNumber(int number) {
+		this.questionNumber = number;
 	}
 	
 	public String toString() {
