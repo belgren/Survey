@@ -4,6 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.*;
 
+/**
+ * Survey class, which creates the survey.  Also has a main the does UI/O.
+ * @author Jordan
+ *
+ */
 public class Survey {
 	
 	private QuestionStrategy question;
@@ -13,6 +18,10 @@ public class Survey {
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	
+	/**
+	 * Constructor for survey.  Sets up survey name, initializes question counter to 0, initializes allAnswerTallys
+	 * @param name
+	 */
 	public Survey(String name) {
 		surveyName = name;
 		counter = 0;
@@ -20,7 +29,7 @@ public class Survey {
 	}
 	
 	/**
-	 * creates a question object with the given question txt.
+	 * creates a question object with the given question text.
 	 * Adds the question to the survey's attribute, questionList
 	 * @param questionText
 	 */
@@ -34,7 +43,7 @@ public class Survey {
 	}
 	
 	/**
-	 * Print all questions in survey;
+	 * Prints survey instructions followed by survey questions
 	 */
 	public void showSurvey() {
 		int i = 1;
@@ -63,50 +72,32 @@ public class Survey {
 	} 
 	
 	/**
-	 * takes in email list and separates into 2D array will each column corresponding
-	 * to one survey taker, and each row being answers to one question.
-	 * 
+	 * Takes in email list and question list and assigns each email's answers to the correct question 
 	 * @param emailList
-	 * @return 2D array of Answer objects
+	 * @param questionList
 	 */
 	public void separateAnswers(ArrayList<Email> emailList, ArrayList<QuestionStrategy> questionList){
-		//ArrayList<ArrayList<Answer>> allAnswers = new ArrayList<ArrayList<Answer>>();
 		int i = 0;
 		for (QuestionStrategy question : questionList) {
-			//System.out.println("Question !!!!!" + question);
 			for(Email email: emailList) {
 				
-				//ArrayList<Answer> answersPerPerson = new ArrayList<Answer>(); 
 				String surveyAnswers = email.getMessage();
 				String[] answersPerEmail = surveyAnswers.split("\n");
+				
 				if (answersPerEmail.length > i) {
 					Answer answer = new Answer(answersPerEmail[i]);
 					question.addAnswer(answer);
-					//System.out.println("Answer !!!!!" + answer);
-
 				}
 			}
 			i++;
 		} 
 	}
-	
-	
-	/**
-	 * for each row in the 2D array it takes each individual answer and assigns it to the question
-	 * that it was answering.  Question objects have an attribute answerslist.  
-	 * @param allAnswers
-	
-	public void assignAnswersToQuestion(ArrayList<ArrayList<Answer>> allAnswers) {
-		int i = 0;
-		for (Question question : this.questionList) { //loop through all questions in this survey
-			for (ArrayList<Answer> onePersonsAnswers :allAnswers) {
-				Answer answer = onePersonsAnswers.get(i);
-				question.addAnswer(answer);
-			}
-			i++;
-		}   
-	} */
 	 
+	/**
+	 * Calls tallyAnswers for the appropriate question, adds the resulting HashMap to an ArrayList of HashMaps
+	 * Prints the results of each HashMap
+	 * @return
+	 */
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
 		for (QuestionStrategy question : this.questionList) {
 			if (question.getAnswers().isEmpty()) {
@@ -139,6 +130,10 @@ public class Survey {
 		this.questionList = questionList;
 	}
 	 
+	/**
+	 * Runs the main survey maker UI/O
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		
 		System.out.println("-----------------------------------------------------------------");
