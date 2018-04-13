@@ -22,6 +22,7 @@ public class TestSurvey {
 	Answer answer5;
 	
 	
+	
 	@Before
 	public void setUp() throws Exception {
 		testSurvey = new Survey("tester");
