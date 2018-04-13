@@ -8,7 +8,7 @@ public class Survey {
 	
 	private QuestionStrategy question;
 	private ArrayList<QuestionStrategy> questionList = new ArrayList<QuestionStrategy>();
-	private ArrayList<Email> emailList;
+	private static ArrayList<Email> emailList;
 	private int counter;
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
@@ -42,7 +42,7 @@ public class Survey {
 		System.out.println("\nInstructions:");
 		System.out.println("Please email your survey answers to cp274survey@gmail.com");
 		System.out.println("Email subject must be \"" + surveyName + "\"");
-		System.out.println("Please enter \"y\" or \"n\" and separate question answers by line\n");
+		System.out.println("Separate question answers by line\n");
 		
 		for (QuestionStrategy question : questionList) {
 			System.out.println("Question " + i + ": " + question);
@@ -195,6 +195,8 @@ public class Survey {
 		in.nextLine(); 
 		System.out.println("\nFetching Email data. . . .");
 		survey.getSurveyEmailData();
+		
+		System.out.println("\nThere were " + emailList.size() + " responses to the survey!");
 		
 		survey.separateAnswers(survey.emailList, survey.questionList);
 		survey.tallySurvey();			
