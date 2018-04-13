@@ -11,7 +11,7 @@ public class TestSurvey {
 	Survey testSurvey;
 	Email email1;
 	Email email2;
-	ArrayList<Email> emailList;
+	ArrayList<Email> emailList; 
 	ArrayList<QuestionStrategy> questionList;
 	QuestionStrategy question1;
 	QuestionStrategy question2;
