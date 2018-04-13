@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class YesNoQuestion implements Question {
+public class YesNoQuestion implements QuestionStrategy {
 
 	public ArrayList<String> validAnswers;
 	private String questionText;

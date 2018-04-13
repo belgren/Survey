@@ -6,8 +6,8 @@ import java.lang.*;
 
 public class Survey {
 	
-	private Question question;
-	private ArrayList<Question> questionList = new ArrayList<Question>();
+	private QuestionStrategy question;
+	private ArrayList<QuestionStrategy> questionList = new ArrayList<QuestionStrategy>();
 	private ArrayList<Email> emailList;
 	private int counter;
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
@@ -44,7 +44,7 @@ public class Survey {
 		System.out.println("Email subject must be \"" + surveyName + "\"");
 		System.out.println("Please enter \"y\" or \"n\" and separate question answers by line\n");
 		
-		for (Question question : questionList) {
+		for (QuestionStrategy question : questionList) {
 			System.out.println("Question " + i + ": " + question);
 			i++;
 		}
@@ -69,10 +69,10 @@ public class Survey {
 	 * @param emailList
 	 * @return 2D array of Answer objects
 	 */
-	public void separateAnswers(ArrayList<Email> emailList, ArrayList<Question> questionList){
+	public void separateAnswers(ArrayList<Email> emailList, ArrayList<QuestionStrategy> questionList){
 		//ArrayList<ArrayList<Answer>> allAnswers = new ArrayList<ArrayList<Answer>>();
 		int i = 0;
-		for (Question question : questionList) {
+		for (QuestionStrategy question : questionList) {
 			//System.out.println("Question !!!!!" + question);
 			for(Email email: emailList) {
 				
@@ -108,7 +108,7 @@ public class Survey {
 	} */
 	 
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
-		for (Question question : this.questionList) {
+		for (QuestionStrategy question : this.questionList) {
 			if (question.getAnswers().isEmpty()) {
 				System.out.println("\nNo answers provided for question: " + question);
 			}
@@ -131,11 +131,11 @@ public class Survey {
 		return allAnswerTallys;
 	}
 	
-	public ArrayList<Question> getQuestionList(){
+	public ArrayList<QuestionStrategy> getQuestionList(){
 		return questionList;
 	}
 	
-	public void setQuestionList(ArrayList<Question> questionList) {
+	public void setQuestionList(ArrayList<QuestionStrategy> questionList) {
 		this.questionList = questionList;
 	}
 	 

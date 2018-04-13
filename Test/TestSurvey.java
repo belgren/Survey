@@ -12,9 +12,9 @@ public class TestSurvey {
 	Email email1;
 	Email email2;
 	ArrayList<Email> emailList;
-	ArrayList<Question> questionList;
-	Question question1;
-	Question question2;
+	ArrayList<QuestionStrategy> questionList;
+	QuestionStrategy question1;
+	QuestionStrategy question2;
 	Answer answer1;
 	Answer answer2;
 	Answer answer3;
@@ -31,7 +31,7 @@ public class TestSurvey {
 		emailList = new ArrayList<Email>();
 		emailList.add(email1);
 		emailList.add(email2);
-		questionList = new ArrayList<Question>();
+		questionList = new ArrayList<QuestionStrategy>();
 		question1 = new YesNoQuestion("Are you happy?");
 		question2 = new YesNoQuestion("Are you sad?");
 		questionList.add(question1);

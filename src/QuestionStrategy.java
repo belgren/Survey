@@ -6,7 +6,7 @@ import java.util.HashMap;
  * @author belgren
  *
  */
-public interface Question {
+public interface QuestionStrategy {
 
 	public HashMap<String, Integer> tallyAnswers();
 
