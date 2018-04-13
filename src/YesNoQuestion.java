@@ -20,8 +20,8 @@ public class YesNoQuestion implements Question {
 
 		this.questionText = questionText;
 		validAnswers = new ArrayList<String>();
-		validAnswers.add("yes");
-		validAnswers.add("no");
+		validAnswers.add("y");
+		validAnswers.add("n");
 		answers = new ArrayList<Answer>();
 		tally = new HashMap<String, Integer>();
 
@@ -66,6 +66,7 @@ public class YesNoQuestion implements Question {
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
 	}
+	
 
 	public String toString() {
 		return this.questionText;
