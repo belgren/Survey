@@ -42,7 +42,7 @@ public class Survey {
 		System.out.println("\nInstructions:");
 		System.out.println("Please email your survey answers to cp274survey@gmail.com");
 		System.out.println("Email subject must be \"" + surveyName + "\"");
-		System.out.println("Please type \"yes\" or \"no\" and separate question answers by line\n");
+		System.out.println("Separate question answers by line\n");
 		
 		for (Question question : questionList) {
 			System.out.println("Question " + i + ": " + question);
@@ -120,7 +120,7 @@ public class Survey {
 				
 				int occurances = answerTally.get(key);
 		
-				System.out.println("Response: '" + key + "' -- Count: " + occurances);
+				System.out.println("Response: '" + key + "' ---  occurrances: " + occurances);
 				
 			}
 		}
