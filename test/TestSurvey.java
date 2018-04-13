@@ -43,14 +43,16 @@ public class TestSurvey {
 		answer5 = new Answer("no");
 	}
 	
+	//Test separate answers method
 	@Test
 	public void testSeparateAnswers() {
 		testSurvey.separateAnswers(emailList, questionList);
 		assertEquals("messagecontent1", question1.getAnswers().get(0).toString());
 	}
 	
+	//test tallySurvey method
 	@Test
-	public void tallySurvey() {
+	public void testTallySurvey() {
 		question1.addAnswer(answer1);
 		question1.addAnswer(answer2);
 		question1.addAnswer(answer3);
