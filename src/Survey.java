@@ -48,7 +48,7 @@ public class Survey {
 			System.out.println("Question " + i + ": " + question);
 			i++;
 		}
-	}
+	} 
 	/**
 	 * Gets emails and creates list of email objects.
 	 */
