@@ -150,7 +150,7 @@ public class EmailReader {
 	    for (int i = 0; i < count; i++) {
 	        BodyPart emailBody = mimeMultipart.getBodyPart(i);
 	        if (emailBody.isMimeType("text/plain")) {
-	            result = result + "\n" + emailBody.getContent();
+	            result = result + emailBody.getContent();
 	            break; 
 	        } else if (emailBody.getContent() instanceof MimeMultipart){
 	            result = result + getTextFromMimeMultipart((MimeMultipart)emailBody.getContent());
