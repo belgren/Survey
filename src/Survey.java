@@ -103,7 +103,7 @@ public class Survey {
 				}
 				catch (NumberFormatException e) { } //this catches line spaces in emails
 			}
-		}
+		} 
 	}
 	 
 	/**
