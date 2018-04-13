@@ -104,7 +104,7 @@ public class Survey {
 				question.addAnswer(answer);
 			}
 			i++;
-		}
+		}   
 	} */
 	 
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {

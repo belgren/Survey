@@ -60,10 +60,10 @@ public class TestSurvey {
 		ArrayList<HashMap<String, Integer>> finalTally = new ArrayList<HashMap<String, Integer>>();
 		finalTally = testSurvey.tallySurvey();
 		HashMap<String, Integer> tallyAnswers = new HashMap<String, Integer>();
-		tallyAnswers.put("yes", 3);
-		tallyAnswers.put("no", 2);
-		assertEquals(tallyAnswers.get("yes"), finalTally.get(0).get("yes"));
-		assertEquals(tallyAnswers.get("no"), finalTally.get(0).get("no"));
+		tallyAnswers.put("Yes", 3);
+		tallyAnswers.put("No", 2);
+		assertEquals(tallyAnswers.get("yes"), finalTally.get(1).get("yes"));
+		assertEquals(tallyAnswers.get("no"), finalTally.get(1).get("no"));
 		
 	}
 }
