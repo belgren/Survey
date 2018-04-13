@@ -9,7 +9,8 @@ public class Answer {
 	private String answerText;
 	
 	public Answer(String answerText) {
-		this.answerText = answerText.replaceAll("\\r|\\n", "");
+		this.answerText = answerText.replaceAll("\\r|\\n", "").toLowerCase();
+		
 	}
 	
 	public String toString() {

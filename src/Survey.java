@@ -73,13 +73,17 @@ public class Survey {
 		//ArrayList<ArrayList<Answer>> allAnswers = new ArrayList<ArrayList<Answer>>();
 		int i = 0;
 		for (Question question : questionList) {
+			System.out.println("Question !!!!!" + question);
 			for(Email email: emailList) {
+				
 				//ArrayList<Answer> answersPerPerson = new ArrayList<Answer>(); 
 				String surveyAnswers = email.getMessage();
 				String[] answersPerEmail = surveyAnswers.split("\n");
 				if (answersPerEmail.length > i) {
 					Answer answer = new Answer(answersPerEmail[i]);
 					question.addAnswer(answer);
+					System.out.println("Answer !!!!!" + question);
+
 				}
 			}
 			i++;
@@ -109,7 +113,7 @@ public class Survey {
 				System.out.println("No answers provided for question: " + question);
 			}
 			else {
-				System.out.println("Tally for question: " + question);
+				System.out.println("\nTally for question: " + question);
 			}
 			//hashmap of answers and their tally for all answers for a given question
 			HashMap<String, Integer> answerTally = question.tallyAnswers();
@@ -185,6 +189,7 @@ public class Survey {
 		System.out.println("\nPress enter to tally results");
 		Scanner in = new Scanner(System.in);
 		in.nextLine(); 
+		System.out.println("\n Fetching Email data. . . . .");
 		
 		survey.getSurveyEmailData();
 		
