@@ -7,16 +7,16 @@ import java.lang.*;
 public class Survey {
 	
 	private Question question;
-	private static ArrayList<Question> questionList = new ArrayList<Question>();
-	private static ArrayList<Email> emailList;
+	private ArrayList<Question> questionList = new ArrayList<Question>();
+	private ArrayList<Email> emailList;
 	private int counter;
-	private ArrayList<HashMap<String, Integer>> answerTallys;
+	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	
 	public Survey(String name) {
 		surveyName = name;
 		counter = 0;
-		answerTallys = new ArrayList<HashMap<String, Integer>>();
+		allAnswerTallys = new ArrayList<HashMap<String, Integer>>();
 	}
 	
 	/**
@@ -116,23 +116,27 @@ public class Survey {
 				System.out.println("\nTally for question: " + question);
 			}
 			//hashmap of answers and their tally for all answers for a given question
-			HashMap<String, Integer> answerTally = question.tallyAnswers();
+			HashMap<String, Integer> answerTallyHashMap = question.tallyAnswers();
 			//Adding one question's tally map to a list of all maps for all question in a survey
-			answerTallys.add(answerTally); 
+			allAnswerTallys.add(answerTallyHashMap); 
 			//print one 
-			for (String key : answerTally.keySet()) {
+			for (String key : answerTallyHashMap.keySet()) {
 				
-				int occurances = answerTally.get(key);
+				int occurances = answerTallyHashMap.get(key);
 		
 				System.out.println("Response: '" + key + "' -- Count: " + occurances);
 				
 			}
 		}
-		return answerTallys;
+		return allAnswerTallys;
 	}
 	
 	public ArrayList<Question> getQuestionList(){
 		return questionList;
+	}
+	
+	public void setQuestionList(ArrayList<Question> questionList) {
+		this.questionList = questionList;
 	}
 	 
 	public static void main(String args[]) {
@@ -168,7 +172,7 @@ public class Survey {
 					break;
 
 				case 2:
-					if(questionList.isEmpty()) {
+					if(survey.questionList.isEmpty()) {
 						System.out.println("Survey has no questions. Please add a question.\n");
 						break;
 					}
