@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Map;
 import java.util.Scanner;
+import java.lang.*;
 
 public class Survey {
 	
@@ -110,7 +110,7 @@ public class Survey {
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
 		for (Question question : this.questionList) {
 			if (question.getAnswers().isEmpty()) {
-				System.out.println("No answers provided for question: " + question);
+				System.out.println("\nNo answers provided for question: " + question);
 			}
 			else {
 				System.out.println("\nTally for question: " + question);
@@ -186,11 +186,10 @@ public class Survey {
 			}
 		}
 		 
-		System.out.println("\nPress enter to tally results");
+		System.out.print("\nPress enter to tally results");
 		Scanner in = new Scanner(System.in);
 		in.nextLine(); 
-		System.out.println("Fetching Email data. . . . .");
-
+		System.out.println("\nFetching Email data. . . .");
 		survey.getSurveyEmailData();
 		
 		survey.separateAnswers(survey.emailList, survey.questionList);
