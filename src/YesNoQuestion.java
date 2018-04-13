@@ -25,7 +25,7 @@ public class YesNoQuestion implements Question {
 		answers = new ArrayList<Answer>();
 		tally = new HashMap<String, Integer>();
 
-	}
+	} 
 
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;

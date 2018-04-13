@@ -102,7 +102,7 @@ public class Survey {
 			i++;
 		}
 	} */
-	
+	 
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
 		for (Question question : this.questionList) {
 			if (question.getAnswers().isEmpty()) {
