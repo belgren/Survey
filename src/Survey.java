@@ -88,8 +88,8 @@ public class Survey {
 		for(Email email: emailList) {
 			String surveyAnswers = email.getMessage();
 			String[] answersPerEmail = surveyAnswers.split("\n");
-			
-			for (String line : answersPerEmail) {
+ 
+			for (String line : answersPerEmail) { 
 				try {
 					String questionNumberAsString = line.substring(0, 1);
 					int questionNumber = Integer.parseInt(questionNumberAsString);
