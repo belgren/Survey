@@ -153,9 +153,16 @@ public class Survey {
 		System.out.println("                          Survey Maker                           ");
 		System.out.println("-----------------------------------------------------------------");
 
-		System.out.println("Please enter survey name:");
-		Scanner nameScanner = new Scanner(System.in);
-		String surveyName = nameScanner.nextLine();
+		String surveyName;
+		do {
+			System.out.println("Please enter survey name:");
+			Scanner nameScanner = new Scanner(System.in);
+			surveyName = nameScanner.nextLine();
+			if(surveyName.equals("")) {
+				System.out.println("No name entered, try again");
+			}
+		}while(surveyName.equals(""));
+		
 		Survey survey = new Survey(surveyName);
 		
 		Scanner sc = new Scanner(System.in);
