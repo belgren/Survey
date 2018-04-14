@@ -33,6 +33,19 @@ public class YesNoQuestion implements QuestionStrategy {
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
 	}
+	
+	public String formatAnswers(String answer) {
+		if (answer.equalsIgnoreCase("yes") | answer.equalsIgnoreCase("y")) {
+			return "yes";
+		}
+		else if (answer.equalsIgnoreCase("no") | answer.equalsIgnoreCase("n")) {
+			return "no";
+		}
+		else {
+			System.out.println("Invalid Answer Provided");
+			return null;
+		}
+	}
 
 	public boolean isValidAnswer(String trialAnswer) {
 		for (String ans : validAnswers) {
