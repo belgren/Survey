@@ -115,7 +115,7 @@ public class Survey {
 		for (QuestionStrategy question : this.questionList) {
 			if (question.getAnswers().isEmpty()) {
 				System.out.println("\nNo answers provided for question: " + question);
-			}
+			} 
 			else {
 				System.out.println("\nTally for question: " + question);
 			}
