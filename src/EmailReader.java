@@ -16,10 +16,10 @@ import javax.mail.internet.MimeMultipart;
  * Baseline code for fetching email messages using Javamail
  */
 public class EmailReader {
-	
+
 	private String surveyName;
 	public static ArrayList<Email> arrayOfEmails;
-	
+
 	/**
 	 * Constructor initializes survey name
 	 * @param name
@@ -27,7 +27,7 @@ public class EmailReader {
 	public EmailReader(String name) {
 		surveyName = name;
 	}
-	 
+
 	/**
 	 * Returns a Properties object which is configured for a POP3 or IMAP server
 	 * @param protocol either "imap" or "pop3"
@@ -50,7 +50,7 @@ public class EmailReader {
 
 		return properties;
 	}
-	
+
 
 	/**
 	 * Downloads new messages and fetches details for each message.
@@ -87,8 +87,8 @@ public class EmailReader {
 				String sentDate = msg.getSentDate().toString();
 				String contentType = msg.getContentType();
 				String messageContent = "";
-				
-				
+
+
 				if (contentType.contains("TEXT/PLAIN")) {
 					try {
 						Object content = msg.getContent();
@@ -102,21 +102,23 @@ public class EmailReader {
 				}
 				else if (msg.isMimeType("multipart/*")) {
 					try {
-			        MimeMultipart mimeMultipart = (MimeMultipart) msg.getContent();
-			        messageContent = getTextFromMimeMultipart(mimeMultipart);
+						MimeMultipart mimeMultipart = (MimeMultipart) msg.getContent();
+						messageContent = getTextFromMimeMultipart(mimeMultipart);
 					}
 					catch(Exception ex) {
 						messageContent = "Error downloading massage content";
 						ex.printStackTrace();
 					}
-			    }
-
-				if(subject.equalsIgnoreCase(surveyName)) {
-					Email savedEmail = new Email(subject, from, sentDate, messageContent);
-					arrayOfEmails.add(savedEmail);
 				}
+
+				try{
+					if(subject.equalsIgnoreCase(surveyName)) {
+						Email savedEmail = new Email(subject, from, sentDate, messageContent);
+						arrayOfEmails.add(savedEmail);
+					}
+				}catch(NullPointerException e) {System.out.println("Empty Subject Line");}
 			}
-			 
+
 
 			// disconnect
 			inboxFolder.close(false);
@@ -131,7 +133,7 @@ public class EmailReader {
 		return arrayOfEmails;
 
 	}
-	
+
 	/**
 	 * Message that converts a MimeMultipart body to a string
 	 * @param mimeMultipart
@@ -140,17 +142,17 @@ public class EmailReader {
 	 * @throws IOException
 	 */
 	private String getTextFromMimeMultipart(MimeMultipart mimeMultipart)  throws MessagingException, IOException{
-	    String result = "";
-	    int count = mimeMultipart.getCount();
-	    for (int i = 0; i < count; i++) {
-	        BodyPart emailBody = mimeMultipart.getBodyPart(i);
-	        if (emailBody.isMimeType("text/plain")) {
-	            result = result + emailBody.getContent();
-	            break; 
-	        } else if (emailBody.getContent() instanceof MimeMultipart){
-	            result = result + getTextFromMimeMultipart((MimeMultipart)emailBody.getContent());
-	        }
-	    }
-	    return result;   
+		String result = "";
+		int count = mimeMultipart.getCount();
+		for (int i = 0; i < count; i++) {
+			BodyPart emailBody = mimeMultipart.getBodyPart(i);
+			if (emailBody.isMimeType("text/plain")) {
+				result = result + emailBody.getContent();
+				break; 
+			} else if (emailBody.getContent() instanceof MimeMultipart){
+				result = result + getTextFromMimeMultipart((MimeMultipart)emailBody.getContent());
+			}
+		}
+		return result;   
 	}
 }
