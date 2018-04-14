@@ -143,6 +143,10 @@ public class Survey {
 		this.questionList = questionList;
 	}
 	 
+	public int getQuestionNumber() {
+		return questionList.size();
+	}
+	
 	/**
 	 * Runs the main survey maker UI/O
 	 * @param args
