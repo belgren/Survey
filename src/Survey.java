@@ -208,8 +208,6 @@ public class Survey {
 			}
 		}
 	}
-
-	public ArrayList<QuestionStrategy> getQuestionList() {
 	
 	public String getSurveyName(){
 		return surveyName;
