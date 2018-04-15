@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -18,12 +19,11 @@ import java.awt.event.ActionEvent;
 public class SurveyBuilderMain {
 
 	private JFrame frame;
-	private Survey survey;
+	private Survey currentSurvey;
 	
-	public void newMainBuilder(Survey survey) {
-		this.survey = survey;
+	public void newMainBuilder() {
 		try {
-			SurveyBuilderMain window = new SurveyBuilderMain();
+			SurveyBuilderMain window = new SurveyBuilderMain(currentSurvey);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -33,7 +33,9 @@ public class SurveyBuilderMain {
 	/**
 	 * Create the application.
 	 */
-	public SurveyBuilderMain() {
+	public SurveyBuilderMain(Survey survey) {
+		currentSurvey = null;
+		currentSurvey = survey;
 		initialize();
 	}
 
@@ -53,8 +55,8 @@ public class SurveyBuilderMain {
 		JButton ynButton = new JButton("Add Yes/No Question");
 		ynButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SurveyBuilderYN newYN = new SurveyBuilderYN();
-				newYN.newYNQuestion(survey);
+				SurveyBuilderYN newYN = new SurveyBuilderYN(currentSurvey);
+				newYN.newYNQuestion();
 				frame.dispose();
 			}
 		});
@@ -74,13 +76,19 @@ public class SurveyBuilderMain {
 		JButton btnCreateSurvey = new JButton("Create Survey");
 		btnCreateSurvey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SurveyDisplay newSurvey = new SurveyDisplay();
-				newSurvey.newSurveyDisplay(survey);
+				SurveyDisplay newSurvey = new SurveyDisplay(currentSurvey);
+				newSurvey.newSurveyDisplay();
+				System.out.println("\nFetching Email data. . . .");
+				currentSurvey.getSurveyEmailData();
+				currentSurvey.separateAnswers(currentSurvey.getEmailList(), currentSurvey.getQuestionList());
+				currentSurvey.tallySurvey();	
 				frame.dispose();
 			}
 		});
 		btnCreateSurvey.setBounds(255, 499, 152, 52);
 		frame.getContentPane().add(btnCreateSurvey);
+		
+		
 		
 		JLabel background = new JLabel("");
 		background.setIcon(new ImageIcon(SurveyBuilderMain.class.getResource("/resources/SurveyMaker.png")));

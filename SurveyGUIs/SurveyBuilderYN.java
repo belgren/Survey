@@ -5,7 +5,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,17 +16,17 @@ public class SurveyBuilderYN {
 
 	private JFrame frame;
 	private JTextField textField;
-	private Survey survey;
+	private Survey currentSurvey;
+	private String questionText;
 
 	/**
 	 * Launch the application.
 	 */
-	public void newYNQuestion(Survey survey) {
-		this.survey = survey;
+	public void newYNQuestion() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SurveyBuilderYN window = new SurveyBuilderYN();
+					SurveyBuilderYN window = new SurveyBuilderYN(currentSurvey);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +38,8 @@ public class SurveyBuilderYN {
 	/**
 	 * Create the application.
 	 */
-	public SurveyBuilderYN() {
+	public SurveyBuilderYN(Survey survey) {
+		currentSurvey = survey;
 		initialize();
 	}
 
@@ -49,16 +52,17 @@ public class SurveyBuilderYN {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(44, 190, 365, 127);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		JTextArea textBox = new JTextArea();
+		textBox.setBounds(49, 190, 355, 127);
+		textBox.setBackground(UIManager.getColor("window"));
+		frame.getContentPane().add(textBox);
+		
 		
 		JButton backButton = new JButton("Go Back to Main Creator Screen");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SurveyBuilderMain mainMenu = new SurveyBuilderMain();
-				mainMenu.newMainBuilder(survey);
+				SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
+				mainMenu.newMainBuilder();
 				frame.dispose();
 				
 				
@@ -70,6 +74,12 @@ public class SurveyBuilderYN {
 		JButton btnAddQuestion = new JButton("Add Question");
 		btnAddQuestion.setBounds(163, 370, 117, 29);
 		frame.getContentPane().add(btnAddQuestion);
+		btnAddQuestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				questionText = textBox.getText();
+				currentSurvey.addYesNoQuestion(questionText);
+			}
+		});
 		
 		JLabel descriptorTest = new JLabel("What would you like your yes/no question to say?");
 		descriptorTest.setHorizontalAlignment(SwingConstants.CENTER);
