@@ -15,6 +15,7 @@ public class SurveyDisplay {
 
 	private JFrame frame;
 	private Survey survey;
+	private JLabel label;
 
 	public void newSurveyDisplay() {
 		EventQueue.invokeLater(new Runnable() {
@@ -53,17 +54,22 @@ public class SurveyDisplay {
 		surveyTitle.setBounds(24, 15, 416, 90);
 		frame.getContentPane().add(surveyTitle);
 		
-//		JScrollPane scrollPane = new JScrollPane();
-//		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-//		scrollPane.setBounds(0, 0, 500, 678);
-//		frame.getContentPane().add(scrollPane);
+		int counter = 0;
+		for(QuestionStrategy q : survey.getQuestionList()) {
+			label = new JLabel("Question " + q.getQuestionNumber() +" : " + q.toString());
+			label.setBackground(Color.blue);
+			label.setSize(414, 20);
+			label.setLocation(6, 100);
+			frame.getContentPane().add(label);
+			counter++;
+		}
+		
+		JScrollPane scrollPane = new JScrollPane(label);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(0, 0, 500, 678);
+		frame.getContentPane().add(scrollPane);
 //		frame.add(scrollPane);
-//		
-//		int counter = 0;
-//		for(QuestionStrategy q : survey.getQuestionList()) {
-//			JTextPane textPane = new JTextPane();
-//			textPane.setBounds(6, 18 + (counter * 90), 414, 90);
-//			frame.getContentPane().add(textPane);
-//		}
+		
+		
 	}
 }

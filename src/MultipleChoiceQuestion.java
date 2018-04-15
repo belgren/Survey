@@ -85,4 +85,8 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 	public String toString() {
 		return this.questionText;
 	}
+	
+	public int getQuestionNumber() {
+		return questionNumber;
+	}
 }

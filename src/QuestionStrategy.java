@@ -20,5 +20,7 @@ public interface QuestionStrategy {
 	
 	public int getQuestionType();
 	
+	public int getQuestionNumber();
+	
 	//public boolean isValidAnswer(String trialAnswer);
 }

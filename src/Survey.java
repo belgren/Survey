@@ -196,7 +196,7 @@ public class Survey {
 						// old way without db
 						QuestionStrategy currentQuestion = questionNumberMap.get(questionNumber);
 						String answerText = line.substring(2);
-						answerText = answerText.trim();		//removing white space from answer text
+						answerText = answerText.trim();
 						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
 						currentQuestion.addAnswer(answer);
