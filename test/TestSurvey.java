@@ -49,23 +49,4 @@ public class TestSurvey {
 		testSurvey.separateAnswers(emailList, questionList);
 		assertEquals("messagecontent1", question1.getAnswers().get(0).toString());
 	}
-	
-	//test tallySurvey method
-	@Test
-	public void testTallySurvey() {
-		question1.addAnswer(answer1);
-		question1.addAnswer(answer2);
-		question1.addAnswer(answer3);
-		question1.addAnswer(answer4);
-		question1.addAnswer(answer5);
-		testSurvey.setQuestionList(questionList);
-		ArrayList<HashMap<String, Integer>> finalTally = new ArrayList<HashMap<String, Integer>>();
-		finalTally = testSurvey.tallySurvey();
-		HashMap<String, Integer> tallyAnswers = new HashMap<String, Integer>();
-		tallyAnswers.put("Yes", 3);
-		tallyAnswers.put("No", 2);
-		assertEquals(tallyAnswers.get("yes"), finalTally.get(1).get("yes"));
-		assertEquals(tallyAnswers.get("no"), finalTally.get(1).get("no"));
-		
-	}
 }
