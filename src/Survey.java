@@ -184,9 +184,8 @@ public class Survey {
 	public void separateAnswers(ArrayList<Email> emailList, ArrayList<QuestionStrategy> questionList) {
 		for (Email email : emailList) {
 			String surveyAnswers = email.getMessage();
-			String[] answersPerEmail = surveyAnswers.split("\n");
-
-
+			String[] answersPerEmail = surveyAnswers.split("\n"); 
+			
 			for (String line : answersPerEmail) {
 				try {
 					String questionNumberAsString = line.substring(0, 1);
