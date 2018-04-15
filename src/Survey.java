@@ -17,12 +17,17 @@ import java.sql.ResultSet;
 public class Survey {
 
 	private QuestionStrategy question;
-	private ArrayList<QuestionStrategy> questionList = new ArrayList<QuestionStrategy>();
+	private ArrayList<QuestionStrategy> questionList;
 	private static ArrayList<Email> emailList;
 	private int counter;
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	private HashMap<Integer, QuestionStrategy> questionNumberMap;
+	private static String option1 = "";
+	private static String option2 = "";
+	private static String option3 = "";
+	private static String option4 = "";
+
 
 	private Database database;
 	private Random random;
@@ -53,6 +58,10 @@ public class Survey {
 		counter = 0;
 		allAnswerTallys = new ArrayList<HashMap<String, Integer>>();
 		questionNumberMap = new HashMap<Integer, QuestionStrategy>();
+		emailList = new ArrayList<Email>();
+		questionList = new ArrayList<QuestionStrategy>();
+	
+
 		database = new Database();
 		random = new Random();
 		try {
@@ -74,9 +83,33 @@ public class Survey {
 	public void addYesNoQuestion(String questionText) {
 		question = new YesNoQuestion(questionText);
 		counter++;
-		question.setQuestionNumber(counter);
+		//question.setQuestionNumber(counter);
 		questionList.add(question);
-		emailList = new ArrayList<Email>();
+		questionNumberMap.put(counter, question);
+
+	}
+
+	/**
+	 * creates a multiple choice question object with the given question text.
+	 * Adds the question to the survey's attribute, questionList
+	 * @param questionText
+	 */
+	public void addMultChoiceQuestion(String questionText) {
+		question = new MultipleChoiceQuestion(questionText);
+		counter++;
+		questionList.add(question);
+		questionNumberMap.put(counter, question);
+	}
+
+	/**
+	 * creates a quantity question object with the given question text.
+	 * Adds the question to the survey's attribute, questionList
+	 * @param questionText
+	 */
+	public void addQuantityQuestion(String questionText) {
+		question = new QuantityQuestion(questionText);
+		counter++;
+		questionList.add(question);
 		questionNumberMap.put(counter, question);
 		try {
 			database.addQuestion(counter, questionText);
@@ -98,7 +131,16 @@ public class Survey {
 		System.out.println("Separate question answers by line\n");
 
 		for (QuestionStrategy question : questionList) {
-			System.out.println("Question " + i + ": " + question);
+			if(question.getQuestionType() == 2) {
+				System.out.println("Question " + i + ": " + question);
+				System.out.println("            A: " + option1);
+				System.out.println("            B: " + option2);
+				System.out.println("            C: " + option3);
+				System.out.println("            D: " + option4);
+			}
+			else {
+				System.out.println("Question " + i + ": " + question);
+			}
 			i++;
 		}
 	}
@@ -114,7 +156,8 @@ public class Survey {
 		String password = "DarrylBenJordan";
 		EmailReader reader = new EmailReader(surveyName);
 		emailList = reader.downloadEmails(protocol, host, port, userName, password);
-	}
+	} 
+
 
 	/**
 	 * Loops through the list of emails submitted and for a survey, splits each
@@ -132,11 +175,13 @@ public class Survey {
 			String surveyAnswers = email.getMessage();
 			String[] answersPerEmail = surveyAnswers.split("\n");
 
+
 			for (String line : answersPerEmail) {
 				try {
 					String questionNumberAsString = line.substring(0, 1);
 					int questionNumber = Integer.parseInt(questionNumberAsString);
 					if (questionNumberMap.keySet().contains(questionNumber)) {
+
 						// old way without db
 						QuestionStrategy currentQuestion = questionNumberMap.get(questionNumber);
 						String answerText = line.substring(2);
@@ -164,9 +209,9 @@ public class Survey {
 	 * to an ArrayList of HashMaps Prints the results of each HashMap
 	 * 
 	 * @return
-	 */
+	 
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
-		for (QuestionStrategy question : this.questionList) {
+		for (QuestionStrategy question : questionList) {
 			if (question.getAnswers().isEmpty()) {
 				System.out.println("\nNo answers provided for question: " + question);
 			} else {
@@ -188,6 +233,7 @@ public class Survey {
 		}
 		return allAnswerTallys;
 	}
+   */
 
 	/**
 	 * Loops through the question numbers in the hashmap that keeps track of them,
@@ -249,6 +295,7 @@ public class Survey {
 			if (surveyName.equals("")) {
 				System.out.println("No name entered, try again");
 			}
+
 		} while (surveyName.equals(""));
 
 		Survey survey = new Survey(surveyName);
@@ -256,10 +303,13 @@ public class Survey {
 		Scanner sc = new Scanner(System.in);
 		boolean done = false;
 
+
 		while (!done) {
 			System.out.println("What would you like to do?");
 			System.out.println("1: Add a yes/no question");
-			System.out.println("2: Finish and create survey");
+			System.out.println("2: Add a multiple choice question");
+			System.out.println("3: Add a quantity question");
+			System.out.println("4: Finish and create survey");
 
 			try {
 				int questionType = sc.nextInt();
@@ -267,14 +317,41 @@ public class Survey {
 				switch (questionType) { 
 				case 1:
 					System.out.println("Please enter the yes/no question you would like to add.");
-					Scanner s = new Scanner(System.in);
-					String ynQuestion = s.nextLine();
+					Scanner ynScanner = new Scanner(System.in);
+					String ynQuestion = ynScanner.nextLine();
 
 					survey.addYesNoQuestion(ynQuestion);
 
 					break;
 
 				case 2:
+
+					System.out.println("Please enter the multiple choice question you would like to add.");
+					Scanner mcScanner1 = new Scanner(System.in);
+					String mcQuestion = mcScanner1.nextLine();
+
+					System.out.println("Please enter 4 multiple choice answer options");
+					Scanner mcScanner2 = new Scanner(System.in);
+					option1 = mcScanner2.nextLine();
+					option2 = mcScanner2.nextLine();
+					option3 = mcScanner2.nextLine();
+					option4 = mcScanner2.nextLine();
+
+					survey.addMultChoiceQuestion(mcQuestion);
+
+					break;
+
+				case 3:
+					System.out.println("Please enter the quantity question you would like to add.");
+					Scanner qScanner = new Scanner(System.in);
+					String qQuestion = qScanner.nextLine();
+
+					survey.addQuantityQuestion(qQuestion);
+
+					break;
+
+				case 4:
+
 					if (survey.questionList.isEmpty()) {
 						System.out.println("Survey has no questions. Please add a question.\n");
 						break;
@@ -288,7 +365,7 @@ public class Survey {
 				}
 			} catch (InputMismatchException ex) {
 				sc.nextLine();
-				System.out.println("Please enter a valid option between 1 and 2\n");
+				System.out.println("Please enter a valid option between 1 and 4\n");
 			}
 		}
 
@@ -303,7 +380,6 @@ public class Survey {
 		survey.separateAnswers(survey.emailList, survey.questionList);
 		survey.printReport(survey.questionNumberMap);
 
-		// survey.tallySurvey();
-
+	} 
 	}
 }

@@ -17,4 +17,8 @@ public interface QuestionStrategy {
 	public ArrayList<Answer> getAnswers();
 	
 	public void setQuestionNumber(int questionNumber);
+	
+	public int getQuestionType();
+	
+	//public boolean isValidAnswer(String trialAnswer);
 }

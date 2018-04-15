@@ -116,7 +116,7 @@ public class EmailReader {
 						Email savedEmail = new Email(subject, from, sentDate, messageContent);
 						arrayOfEmails.add(savedEmail);
 					}
-				}catch(NullPointerException e) {System.out.println("Empty Subject Line");}
+				}catch(NullPointerException e) {}
 			}
 
 

@@ -13,14 +13,16 @@ public class YesNoQuestion implements QuestionStrategy {
 	private ArrayList<Answer> answers;
 	private HashMap<String, Integer> tally;
 	public int questionNumber;
+	private int questionType;
 
 	/**
 	 * Sets up valid answers for yes/no questions
 	 * @param questionText
 	 */
 	public YesNoQuestion(String questionText) {
-
+		
 		this.questionText = questionText;
+		questionType = 1;
 		validAnswers = new ArrayList<String>();
 		validAnswers.add("y");
 		validAnswers.add("n");
@@ -34,17 +36,8 @@ public class YesNoQuestion implements QuestionStrategy {
 		this.questionNumber = questionNumber;
 	}
 	
-	public String formatAnswers(String answer) {
-		if (answer.equalsIgnoreCase("yes") | answer.equalsIgnoreCase("y")) {
-			return "yes";
-		}
-		else if (answer.equalsIgnoreCase("no") | answer.equalsIgnoreCase("n")) {
-			return "no";
-		}
-		else {
-			System.out.println("Invalid Answer Provided");
-			return null;
-		}
+	public int getQuestionType() {
+		return questionType;
 	}
 
 	public boolean isValidAnswer(String trialAnswer) {
@@ -61,7 +54,6 @@ public class YesNoQuestion implements QuestionStrategy {
 	 */
 	public HashMap<String, Integer> tallyAnswers() {
 		tally = new HashMap<String, Integer>();
-
 		tally.put("Yes", 0);
 		tally.put("No", 0);
 
@@ -77,10 +69,6 @@ public class YesNoQuestion implements QuestionStrategy {
 		return tally;
 	}
 	
-	
-	
-	
-	
 	public void addAnswer(Answer answer) {
 		answers.add(answer);
 	}
@@ -88,7 +76,6 @@ public class YesNoQuestion implements QuestionStrategy {
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
 	}
-
 
 	public String toString() {
 		return this.questionText;
