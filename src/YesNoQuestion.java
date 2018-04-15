@@ -13,14 +13,16 @@ public class YesNoQuestion implements QuestionStrategy {
 	private ArrayList<Answer> answers;
 	private HashMap<String, Integer> tally;
 	public int questionNumber;
+	private int questionType;
 
 	/**
 	 * Sets up valid answers for yes/no questions
 	 * @param questionText
 	 */
 	public YesNoQuestion(String questionText) {
-
+		
 		this.questionText = questionText;
+		questionType = 1;
 		validAnswers = new ArrayList<String>();
 		validAnswers.add("y");
 		validAnswers.add("n");
@@ -32,6 +34,10 @@ public class YesNoQuestion implements QuestionStrategy {
 
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
+	}
+	
+	public int getQuestionType() {
+		return questionType;
 	}
 
 	public boolean isValidAnswer(String trialAnswer) {
