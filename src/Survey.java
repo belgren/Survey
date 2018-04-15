@@ -4,6 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.*;
 import java.lang.NumberFormatException;
+import java.sql.SQLException;
+import java.util.Random;
+import java.sql.ResultSet;
+
+
 /**
  * Survey class, which creates the survey.  Also has a main the does UI/O.
  * @author Jordan
@@ -18,6 +23,9 @@ public class Survey {
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	private HashMap<Integer, QuestionStrategy> questionNumberMap;
+	private Database database;
+	private Random random;
+	private ResultSet report;
 	
 	/**
 	 * Constructor for survey.  Sets up survey name, initializes question counter to 0, initializes allAnswerTallys
@@ -28,11 +36,22 @@ public class Survey {
 		counter = 0;
 		allAnswerTallys = new ArrayList<HashMap<String, Integer>>();
 		questionNumberMap = new HashMap<Integer, QuestionStrategy>();
+		database = new Database();
+		random = new Random();
+		try {
+			database.createDatabase();
+		}
+		catch(SQLException e) {
+			System.out.println("Error creating Database");
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * creates a question object with the given question text.
 	 * Adds the question to the survey's attribute, questionList
+	 * Assigns question number based on incrementing counter.
+	 * Adds the new question to the Question table in SurveyDatabase.
 	 * @param questionText
 	 */
 	public void addYesNoQuestion(String questionText) {
@@ -42,8 +61,15 @@ public class Survey {
 		questionList.add(question);
 		emailList = new ArrayList<Email>();
 		questionNumberMap.put(counter, question);
-		
+		try {
+			database.addQuestion(counter, questionText);
+		}
+		catch (SQLException e) {
+			System.out.println("Error adding question " + counter + " to the database.");
+			e.printStackTrace();		
+		}
 	}
+	
 	
 	/**
 	 * Prints survey instructions followed by survey questions
@@ -94,11 +120,22 @@ public class Survey {
 					String questionNumberAsString = line.substring(0, 1);
 					int questionNumber = Integer.parseInt(questionNumberAsString);
 					if (questionNumberMap.keySet().contains(questionNumber)) {
-						
+						//old way without db
 						QuestionStrategy currentQuestion = questionNumberMap.get(questionNumber);
-						Answer answer = new Answer(line.substring(2));
+						String answerText = line.substring(2);
+						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
 						currentQuestion.addAnswer(answer);
+						
+						//using db
+						int answerID = random.nextInt(1000) + 1;
+						try {
+							database.addAnswer(answerID, answerText, questionNumber);
+						}
+						catch (SQLException e) {
+							System.out.println("Error adding answer: " + answerText);
+							e.printStackTrace();								
+						}			
 					}
 				}
 				catch (NumberFormatException e) { } //this catches line spaces in emails
@@ -134,6 +171,18 @@ public class Survey {
 		}
 		return allAnswerTallys;
 	}
+	
+	public ResultSet getDBReport() {
+		try {
+			report = database.makeReport();
+		}
+		catch (SQLException e) {
+			System.out.println("Error making DB report");
+			e.printStackTrace();
+		}
+		return report;
+	}
+	
 	
 	public ArrayList<QuestionStrategy> getQuestionList(){
 		return questionList;
