@@ -253,12 +253,12 @@ public class Survey {
 	 * 
 	 * @param questions
 	 */
-	public void printReport(HashMap<Integer, QuestionStrategy> questions) {
-		for (int qid : questions.keySet()) {
+	public void printReport() {
+		for (int qid : this.questionNumberMap.keySet()) {
 			System.out.println("\n\nQID " + qid);
 			try {
 				database.printSeparatedReport(qid);
-			} catch (SQLException e) {
+			} catch (SQLException e) { 
 				e.printStackTrace();
 				System.out.println("Error in printReport");
 			}
@@ -388,7 +388,7 @@ public class Survey {
 		System.out.println("\nThere were " + emailList.size() + " responses to the survey!");
 
 		survey.separateAnswers(survey.emailList, survey.questionList);
-		survey.printReport(survey.questionNumberMap);
+		survey.printReport();
 
 	} 
 	
