@@ -32,7 +32,7 @@ public class YesNoQuestion implements QuestionStrategy {
 
 	} 
 
-	public void setQuestionNumber(int questionNumber) {
+	public void setQuestionNumber(int questionNumber) {  
 		this.questionNumber = questionNumber;
 	}
 	

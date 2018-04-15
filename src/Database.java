@@ -17,6 +17,8 @@ public class Database {
 	private ArrayList<Integer> questionNumbers;
 	private HashMap<Integer, ResultSet> separatedReports;
 	private ResultSet currentReport;
+	private HashMap<String, Integer> tuple;
+
 	
 	/**
 	 * Constructor that establishes a new connection and creates a new statement
@@ -115,7 +117,9 @@ public class Database {
 	 * @param QID
 	 * @throws SQLException
 	 */
-	public void printSeparatedReport(int QID) throws SQLException {
+	public HashMap<String, Integer> printSeparatedReport(int QID) throws SQLException {
+		tuple = new HashMap<String, Integer>();
+
 		String chooseDatabase = "use StrategyDatabase;"; // select the correct DB
 		stmt.execute(chooseDatabase);
 		
@@ -123,9 +127,12 @@ public class Database {
 		ResultSet r = stmt.executeQuery(qidQuery);
 		
 		while (r.next()) {
-			System.out.print("\nAnswer: " + r.getString(1) + " ======= count : " + r.getInt(2));
+			String atxt = r.getString(1);
+			int count = r.getInt(2);  
+			tuple.put(atxt, count);
 		}
 		r.close();
+		return tuple;
 	}
 	
 	public static void main(String args[]) {
