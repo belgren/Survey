@@ -5,7 +5,6 @@ import java.util.Scanner;
 import java.lang.*;
 import java.lang.NumberFormatException;
 import java.sql.SQLException;
-import java.util.Random;
 import java.sql.ResultSet;
 
 /**
@@ -30,7 +29,6 @@ public class Survey {
 
 
 	private Database database;
-	private Random random;
 	private ResultSet report;
 	HashMap<Integer, ResultSet> rsMap;
 
@@ -63,7 +61,6 @@ public class Survey {
 	
 
 		database = new Database();
-		random = new Random();
 		try {
 			database.createDatabase();
 		} catch (SQLException e) {
@@ -194,7 +191,7 @@ public class Survey {
 					String questionNumberAsString = line.substring(0, 1);
 					int questionNumber = Integer.parseInt(questionNumberAsString);
 					if (questionNumberMap.keySet().contains(questionNumber)) {
-
+  
 						// old way without db
 						QuestionStrategy currentQuestion = questionNumberMap.get(questionNumber);
 						String answerText = line.substring(2);
@@ -203,9 +200,8 @@ public class Survey {
 						currentQuestion.addAnswer(answer);
 
 						// using db
-						int answerID = random.nextInt(1000) + 1;
 						try {
-							database.addAnswer(answerID, answerText, questionNumber);
+							database.addAnswer(answerText, questionNumber);
 						} catch (SQLException e) {
 							System.out.println("Error adding answer: " + answerText);
 							e.printStackTrace();

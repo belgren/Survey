@@ -32,7 +32,7 @@ public class Database {
 			ex.printStackTrace();
 		}
 	}
-
+  
 	/**
 	 * Creates a new database called StrategyDatabase and performs the necessary
 	 * setup tasks: deletes Question and Answer tables if they exist from a previous
@@ -58,9 +58,11 @@ public class Database {
 
 		// Add Question and Answer tables
 		String createQuestionTable = "create table Question(QID int, QuestionText Varchar(100), Primary Key(QID));";
-		String createAnswertable = "CREATE table Answer(AID int, AnswerText Varchar(100), QID int, "
+		
+		String createAnswertable = "CREATE table Answer(AID int AUTO_INCREMENT, AnswerText Varchar(100), QID int, "
 				+ "Primary Key(AID), " + "Foreign Key(QID) REFERENCES Question(QID));";
-		stmt.execute(createQuestionTable);
+		
+		stmt.execute(createQuestionTable); 
 		stmt.execute(createAnswertable);
 
 	}
@@ -94,15 +96,14 @@ public class Database {
 	 * @param questionNumber
 	 * @throws SQLException
 	 */
-	public void addAnswer(int AID, String answerText, int questionNumber) throws SQLException {
+	public void addAnswer(String answerText, int questionNumber) throws SQLException {
 		String chooseDatabase = "use StrategyDatabase;"; // select the correct DB
 		stmt.execute(chooseDatabase);
 
-		PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Answer(AID, AnswerText, QID) VALUES (?, ?, ?)");
+		PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Answer(AnswerText, QID) VALUES (?, ?)");
 
-		pstmt.setInt(1, AID);
-		pstmt.setString(2, answerText);
-		pstmt.setInt(3, questionNumber);
+		pstmt.setString(1, answerText);
+		pstmt.setInt(2, questionNumber);
 
 		pstmt.executeUpdate();
 	}
@@ -132,7 +133,9 @@ public class Database {
 		try {
 			db.createDatabase();
 			db.addQuestion(1, "Q1");
-			db.addAnswer(1, "ONE", 1);
+			db.addAnswer("ONE", 1);
+			db.addAnswer("TWO", 1);
+
 		}
 		catch(SQLException e) { 
 			e.printStackTrace();
