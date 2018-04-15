@@ -28,12 +28,13 @@ public class SurveyMenu {
 	private JFrame frame;
 	private JTextField surveyName;
 	private String surveyNameInput;
-	Survey survey;
+	private Survey survey;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,8 +51,9 @@ public class SurveyMenu {
 	 * Create the application.
 	 */
 	public SurveyMenu() {
+		surveyNameInput = "";
 		initialize();
-		survey = new Survey(surveyNameInput);
+		
 	}
 
 	/**
@@ -69,8 +71,10 @@ public class SurveyMenu {
 		JButton sendToFile = new JButton("Send To File");
 		sendToFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SurveyBuilderMain homeScreen = new SurveyBuilderMain();
-				homeScreen.newMainBuilder(survey);
+				surveyNameInput = surveyName.getText();
+				survey = new Survey(surveyNameInput);
+				SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
+				homeScreen.newMainBuilder();
 				frame.dispose();
 			}
 		});
@@ -79,11 +83,7 @@ public class SurveyMenu {
 		surveyName.setBounds(80, 247, 297, 37);
 		frame.getContentPane().add(surveyName);
 		surveyName.setColumns(10);
-		surveyName.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				surveyNameInput = surveyName.getText();
-			}
-		});
+		
 
 		JLabel nameText = new JLabel("What would you like to name your survey?");
 		nameText.setHorizontalAlignment(SwingConstants.CENTER);
@@ -109,8 +109,10 @@ public class SurveyMenu {
 		frame.getContentPane().add(displayOnScreen);
 		displayOnScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SurveyBuilderMain homeScreen = new SurveyBuilderMain();
-				homeScreen.newMainBuilder(survey);
+				surveyNameInput = surveyName.getText();
+				survey = new Survey(surveyNameInput);
+				SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
+				homeScreen.newMainBuilder();
 				frame.dispose();
 				
 			}

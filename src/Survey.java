@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.*;
-import java.lang.NumberFormatException;
 /**
  * Survey class, which creates the survey.  Also has a main the does UI/O.
  * @author Jordan
@@ -135,6 +134,10 @@ public class Survey {
 		return allAnswerTallys;
 	}
 	
+	public String getSurveyName(){
+		return surveyName;
+	}
+	
 	public ArrayList<QuestionStrategy> getQuestionList(){
 		return questionList;
 	}
@@ -145,6 +148,10 @@ public class Survey {
 	 
 	public int getQuestionNumber() {
 		return questionList.size();
+	}
+	
+	public ArrayList<Email> getEmailList() {
+		return emailList;
 	}
 	
 	/**
