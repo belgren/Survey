@@ -17,12 +17,31 @@ public class Survey {
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	private HashMap<Integer, QuestionStrategy> questionNumberMap;
+	private static Survey surveyInstance;
+	
+	
+	
+	
+	
+
+
+		  
+	
+
+	//Get the only object available
+	public static Survey getInstance(String name){
+		if(surveyInstance == null) {
+			surveyInstance = new Survey(name);
+		}
+		
+		return surveyInstance;
+	}
 	
 	/**
 	 * Constructor for survey.  Sets up survey name, initializes question counter to 0, initializes allAnswerTallys
 	 * @param name
 	 */
-	public Survey(String name) {
+	private Survey(String name) {
 		surveyName = name;
 		counter = 0;
 		allAnswerTallys = new ArrayList<HashMap<String, Integer>>();

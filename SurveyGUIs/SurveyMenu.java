@@ -72,7 +72,7 @@ public class SurveyMenu {
 		sendToFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				surveyNameInput = surveyName.getText();
-				survey = new Survey(surveyNameInput);
+				survey = Survey.getInstance(surveyNameInput);
 				SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
 				homeScreen.newMainBuilder();
 				frame.dispose();
@@ -110,7 +110,7 @@ public class SurveyMenu {
 		displayOnScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				surveyNameInput = surveyName.getText();
-				survey = new Survey(surveyNameInput);
+				survey = Survey.getInstance(surveyNameInput);
 				SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
 				homeScreen.newMainBuilder();
 				frame.dispose();
