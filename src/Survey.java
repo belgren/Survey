@@ -26,6 +26,7 @@ public class Survey {
 	private static String option2 = "";
 	private static String option3 = "";
 	private static String option4 = "";
+	private HashMap<String, Integer> answerData;
 
 
 	private Database database;
@@ -139,7 +140,7 @@ public class Survey {
 		System.out.println("Please email your survey answers to cp274survey@gmail.com");
 		System.out.println("Email subject must be \"" + surveyName + "\"");
 		System.out.println("Separate question answers by line\n");
-
+  
 		for (QuestionStrategy question : questionList) {
 			if(question.getQuestionType() == 2) {
 				System.out.println("Question " + i + ": " + question);
@@ -195,11 +196,12 @@ public class Survey {
 						// old way without db
 						QuestionStrategy currentQuestion = questionNumberMap.get(questionNumber);
 						String answerText = line.substring(2);
+						answerText = answerText.trim();
 						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
 						currentQuestion.addAnswer(answer);
 
-						// using db
+						// using db 
 						try {
 							database.addAnswer(answerText, questionNumber);
 						} catch (SQLException e) {
@@ -251,13 +253,18 @@ public class Survey {
 	 */
 	public void printReport() {
 		for (int qid : this.questionNumberMap.keySet()) {
-			System.out.print("\n\nQuestion " + qid + ":");
+			System.out.print("\n\nQuestion " + qid + ":  ");
 			System.out.println(questionNumberMap.get(qid).toString());
 			try {
-				database.printSeparatedReport(qid);
+				answerData = database.printSeparatedReport(qid);
 			} catch (SQLException e) { 
 				e.printStackTrace();
 				System.out.println("Error in printReport");
+			}
+			for (String answer : answerData.keySet()) {
+				//string answer = answer text
+				int count = answerData.get(answer);
+				System.out.print("\nAnswer: " + answer + " ===== Tally: " + answerData.get(answer));
 			}
 		}
 	}
