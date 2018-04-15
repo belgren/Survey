@@ -83,10 +83,15 @@ public class Survey {
 	public void addYesNoQuestion(String questionText) {
 		question = new YesNoQuestion(questionText);
 		counter++;
-		//question.setQuestionNumber(counter);
+		question.setQuestionNumber(counter);
 		questionList.add(question);
 		questionNumberMap.put(counter, question);
-
+		try {
+			database.addQuestion(counter, questionText);
+		} catch (SQLException e) {
+			System.out.println("Error adding question " + counter + " to the database.");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -97,8 +102,15 @@ public class Survey {
 	public void addMultChoiceQuestion(String questionText) {
 		question = new MultipleChoiceQuestion(questionText);
 		counter++;
+		question.setQuestionNumber(counter);
 		questionList.add(question);
 		questionNumberMap.put(counter, question);
+		try {
+			database.addQuestion(counter, questionText);
+		} catch (SQLException e) {
+			System.out.println("Error adding question " + counter + " to the database.");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -109,6 +121,7 @@ public class Survey {
 	public void addQuantityQuestion(String questionText) {
 		question = new QuantityQuestion(questionText);
 		counter++;
+		question.setQuestionNumber(counter);
 		questionList.add(question);
 		questionNumberMap.put(counter, question);
 		try {

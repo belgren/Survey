@@ -108,7 +108,7 @@ public class Database {
 	}
 
 
-	/**
+	/** 
 	 * Generates a SQL report summarizing the answer data for the question identefied 
 	 * by the input question ID.
 	 * @param QID
@@ -125,5 +125,18 @@ public class Database {
 			System.out.print("\nAnswer: " + r.getString(1) + " ======= count : " + r.getInt(2));
 		}
 		r.close();
+	}
+	
+	public static void main(String args[]) {
+		Database db = new Database();
+		try {
+			db.createDatabase();
+			db.addQuestion(1, "Q1");
+			db.addAnswer(1, "ONE", 1);
+		}
+		catch(SQLException e) { 
+			e.printStackTrace();
+		}
+		
 	}
 }

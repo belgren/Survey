@@ -81,7 +81,7 @@ public class SurveyBuilderMain {
 				System.out.println("\nFetching Email data. . . .");
 				currentSurvey.getSurveyEmailData();
 				currentSurvey.separateAnswers(currentSurvey.getEmailList(), currentSurvey.getQuestionList());
-				currentSurvey.tallySurvey();	
+				//currentSurvey.tallySurvey();
 				frame.dispose();
 			}
 		});
