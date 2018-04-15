@@ -251,7 +251,7 @@ public class Survey {
 	 */
 	public void printReport() {
 		for (int qid : this.questionNumberMap.keySet()) {
-			System.out.println("\n\nQID " + qid);
+			System.out.print("\n\nQuestion " + qid + ":");
 			System.out.println(questionNumberMap.get(qid).toString());
 			try {
 				database.printSeparatedReport(qid);
