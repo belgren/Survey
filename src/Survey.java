@@ -237,11 +237,8 @@ public class Survey {
 			allAnswerTallys.add(answerTallyHashMap);
 			// print one
 			for (String key : answerTallyHashMap.keySet()) {
-
 				int occurances = answerTallyHashMap.get(key);
-
 				System.out.println("Response: '" + key + "' -- Count: " + occurances);
-
 			}
 		}
 		return allAnswerTallys;

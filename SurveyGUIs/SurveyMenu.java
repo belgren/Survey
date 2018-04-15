@@ -1,7 +1,7 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-//import net.miginfocom.swing.MigLayout;
+import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.BoxLayout;
@@ -9,7 +9,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-//import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.DropMode;
