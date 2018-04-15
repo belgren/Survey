@@ -183,6 +183,23 @@ public class Survey {
 		return report;
 	}
 	
+	public void printReport(ResultSet report) {
+		try{
+			while (report.next()) {
+				int qid = report.getInt(1);
+				System.out.println("\n\nQID " + qid);
+				System.out.println("ATEXT " + report.getString(2));
+				System.out.println("Count: " + report.getInt(3));
+				System.out.println("QUESTION: " + questionNumberMap.get(qid).toString());
+			}
+		}
+			
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	public ArrayList<QuestionStrategy> getQuestionList(){
 		return questionList;
@@ -267,7 +284,11 @@ public class Survey {
 		System.out.println("\nThere were " + emailList.size() + " responses to the survey!");
 		
 		survey.separateAnswers(survey.emailList, survey.questionList);
-		survey.tallySurvey();			
+		ResultSet r = survey.getDBReport();
+		survey.printReport(r);
+
+
+		//survey.tallySurvey();			
 			
 	} 
 }

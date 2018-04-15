@@ -105,6 +105,12 @@ public class Database {
 	}
 
 	
+	/*
+	 * First creates a list of unique QIDs (question numbers) using 
+	 * a query on the Question table, then loops through that list 
+	 * creating a new report for each question, grouping by answer.
+	 * 
+	 */
 	public ResultSet makeReport() throws SQLException{
 		questionNumbers = new ArrayList<Integer>();
 		answersTally = new HashMap<String, Integer>();
@@ -112,15 +118,14 @@ public class Database {
 		stmt.execute(chooseDatabase);
 		
 		String selectQuery = "SELECT QID, AnswerText, count(*)"
-				+ "FROM Answer"
-				+ "GROUP BY QID, AnswerText;";
+				+ "FROM Answer GROUP BY QID, AnswerText;";
 		ResultSet rs = stmt.executeQuery(selectQuery);
 		
 		return rs;
 	}
 	
 	
-	/**
+	
 	public static void main(String args[]) {
 		Database db = new Database();
 		try {
@@ -139,6 +144,6 @@ public class Database {
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
-	}**/
+	}
 
 }
