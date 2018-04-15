@@ -4,8 +4,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.*;
 import java.lang.NumberFormatException;
+import java.sql.SQLException;
+import java.util.Random;
+import java.sql.ResultSet;
+
 /**
- * Survey class, which creates the survey.  Also has a main the does UI/O.
+ * Survey class, which creates the survey. Also has a main the does UI/O.
+ * 
  * @author Jordan
  *
  */
@@ -23,22 +28,56 @@ public class Survey {
 	private static String option3 = "";
 	private static String option4 = "";
 
+
+	private Database database;
+	private Random random;
+	private ResultSet report;
+	HashMap<Integer, ResultSet> rsMap;
+
+
+	private static Survey surveyInstance;
+	
+
+	//Get the only object available
+	public static Survey getInstance(String name){
+		if(surveyInstance == null) {
+			surveyInstance = new Survey(name);
+		}
+		
+		return surveyInstance;
+	}
+	
 	/**
-	 * Constructor for survey.  Sets up survey name, initializes question counter to 0, initializes allAnswerTallys
+	 * Constructor for survey. Sets up survey name, initializes question counter to
+	 * 0, initializes allAnswerTallys
+	 * 
 	 * @param name
 	 */
-	public Survey(String name) {
+	private Survey(String name) {
 		surveyName = name;
 		counter = 0;
 		allAnswerTallys = new ArrayList<HashMap<String, Integer>>();
 		questionNumberMap = new HashMap<Integer, QuestionStrategy>();
 		emailList = new ArrayList<Email>();
 		questionList = new ArrayList<QuestionStrategy>();
+	
+
+		database = new Database();
+		random = new Random();
+		try {
+			database.createDatabase();
+		} catch (SQLException e) {
+			System.out.println("Error creating Database");
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * creates a yes/no question object with the given question text.
-	 * Adds the question to the survey's attribute, questionList
+	 * creates a question object with the given question text. Adds the question to
+	 * the survey's attribute, questionList Assigns question number based on
+	 * incrementing counter. Adds the new question to the Question table in
+	 * SurveyDatabase.
+	 * 
 	 * @param questionText
 	 */
 	public void addYesNoQuestion(String questionText) {
@@ -72,6 +111,12 @@ public class Survey {
 		counter++;
 		questionList.add(question);
 		questionNumberMap.put(counter, question);
+		try {
+			database.addQuestion(counter, questionText);
+		} catch (SQLException e) {
+			System.out.println("Error adding question " + counter + " to the database.");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -98,7 +143,8 @@ public class Survey {
 			}
 			i++;
 		}
-	} 
+	}
+
 	/**
 	 * Gets emails and creates list of email objects.
 	 */
@@ -112,65 +158,107 @@ public class Survey {
 		emailList = reader.downloadEmails(protocol, host, port, userName, password);
 	} 
 
+
 	/**
-	 * Loops through the list of emails submitted and for a survey, splits each email up by line and 
-	 * loops through the lines. Checks if the line has a line number in the first place and if so,
-	 * finds the corresponding question number in the hashmap of questions.  Then, creates an answer object
-	 * containing the test of the rest of the line and adds that answer to the corresponding question's
-	 * list of answers.
+	 * Loops through the list of emails submitted and for a survey, splits each
+	 * email up by line and loops through the lines. Checks if the line has a line
+	 * number in the first place and if so, finds the corresponding question number
+	 * in the hashmap of questions. Then, creates an answer object containing the
+	 * test of the rest of the line and adds that answer to the corresponding
+	 * question's list of answers.
 	 * 
 	 * @param emailList
 	 * @return 2D array of Answer objects
 	 */
-	public void separateAnswers(ArrayList<Email> emailList, ArrayList<QuestionStrategy> questionList){
-		for(Email email: emailList) {
+	public void separateAnswers(ArrayList<Email> emailList, ArrayList<QuestionStrategy> questionList) {
+		for (Email email : emailList) {
 			String surveyAnswers = email.getMessage();
 			String[] answersPerEmail = surveyAnswers.split("\n");
 
-			for (String line : answersPerEmail) { 
+
+			for (String line : answersPerEmail) {
 				try {
 					String questionNumberAsString = line.substring(0, 1);
 					int questionNumber = Integer.parseInt(questionNumberAsString);
 					if (questionNumberMap.keySet().contains(questionNumber)) {
 
+						// old way without db
 						QuestionStrategy currentQuestion = questionNumberMap.get(questionNumber);
-						Answer answer = new Answer(line.substring(2));
+						String answerText = line.substring(2);
+						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
 						currentQuestion.addAnswer(answer);
+
+						// using db
+						int answerID = random.nextInt(1000) + 1;
+						try {
+							database.addAnswer(answerID, answerText, questionNumber);
+						} catch (SQLException e) {
+							System.out.println("Error adding answer: " + answerText);
+							e.printStackTrace();
+						}
 					}
-				}
-				catch (NumberFormatException e) { } //this catches line spaces in emails
+				} catch (NumberFormatException e) {
+				} // this catches line spaces in emails
 			}
-		} 
+		}
 	}
 
 	/**
-	 * Calls tallyAnswers for the appropriate question, adds the resulting HashMap to an ArrayList of HashMaps
-	 * Prints the results of each HashMap
+	 * Calls tallyAnswers for the appropriate question, adds the resulting HashMap
+	 * to an ArrayList of HashMaps Prints the results of each HashMap
+	 * 
 	 * @return
-	 */
+	 
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
 		for (QuestionStrategy question : questionList) {
 			if (question.getAnswers().isEmpty()) {
 				System.out.println("\nNo answers provided for question: " + question);
-			} 
-			else {
+			} else {
 				System.out.println("\nTally for question: " + question);
 			}
-			//hashmap of answers and their tally for all answers for a given question
+			// hashmap of answers and their tally for all answers for a given question
 			HashMap<String, Integer> answerTallyHashMap = question.tallyAnswers();
-			//Adding one question's tally map to a list of all maps for all question in a survey
-			allAnswerTallys.add(answerTallyHashMap); 
-			//print one 
+			// Adding one question's tally map to a list of all maps for all question in a
+			// survey
+			allAnswerTallys.add(answerTallyHashMap);
+			// print one
 			for (String key : answerTallyHashMap.keySet()) {
 
 				int occurances = answerTallyHashMap.get(key);
+
 				System.out.println("Response: '" + key + "' -- Count: " + occurances);
+
 			}
 		}
 		return allAnswerTallys;
 	}
+   */
 
+	/**
+	 * Loops through the question numbers in the hashmap that keeps track of them,
+	 * calling the printSeparatedReport method on each qid. This method generates a
+	 * new report that displays each answer and the number of occurrences, for the
+	 * Inputed question.
+	 * 
+	 * @param questions
+	 */
+	public void printReport(HashMap<Integer, QuestionStrategy> questions) {
+		for (int qid : questions.keySet()) {
+			System.out.println("\n\nQID " + qid);
+			try {
+				database.printSeparatedReport(qid);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Error in printReport");
+			}
+		}
+	}
+	
+	public String getSurveyName(){
+		return surveyName;
+	}
+	
 	public ArrayList<QuestionStrategy> getQuestionList(){
 		return questionList;
 	}
@@ -183,8 +271,14 @@ public class Survey {
 		return questionList.size();
 	}
 
+	
+	public ArrayList<Email> getEmailList() {
+		return emailList;
+	}
+	
 	/**
 	 * Runs the main survey maker UI/O
+	 * 
 	 * @param args
 	 */
 	public static void main(String args[]) {
@@ -198,17 +292,19 @@ public class Survey {
 			System.out.println("Please enter survey name:");
 			Scanner nameScanner = new Scanner(System.in);
 			surveyName = nameScanner.nextLine();
-			if(surveyName.equals("")) {
+			if (surveyName.equals("")) {
 				System.out.println("No name entered, try again");
 			}
-		}while(surveyName.equals(""));
+
+		} while (surveyName.equals(""));
 
 		Survey survey = new Survey(surveyName);
 
 		Scanner sc = new Scanner(System.in);
 		boolean done = false;
 
-		while(!done) {
+
+		while (!done) {
 			System.out.println("What would you like to do?");
 			System.out.println("1: Add a yes/no question");
 			System.out.println("2: Add a multiple choice question");
@@ -218,7 +314,7 @@ public class Survey {
 			try {
 				int questionType = sc.nextInt();
 
-				switch(questionType) {
+				switch (questionType) { 
 				case 1:
 					System.out.println("Please enter the yes/no question you would like to add.");
 					Scanner ynScanner = new Scanner(System.in);
@@ -229,6 +325,7 @@ public class Survey {
 					break;
 
 				case 2:
+
 					System.out.println("Please enter the multiple choice question you would like to add.");
 					Scanner mcScanner1 = new Scanner(System.in);
 					String mcQuestion = mcScanner1.nextLine();
@@ -254,19 +351,19 @@ public class Survey {
 					break;
 
 				case 4:
-					if(survey.questionList.isEmpty()) {
+
+					if (survey.questionList.isEmpty()) {
 						System.out.println("Survey has no questions. Please add a question.\n");
 						break;
-					}
-					else {
+					} else {
 						survey.showSurvey();
 						done = true;
 						break;
 					}
 				default:
-					System.out.println("Please enter a valid option between 1 and 4\n");					
+					System.out.println("Please enter a valid option between 1 and 2\n");
 				}
-			} catch(InputMismatchException ex){
+			} catch (InputMismatchException ex) {
 				sc.nextLine();
 				System.out.println("Please enter a valid option between 1 and 4\n");
 			}
@@ -274,14 +371,15 @@ public class Survey {
 
 		System.out.print("\nPress enter to tally results");
 		Scanner in = new Scanner(System.in);
-		in.nextLine(); 
+		in.nextLine();
 		System.out.println("\nFetching Email data. . . .");
 		survey.getSurveyEmailData();
 
 		System.out.println("\nThere were " + emailList.size() + " responses to the survey!");
 
 		survey.separateAnswers(survey.emailList, survey.questionList);
-		survey.tallySurvey();			
+		survey.printReport(survey.questionNumberMap);
 
 	} 
+	}
 }

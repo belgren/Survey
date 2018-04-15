@@ -25,7 +25,7 @@ public class TestSurvey {
 	
 	@Before
 	public void setUp() throws Exception {
-		testSurvey = new Survey("tester");
+		testSurvey = Survey.getInstance("tester");
 		email1 = new Email( "subject1","fromAddress1", "sentDate1", "messagecontent1");
 		email2 = new Email( "subject2","fromAddress2", "sentDate2", "messagecontent2");
 		emailList = new ArrayList<Email>();
