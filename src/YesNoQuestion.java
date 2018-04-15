@@ -33,19 +33,6 @@ public class YesNoQuestion implements QuestionStrategy {
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
 	}
-	
-	public String formatAnswers(String answer) {
-		if (answer.equalsIgnoreCase("yes") | answer.equalsIgnoreCase("y")) {
-			return "yes";
-		}
-		else if (answer.equalsIgnoreCase("no") | answer.equalsIgnoreCase("n")) {
-			return "no";
-		}
-		else {
-			System.out.println("Invalid Answer Provided");
-			return null;
-		}
-	}
 
 	public boolean isValidAnswer(String trialAnswer) {
 		for (String ans : validAnswers) {
@@ -61,7 +48,6 @@ public class YesNoQuestion implements QuestionStrategy {
 	 */
 	public HashMap<String, Integer> tallyAnswers() {
 		tally = new HashMap<String, Integer>();
-
 		tally.put("Yes", 0);
 		tally.put("No", 0);
 
@@ -76,6 +62,7 @@ public class YesNoQuestion implements QuestionStrategy {
 		}
 		return tally;
 	}
+	
 	public void addAnswer(Answer answer) {
 		answers.add(answer);
 	}
@@ -83,7 +70,6 @@ public class YesNoQuestion implements QuestionStrategy {
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
 	}
-
 
 	public String toString() {
 		return this.questionText;

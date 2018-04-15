@@ -12,7 +12,7 @@ import java.lang.NumberFormatException;
 public class Survey {
 	
 	private QuestionStrategy question;
-	private ArrayList<QuestionStrategy> questionList = new ArrayList<QuestionStrategy>();
+	private ArrayList<QuestionStrategy> questionList;
 	private static ArrayList<Email> emailList;
 	private int counter;
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
@@ -28,21 +28,46 @@ public class Survey {
 		counter = 0;
 		allAnswerTallys = new ArrayList<HashMap<String, Integer>>();
 		questionNumberMap = new HashMap<Integer, QuestionStrategy>();
+		emailList = new ArrayList<Email>();
+		questionList = new ArrayList<QuestionStrategy>();
 	}
 	
 	/**
-	 * creates a question object with the given question text.
+	 * creates a yes/no question object with the given question text.
 	 * Adds the question to the survey's attribute, questionList
 	 * @param questionText
 	 */
 	public void addYesNoQuestion(String questionText) {
 		question = new YesNoQuestion(questionText);
 		counter++;
-		question.setQuestionNumber(counter);
+		//question.setQuestionNumber(counter);
 		questionList.add(question);
-		emailList = new ArrayList<Email>();
 		questionNumberMap.put(counter, question);
 		
+	}
+	
+	/**
+	 * creates a multiple choice question object with the given question text.
+	 * Adds the question to the survey's attribute, questionList
+	 * @param questionText
+	 */
+	public void addMultChoiceQuestion(String questionText) {
+		question = new MultipleChoiceQuestion(questionText);
+		counter++;
+		questionList.add(question);
+		questionNumberMap.put(counter, question);
+	}
+	
+	/**
+	 * creates a quantity question object with the given question text.
+	 * Adds the question to the survey's attribute, questionList
+	 * @param questionText
+	 */
+	public void addQuantityQuestion(String questionText) {
+		question = new QuantityQuestion(questionText);
+		counter++;
+		questionList.add(question);
+		questionNumberMap.put(counter, question);
 	}
 	
 	/**
@@ -112,7 +137,7 @@ public class Survey {
 	 * @return
 	 */
 	public ArrayList<HashMap<String, Integer>> tallySurvey() {
-		for (QuestionStrategy question : this.questionList) {
+		for (QuestionStrategy question : questionList) {
 			if (question.getAnswers().isEmpty()) {
 				System.out.println("\nNo answers provided for question: " + question);
 			} 
@@ -175,7 +200,9 @@ public class Survey {
 		while(!done) {
 			System.out.println("What would you like to do?");
 			System.out.println("1: Add a yes/no question");
-			System.out.println("2: Finish and create survey");
+			System.out.println("2: Add a multiple choice question");
+			System.out.println("3: Add a quantity question");
+			System.out.println("4: Finish and create survey");
 
 			try {
 				int questionType = sc.nextInt();
@@ -183,14 +210,39 @@ public class Survey {
 				switch(questionType) {
 				case 1:
 					System.out.println("Please enter the yes/no question you would like to add.");
-					Scanner s = new Scanner(System.in);
-					String ynQuestion = s.nextLine();
+					Scanner ynScanner = new Scanner(System.in);
+					String ynQuestion = ynScanner.nextLine();
 
 					survey.addYesNoQuestion(ynQuestion);
 
 					break;
-
+				
 				case 2:
+					System.out.println("Please enter the multiple choice question you would like to add.");
+					Scanner mcScanner1 = new Scanner(System.in);
+					String mcQuestion = mcScanner1.nextLine();
+					
+					System.out.println("Please enter 4 multiple choice answer options");
+					Scanner mcScanner2 = new Scanner(System.in);
+					String option1 = mcScanner2.nextLine();
+					String option2 = mcScanner2.nextLine();
+					String option3 = mcScanner2.nextLine();
+					String option4 = mcScanner2.nextLine();
+					
+					survey.addMultChoiceQuestion(mcQuestion);
+
+					break;
+				
+				case 3:
+					System.out.println("Please enter the quantity question you would like to add.");
+					Scanner qScanner = new Scanner(System.in);
+					String qQuestion = qScanner.nextLine();
+
+					survey.addQuantityQuestion(qQuestion);
+
+					break;
+					
+				case 4:
 					if(survey.questionList.isEmpty()) {
 						System.out.println("Survey has no questions. Please add a question.\n");
 						break;
@@ -201,11 +253,11 @@ public class Survey {
 						break;
 					}
 				default:
-					System.out.println("Please enter a valid option between 1 and 2\n");					
+					System.out.println("Please enter a valid option between 1 and 4\n");					
 				}
 			} catch(InputMismatchException ex){
 				sc.nextLine();
-				System.out.println("Please enter a valid option between 1 and 2\n");
+				System.out.println("Please enter a valid option between 1 and 4\n");
 			}
 		}
 		 
