@@ -15,11 +15,14 @@ public class Database {
 	
 	private HashMap<String, Integer> answersTally;
 	private ArrayList<Integer> questionNumbers;
+	private HashMap<Integer, ResultSet> separatedReports;
+	private ResultSet currentReport;
 	
 	/**
 	 * Constructor that establishes a new connection and creates a new statement
 	 */
 	public Database() {
+		separatedReports = new HashMap<Integer, ResultSet>();
 		try {
 			// Allocate a database "Connection" object
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:" + PORT_NUMBER + "/", "root", "root"); // MySQL
@@ -104,46 +107,23 @@ public class Database {
 		pstmt.executeUpdate();
 	}
 
-	
-	/*
-	 * First creates a list of unique QIDs (question numbers) using 
-	 * a query on the Question table, then loops through that list 
-	 * creating a new report for each question, grouping by answer.
-	 * 
+
+	/**
+	 * Generates a SQL report summarizing the answer data for the question identefied 
+	 * by the input question ID.
+	 * @param QID
+	 * @throws SQLException
 	 */
-	public ResultSet makeReport() throws SQLException{
-		questionNumbers = new ArrayList<Integer>();
-		answersTally = new HashMap<String, Integer>();
+	public void printSeparatedReport(int QID) throws SQLException {
 		String chooseDatabase = "use StrategyDatabase;"; // select the correct DB
 		stmt.execute(chooseDatabase);
 		
-		String selectQuery = "SELECT QID, AnswerText, count(*)"
-				+ "FROM Answer GROUP BY QID, AnswerText;";
-		ResultSet rs = stmt.executeQuery(selectQuery);
+		String qidQuery = "SELECT AnswerText, count(AnswerText) FROM Answer WHERE QID = " + QID + " GROUP BY AnswerText;";
+		ResultSet r = stmt.executeQuery(qidQuery);
 		
-		return rs;
-	}
-	
-	
-	
-	public static void main(String args[]) {
-		Database db = new Database();
-		try {
-			db.createDatabase();
-
-			db.addQuestion(1, "First Question");
-			db.addQuestion(2, "Second Question");
-
-
-			db.addAnswer(10, "yes", 1);
-			db.addAnswer(11, "no", 1);
-			db.addAnswer(12, "no", 2);
-
-			ResultSet rs = db.makeReport();
-
-		} catch (SQLException e) {
-			System.out.println(e);
+		while (r.next()) {
+			System.out.print("\nAnswer: " + r.getString(1) + " ======= count : " + r.getInt(2));
 		}
+		r.close();
 	}
-
 }
