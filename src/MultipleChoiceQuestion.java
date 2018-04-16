@@ -61,8 +61,9 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		return false;
 	}
 
-	public void addAnswer(Answer answer) {
+	public String addAnswer(Answer answer) {
 		answers.add(answer);
+		
 	}
 
 	public ArrayList<Answer> getAnswers() {

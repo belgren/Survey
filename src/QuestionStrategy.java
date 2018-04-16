@@ -8,9 +8,11 @@ import java.util.HashMap;
  */
 public interface QuestionStrategy {
 
+  public String displayQuestion();
+
 	public String toString();
 	
-	public void addAnswer(Answer answer);
+	public String addAnswer(Answer answer);
 	
 	public ArrayList<Answer> getAnswers();
 	

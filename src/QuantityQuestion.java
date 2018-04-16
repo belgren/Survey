@@ -43,8 +43,10 @@ public class QuantityQuestion implements QuestionStrategy {
 	}
 
 
-	public void addAnswer(Answer answer) {
+	public String addAnswer(Answer answer) {
 		answers.add(answer);
+		String answerText = answer.toString().toLowerCase();
+		return answerText;
 	}
 
 	public ArrayList<Answer> getAnswers() {
@@ -54,5 +56,9 @@ public class QuantityQuestion implements QuestionStrategy {
 
 	public String toString() {
 		return this.questionText;
+	}
+
+	public String displayQuestion() {
+		return this.toString();
 	}
 }

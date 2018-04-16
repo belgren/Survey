@@ -26,11 +26,30 @@ public class YesNoQuestion implements QuestionStrategy {
 		validAnswers = new ArrayList<String>();
 		validAnswers.add("y");
 		validAnswers.add("n");
-		validAnswers.add("yes");
+		validAnswers.add("yes");  
 		validAnswers.add("no");
 		answers = new ArrayList<Answer>();
-
+ 
 	} 
+	
+	public String displayQuestion() {
+		return this.toString();
+	}
+	
+	/**
+	 * formatting method to standardize all forms of yes/no to be 'Yes' or 'No'
+	 * @param questionText
+	 * @return
+	 */
+	public String formatAnswer(String answerText) {
+		if (questionText.equalsIgnoreCase("y") | questionText.equalsIgnoreCase("yes")) {
+			return "Yes";  
+		}
+		else if (questionText.equalsIgnoreCase("n") | questionText.equalsIgnoreCase("no") ) {
+			return "No";
+		}
+		return questionText;
+	}
 
 	public String displayQuestion() {
 		return null;
@@ -54,9 +73,18 @@ public class YesNoQuestion implements QuestionStrategy {
 	}
 	
 	public void setOptions(ArrayList<String> options) {}
-	
-	public void addAnswer(Answer answer) {
+
+
+	/**
+	 * adds answer object to this questions list of answers
+	 * converts the string to standardize answer format.
+	 * returns new string
+	 */
+	public String addAnswer(Answer answer) {
 		answers.add(answer);
+		String answerText = answer.toString();
+		answerText = formatAnswer(answerText);
+		return answerText;
 	}
 
 	public ArrayList<Answer> getAnswers() {
