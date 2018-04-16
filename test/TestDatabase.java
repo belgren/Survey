@@ -52,7 +52,6 @@ public class TestDatabase {
 		answerTableContents = db.getAnswers();
 		
 		Object firstAnswer = answerTableContents.keySet().toArray()[0];
-		System.out.println(firstAnswer);
 		assertEquals(firstAnswer.toString(), "answer one");
 	}
 	
