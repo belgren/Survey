@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 /**
  * Concrete subclass of question defining the multiple choice question type.
- * Contains a tally answers method, and an ArrayList of answer objects
+ * Contains a an ArrayList of answer objects
  * that will be filled in when the survey is conducted.
  */
 public class MultipleChoiceQuestion implements QuestionStrategy {
