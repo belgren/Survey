@@ -64,6 +64,13 @@ public class SurveyBuilderMain {
 		frame.getContentPane().add(ynButton);
 		
 		JButton mcButton = new JButton("Add Multiple Choice Question");
+		mcButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SurveyBuilderMC newMC = new SurveyBuilderMC(currentSurvey);
+				newMC.newMCQuestion();
+				frame.dispose();
+			}
+		});
 		mcButton.setBounds(44, 250, 365, 52);
 		frame.getContentPane().add(mcButton);
 		
@@ -78,10 +85,6 @@ public class SurveyBuilderMain {
 			public void actionPerformed(ActionEvent e) {
 				SurveyDisplay newSurvey = new SurveyDisplay(currentSurvey);
 				newSurvey.newSurveyDisplay();
-				System.out.println("\nFetching Email data. . . .");
-				currentSurvey.getSurveyEmailData();
-				currentSurvey.separateAnswers(currentSurvey.getEmailList(), currentSurvey.getQuestionList());
-				currentSurvey.printReport();
 				frame.dispose();
 			}
 		});
