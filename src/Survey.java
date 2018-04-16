@@ -191,7 +191,7 @@ public class Survey {
 						answerText = answerText.trim();
 						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
-						//answerText = currentQuestion.addAnswer(answer);
+						answerText = currentQuestion.addAnswer(answer);
 
 						// using db 
 						try {

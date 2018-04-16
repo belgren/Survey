@@ -119,13 +119,28 @@ public class SurveyBuilderMC {
 		btnAddQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				questionText = textBox.getText();
-
-				ArrayList<String> options = new ArrayList<String>();
-				options.add(optionA.getText());
-				options.add(optionB.getText());
-				options.add(optionC.getText());
-				options.add(optionD.getText());
-				currentSurvey.addMultChoiceQuestion(questionText, options);
+				if ((questionText.equals("")) || (optionA.getText().equals(""))|| (optionB.getText().equals("")) || (optionC.getText().equals(""))|| (optionD.getText().equals(""))) {
+					ErrorWindow noSurveyNameError = new ErrorWindow("A question field was not filled out.");
+					noSurveyNameError.newErrorBuilder();
+					frame.dispose();
+				}
+				else {
+					ArrayList<String> options = new ArrayList<String>();
+					options.add(optionA.getText());
+					options.add(optionB.getText());
+					options.add(optionC.getText());
+					options.add(optionD.getText());
+					currentSurvey.addMultChoiceQuestion(questionText, options);
+					SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
+					mainMenu.newMainBuilder();
+					frame.dispose();
+				}
+				
+				
+				
+				
+				
+				
 			}
 		});
 		

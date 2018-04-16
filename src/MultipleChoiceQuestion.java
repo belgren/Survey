@@ -48,7 +48,7 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 	}
 	
 	public String displayQuestion() {
-		String mcText = questionText + "\nA: " + options.get(0) + "\nB: " + options.get(1) + "\nC: " + options.get(2) + "\nD: " + options.get(3);
+		String mcText = questionText + "\n\tA: " + options.get(0) + "\n\tB: " + options.get(1) + "\n\tC: " + options.get(2) + "\n\tD: " + options.get(3);
 		return mcText;
 	}
 	
