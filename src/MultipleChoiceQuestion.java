@@ -7,7 +7,7 @@ import java.util.HashMap;
  * that will be filled in when the survey is conducted.
  */
 public class MultipleChoiceQuestion implements QuestionStrategy {
-
+  
 	public ArrayList<String> validAnswers;
 	private String questionText;
 	private ArrayList<Answer> answers;
@@ -34,6 +34,15 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		validAnswers.add("C");
 		validAnswers.add("D");
 	} 
+	
+	public boolean isValidAnswer(String trialAnswer) {
+		for (String ans : validAnswers) {
+			if (ans.equalsIgnoreCase(trialAnswer)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void setOptions(ArrayList<String> options) {
 		this.options = options;

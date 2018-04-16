@@ -23,5 +23,7 @@ public interface QuestionStrategy {
 	public void setOptions(ArrayList<String> options);
 	
 	public int getQuestionNumber();
+	
+	public boolean isValidAnswer(String trialAnswer);
 
 }

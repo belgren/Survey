@@ -50,15 +50,7 @@ public class YesNoQuestion implements QuestionStrategy {
 		}
 		return answerText;
 	}
-
-	public void setQuestionNumber(int questionNumber) {  
-		this.questionNumber = questionNumber;
-	}
 	
-	public int getQuestionType() {
-		return questionType;
-	}
-
 	public boolean isValidAnswer(String trialAnswer) {
 		for (String ans : validAnswers) {
 			if (ans.equalsIgnoreCase(trialAnswer)) {
@@ -66,6 +58,14 @@ public class YesNoQuestion implements QuestionStrategy {
 			}
 		}
 		return false;
+	}
+
+	public void setQuestionNumber(int questionNumber) {  
+		this.questionNumber = questionNumber;
+	}
+	
+	public int getQuestionType() {
+		return questionType;
 	}
 	
 	public void setOptions(ArrayList<String> options) {}

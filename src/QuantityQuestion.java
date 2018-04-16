@@ -32,6 +32,10 @@ public class QuantityQuestion implements QuestionStrategy {
 		return this.toString();
 	}
 	
+	public boolean isValidAnswer(String trialAnswer) {
+		return true;
+	}
+	
 	public void setOptions(ArrayList<String> options) {}
 	
 	public void setQuestionNumber(int questionNumber) {

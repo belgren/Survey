@@ -178,7 +178,7 @@ public class Survey {
 		for (Email email : emailList) {
 			String surveyAnswers = email.getMessage();
 			String[] answersPerEmail = surveyAnswers.split("\n"); 
-			
+			  
 			for (String line : answersPerEmail) {
 				try {
 					String questionNumberAsString = line.substring(0, 1);
@@ -189,17 +189,20 @@ public class Survey {
 						QuestionStrategy currentQuestion = questionNumberMap.get(questionNumber);
 						String answerText = line.substring(2);
 						answerText = answerText.trim();
-						Answer answer = new Answer(answerText);
-						answer.setQuestionNumber(questionNumber);
-						answerText = currentQuestion.addAnswer(answer);
-
-						// using db 
-						try {
-							database.addAnswer(answerText, questionNumber);
-						} catch (SQLException e) {
-							System.out.println("Error adding answer: " + answerText);
-							e.printStackTrace();
+						if (currentQuestion.isValidAnswer(answerText)) {
+							Answer answer = new Answer(answerText);
+							answer.setQuestionNumber(questionNumber);
+							answerText = currentQuestion.addAnswer(answer);
+	
+							// using db 
+							try {
+								database.addAnswer(answerText, questionNumber);
+							} catch (SQLException e) {
+								System.out.println("Error adding answer: " + answerText);
+								e.printStackTrace();
+							}
 						}
+						
 					}
 				} catch (NumberFormatException e) {
 				} // this catches line spaces in emails
