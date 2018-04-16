@@ -15,12 +15,18 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * GUI class that displays the main survey building menu
+ * @author darrylfilmore
+ *
+ */
 public class SurveyBuilderMain {
 
 	private JFrame frame;
 	private Survey currentSurvey;
-	
+	/**
+	 * Method which launches the window
+	 */
 	public void newMainBuilder() {
 		try {
 			SurveyBuilderMain window = new SurveyBuilderMain(currentSurvey);
@@ -31,7 +37,7 @@ public class SurveyBuilderMain {
 	
 	}
 	/**
-	 * Create the application.
+	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
 	 */
 	public SurveyBuilderMain(Survey survey) {
 		currentSurvey = null;
@@ -48,11 +54,14 @@ public class SurveyBuilderMain {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		//Button that cannot be pushed right now
 		JButton qqButton = new JButton("Add Quantity Question");
 		qqButton.setEnabled(false);
 		qqButton.setBounds(44, 370, 365, 52);
 		frame.getContentPane().add(qqButton);
 		
+		
+		//Takes user to the add YN question window and closes the current window
 		JButton ynButton = new JButton("Add Yes/No Question");
 		ynButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -64,6 +73,8 @@ public class SurveyBuilderMain {
 		ynButton.setBounds(44, 134, 365, 52);
 		frame.getContentPane().add(ynButton);
 		
+		
+		//Takes user to the add MC question window and closes the current window
 		JButton mcButton = new JButton("Add Multiple Choice Question");
 		mcButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -81,6 +92,8 @@ public class SurveyBuilderMain {
 		surveyMakerTitle.setBounds(44, 6, 365, 86);
 		frame.getContentPane().add(surveyMakerTitle);
 		
+		
+		//Takes user to the survey display window and gets rid of the current window
 		JButton btnCreateSurvey = new JButton("Create Survey");
 		btnCreateSurvey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

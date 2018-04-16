@@ -13,7 +13,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-
+/**
+ * GUI class that displays the Multiple Choice question building window
+ * @author darrylfilmore
+ *
+ */
 public class SurveyBuilderMC {
 
 	private JFrame frame;
@@ -22,7 +26,7 @@ public class SurveyBuilderMC {
 	private String questionText;
 
 	/**
-	 * Launch the application.
+	 * Method which launches the window.
 	 */
 	public void newMCQuestion() {
 		EventQueue.invokeLater(new Runnable() {
@@ -38,7 +42,7 @@ public class SurveyBuilderMC {
 	}
 
 	/**
-	 * Create the application.
+	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
 	 */
 	public SurveyBuilderMC(Survey survey) {
 		currentSurvey = survey;
@@ -100,6 +104,8 @@ public class SurveyBuilderMC {
 		optionD.setBounds(230, 353, 174, 29);
 		frame.getContentPane().add(optionD);
 		
+		
+		//Takes the user back to the main creation screen without adding a question, gets rid of current screen 
 		JButton backButton = new JButton("Go Back to Main Creator Screen");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -113,6 +119,7 @@ public class SurveyBuilderMC {
 		backButton.setBounds(163, 507, 244, 44);
 		frame.getContentPane().add(backButton);
 		
+		//Creates a new Multiple choice question if all fields are filled, otherwise, takes user to error message
 		JButton btnAddQuestion = new JButton("Add Question");
 		btnAddQuestion.setBounds(163, 406, 117, 29);
 		frame.getContentPane().add(btnAddQuestion);
@@ -135,12 +142,6 @@ public class SurveyBuilderMC {
 					mainMenu.newMainBuilder();
 					frame.dispose();
 				}
-				
-				
-				
-				
-				
-				
 			}
 		});
 		
@@ -154,8 +155,6 @@ public class SurveyBuilderMC {
 		surveyMakerTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		surveyMakerTitle.setBounds(44, 6, 365, 86);
 		frame.getContentPane().add(surveyMakerTitle);
-		
-		
 		
 		JLabel whiteBackground = new JLabel("");
 		whiteBackground.setIcon(new ImageIcon(SurveyBuilderMain.class.getResource("/resources/white background.jpg")));

@@ -9,7 +9,12 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
-
+/**
+ * GUI class that displays an error message when the user does a "bad" action (this class is not fully functional yet)
+ * If encountered, the user must re-start the survey making process.
+ * @author darrylfilmore
+ *
+ */
 public class ErrorWindow {
 
 	private JFrame frame;
@@ -17,7 +22,7 @@ public class ErrorWindow {
 	private final JLabel background = new JLabel("");
 
 	/**
-	 * Launch the application.
+	 * Method which launches the window
 	 */
 	public void newErrorBuilder() {
 		EventQueue.invokeLater(new Runnable() {
@@ -33,7 +38,7 @@ public class ErrorWindow {
 	}
 
 	/**
-	 * Create the application.
+	 * Constructor which takes in an error message that is passed in when a button is pressed (if something is incorrect) 
 	 */
 	public ErrorWindow(String errorMessageString) {
 		this.errorMessageString = errorMessageString;
@@ -41,7 +46,7 @@ public class ErrorWindow {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the contents of the frame
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -50,6 +55,8 @@ public class ErrorWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
+		//Displays the appropriate error message (gets passed in when a specific button is pressed)
 		JTextArea errorMessage = new JTextArea("\n      " 
 												+ errorMessageString);
 		errorMessage.setBounds(67, 71, 405, 207);

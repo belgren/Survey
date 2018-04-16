@@ -9,7 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
+/**
+ * GUI class that displays the results of the survey (this class is not fully functional yet).
+ * @author darrylfilmore
+ *
+ */
 public class DisplayResults {
 
 	private JFrame frame;
@@ -18,7 +22,7 @@ public class DisplayResults {
 	private JLabel Background;
 
 	/**
-	 * Launch the application.
+	 * Method which launches the window
 	 */
 	public void newDisplayResultsBuilder() {
 		EventQueue.invokeLater(new Runnable() {
@@ -34,7 +38,7 @@ public class DisplayResults {
 	}
 
 	/**
-	 * Create the application.
+	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
 	 */
 	public DisplayResults(Survey survey) {
 		currentSurvey = null;
@@ -43,7 +47,7 @@ public class DisplayResults {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the contents of the frame
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -51,6 +55,7 @@ public class DisplayResults {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
+		//Eventually this will display the answers in the text area
 		label = new JTextArea();
 		for(QuestionStrategy q : currentSurvey.getQuestionList()) {
 			label.append("");

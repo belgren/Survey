@@ -15,7 +15,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * GUI class that displays the survey
+ * @author darrylfilmore
+ *
+ */
 public class SurveyDisplay {
 
 	private JFrame frame;
@@ -25,6 +29,9 @@ public class SurveyDisplay {
 	private JButton resultButton;
 	private JTextArea instructions;
 
+	/**
+	 * Method which launches the window.
+	 */
 	public void newSurveyDisplay() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,7 +47,7 @@ public class SurveyDisplay {
 
 
 	/**
-	 * Create the application.
+	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
 	 */
 	public SurveyDisplay(Survey survey) {
 		this.currentSurvey = survey;
@@ -61,6 +68,7 @@ public class SurveyDisplay {
 			label.append("Question " + q.getQuestionNumber() +" : " + q.displayQuestion() + "\n\n");
 		}
 
+		//Displays instructions
 		instructions = new JTextArea();
 		instructions.setText("      Instructions:\n      "
 				+ "Please email your survey answers to cp274survey@gmail.com\n      "
@@ -87,6 +95,7 @@ public class SurveyDisplay {
 		surveyTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		surveyTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
+		//Displays survey results in terminal (for now)
 		resultButton = new JButton("Get Survey Results");
 		resultButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -22,7 +22,12 @@ import java.awt.Button;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
-
+/**
+ * GUI class that displays the survey creation menu
+ * This file runs all the other files!
+ * @author darrylfilmore
+ *
+ */
 public class SurveyMenu {
 
 	private JFrame frame;
@@ -68,6 +73,8 @@ public class SurveyMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
+		
+		//Currently un-clickable button that will eventually send the results to a file upon completion of the survey
 		JButton sendToFile = new JButton("Send To File");
 		sendToFile.setEnabled(false);
 		sendToFile.addActionListener(new ActionListener() {
@@ -105,6 +112,9 @@ public class SurveyMenu {
 		sendToFile.setBounds(72, 335, 138, 37);
 		frame.getContentPane().add(sendToFile);
 
+		
+		//Button that currently displays the results in terminal and sends the user to the next step of the survey making process
+		//Only works if the survey has a name, if not, pops up and error message
 		JButton displayOnScreen = new JButton("Display On Screen");
 		displayOnScreen.setBounds(239, 335, 138, 37);
 		frame.getContentPane().add(displayOnScreen);

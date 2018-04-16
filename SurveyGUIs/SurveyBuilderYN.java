@@ -11,7 +11,11 @@ import javax.swing.UIManager;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * GUI class that displays the Yes/No question building window
+ * @author darrylfilmore
+ *
+ */
 public class SurveyBuilderYN {
 
 	private JFrame frame;
@@ -20,7 +24,7 @@ public class SurveyBuilderYN {
 	private String questionText;
 
 	/**
-	 * Launch the application.
+	 * Method which launches the window.
 	 */
 	public void newYNQuestion() {
 		EventQueue.invokeLater(new Runnable() {
@@ -36,7 +40,7 @@ public class SurveyBuilderYN {
 	}
 
 	/**
-	 * Create the application.
+	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
 	 */
 	public SurveyBuilderYN(Survey survey) {
 		currentSurvey = survey;
@@ -57,7 +61,7 @@ public class SurveyBuilderYN {
 		textBox.setBackground(UIManager.getColor("window"));
 		frame.getContentPane().add(textBox);
 
-
+		//Takes the user back to the main creation screen without adding a question, gets rid of current screen
 		JButton backButton = new JButton("Go Back to Main Creator Screen");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -71,6 +75,7 @@ public class SurveyBuilderYN {
 		backButton.setBounds(163, 507, 244, 44);
 		frame.getContentPane().add(backButton);
 
+		//Creates a new yes/no question if the question field is full, otherwise, takes user to error message
 		JButton btnAddQuestion = new JButton("Add Question");
 		btnAddQuestion.setBounds(163, 370, 117, 29);
 		frame.getContentPane().add(btnAddQuestion);
