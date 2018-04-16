@@ -1,3 +1,11 @@
+
+/**
+ * This class defines the methods that allow our program to interact with a database.
+ * Each time a new database is created using the createDatabase method, the database "StrategyDatabase"
+ * is cleared, and then reset with new Answer and Question tables.  These tables are populated 
+ * when a user creates questions and when the emails containing answers are processed, and
+ * the survey results are tallied using the queries in getAnswers method.
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +20,7 @@ public class Database {
 	private Statement stmt;
 	private Connection conn;
 	public static final String PORT_NUMBER = "8889";
-	
+
 	private HashMap<String, Integer> answersTally;
 	private ArrayList<Integer> questionNumbers;
 	private HashMap<Integer, ResultSet> separatedReports;
@@ -20,7 +28,6 @@ public class Database {
 	private HashMap<String, Integer> tuple;
 	HashMap<Integer, String> questionTableContents;
 
-	
 	/**
 	 * Constructor that establishes a new connection and creates a new statement
 	 */
@@ -35,41 +42,52 @@ public class Database {
 			ex.printStackTrace();
 		}
 	}
-  
-	
-	public HashMap<Integer, String> getQuestions() throws SQLException{
+
+	/**
+	 * Getter method to return the set of questions as question number and text
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public HashMap<Integer, String> getQuestions() throws SQLException {
 		questionTableContents = new HashMap<Integer, String>();
-		
+
 		String choose_database = "use StrategyDatabase;";
 		stmt.execute(choose_database);
-		
+
 		String getQuestionsQuery = "SELECT QID, QuestionText FROM Question;";
 		ResultSet report = stmt.executeQuery(getQuestionsQuery);
-		
-		while(report.next()) {
+
+		while (report.next()) {
 			int qid = report.getInt(1);
 			String qText = report.getString(2);
 			questionTableContents.put(qid, qText);
 		}
 		return questionTableContents;
 	}
-	
-	public HashMap<String, Integer> getAnswers() throws SQLException{
+
+	/**
+	 * Getter method to return all answers in Answer table as Answer text and number
+	 * of occurrences.
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public HashMap<String, Integer> getAnswers() throws SQLException {
 		tuple = new HashMap<String, Integer>();
 
 		String choose_database = "use StrategyDatabase;";
 		stmt.execute(choose_database);
-		
+
 		String getAnswersQuery = "SELECT AnswerText, count(*) FROM Answer GROUP BY AnswerText;";
 		ResultSet report = stmt.executeQuery(getAnswersQuery);
-		
-		while(report.next()) {
+
+		while (report.next()) {
 			tuple.put(report.getString(1), report.getInt(2));
 		}
 		return tuple;
 	}
-	
-	
+
 	/**
 	 * Creates a new database called StrategyDatabase and performs the necessary
 	 * setup tasks: deletes Question and Answer tables if they exist from a previous
@@ -95,11 +113,11 @@ public class Database {
 
 		// Add Question and Answer tables
 		String createQuestionTable = "create table Question(QID int, QuestionText Varchar(100), Primary Key(QID));";
-		
+
 		String createAnswertable = "CREATE table Answer(AID int AUTO_INCREMENT, AnswerText Varchar(100), QID int, "
 				+ "Primary Key(AID), " + "Foreign Key(QID) REFERENCES Question(QID));";
-		
-		stmt.execute(createQuestionTable); 
+
+		stmt.execute(createQuestionTable);
 		stmt.execute(createAnswertable);
 
 	}
@@ -144,11 +162,11 @@ public class Database {
 
 		pstmt.executeUpdate();
 	}
-  
 
-	/** 
-	 * Generates a SQL report summarizing the answer data for the question identefied 
-	 * by the input question ID.
+	/**
+	 * Generates a SQL report summarizing the answer data for the question
+	 * identefied by the input question ID.
+	 * 
 	 * @param QID
 	 * @throws SQLException
 	 */
@@ -157,17 +175,18 @@ public class Database {
 
 		String chooseDatabase = "use StrategyDatabase;"; // select the correct DB
 		stmt.execute(chooseDatabase);
-		
-		String qidQuery = "SELECT AnswerText, count(AnswerText) FROM Answer WHERE QID = " + QID + " GROUP BY AnswerText;";
+
+		String qidQuery = "SELECT AnswerText, count(AnswerText) FROM Answer WHERE QID = " + QID
+				+ " GROUP BY AnswerText;";
 		ResultSet r = stmt.executeQuery(qidQuery);
-		
+
 		while (r.next()) {
 			String atxt = r.getString(1);
-			int count = r.getInt(2);  
+			int count = r.getInt(2);
 			tuple.put(atxt, count);
 		}
 		r.close();
 		return tuple;
 	}
-	
+
 }
