@@ -22,10 +22,6 @@ public class Survey {
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	private HashMap<Integer, QuestionStrategy> questionNumberMap;
-	private static String option1 = "";
-	private static String option2 = "";
-	private static String option3 = "";
-	private static String option4 = "";
 	private HashMap<String, Integer> answerData;
 
 
@@ -144,11 +140,7 @@ public class Survey {
   
 		for (QuestionStrategy question : questionList) {
 			if(question.getQuestionType() == 2) {
-				System.out.println("Question " + i + ": " + question);
-				System.out.println("            A: " + option1);
-				System.out.println("            B: " + option2);
-				System.out.println("            C: " + option3);
-				System.out.println("            D: " + option4);
+				System.out.println("Question " + i + ": " + question.displayQuestion());
 			}
 			else {
 				System.out.println("Question " + i + ": " + question);
@@ -294,7 +286,7 @@ public class Survey {
 	 * Runs the main survey maker UI/O
 	 * 
 	 * @param args
-	 */
+	 
 	public static void main(String args[]) {
 
 		System.out.println("-----------------------------------------------------------------");
@@ -317,7 +309,7 @@ public class Survey {
 		Scanner sc = new Scanner(System.in);
 		boolean done = false;
 
-
+		
 		while (!done) {
 			System.out.println("What would you like to do?");
 			System.out.println("1: Add a yes/no question");
@@ -395,6 +387,6 @@ public class Survey {
 		survey.separateAnswers(survey.emailList, survey.questionList);
 		survey.printReport();
 
-	} 
+	} */
 	
 }

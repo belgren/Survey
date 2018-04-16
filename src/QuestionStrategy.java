@@ -8,18 +8,18 @@ import java.util.HashMap;
  */
 public interface QuestionStrategy {
 
-  public String displayQuestion();
+	public String displayQuestion();
 
 	public String toString();
-	
+
 	public String addAnswer(Answer answer);
-	
+
 	public ArrayList<Answer> getAnswers();
-	
+
 	public void setQuestionNumber(int questionNumber);
-	
+
 	public int getQuestionType();
-	
+
 	public void setOptions(ArrayList<String> options);
-		
+
 }
