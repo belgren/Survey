@@ -8,8 +8,7 @@ import java.util.HashMap;
  */
 public interface QuestionStrategy {
 
-	
-	public String displayQuestion();
+  public String displayQuestion();
 
 	public String toString();
 	
@@ -21,5 +20,8 @@ public interface QuestionStrategy {
 	
 	public int getQuestionType();
 	
-	//public boolean isValidAnswer(String trialAnswer);
+	public void setOptions(ArrayList<String> options);
+	
+	public String displayQuestion();
+	
 }

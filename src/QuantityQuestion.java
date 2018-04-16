@@ -28,6 +28,12 @@ public class QuantityQuestion implements QuestionStrategy {
 		//validAnswers = new ArrayList<String>();
 	} 
 
+	public String displayQuestion() {
+		return null;
+	}
+	
+	public void setOptions(ArrayList<String> options) {}
+	
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
 	}
@@ -35,6 +41,7 @@ public class QuantityQuestion implements QuestionStrategy {
 	public int getQuestionType() {
 		return questionType;
 	}
+
 
 	public String addAnswer(Answer answer) {
 		answers.add(answer);

@@ -51,6 +51,10 @@ public class YesNoQuestion implements QuestionStrategy {
 		return questionText;
 	}
 
+	public String displayQuestion() {
+		return null;
+	}
+	
 	public void setQuestionNumber(int questionNumber) {  
 		this.questionNumber = questionNumber;
 	}
@@ -67,6 +71,9 @@ public class YesNoQuestion implements QuestionStrategy {
 		}
 		return false;
 	}
+	
+	public void setOptions(ArrayList<String> options) {}
+
 
 	/**
 	 * adds answer object to this questions list of answers
