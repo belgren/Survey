@@ -199,7 +199,7 @@ public class Survey {
 						answerText = answerText.trim();		//removing white space from answer text
 						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
-						currentQuestion.addAnswer(answer);
+						answerText = currentQuestion.addAnswer(answer);
 
 						// using db 
 						try {
