@@ -26,11 +26,30 @@ public class YesNoQuestion implements QuestionStrategy {
 		validAnswers = new ArrayList<String>();
 		validAnswers.add("y");
 		validAnswers.add("n");
-		validAnswers.add("yes");
+		validAnswers.add("yes");  
 		validAnswers.add("no");
 		answers = new ArrayList<Answer>();
-
-	} 
+ 
+	}   
+	
+	public String displayQuestion() {
+		return this.toString();
+	}
+	
+	/**
+	 * formatting method to standardize all forms of yes/no to be 'Yes' or 'No'
+	 * @param questionText
+	 * @return
+	 */
+	public String formatAnswer(String answerText) {
+		if (questionText.equalsIgnoreCase("y") | questionText.equalsIgnoreCase("yes")) {
+			return "Yes";  
+		}
+		else if (questionText.equalsIgnoreCase("n") | questionText.equalsIgnoreCase("no") ) {
+			return "No";
+		}
+		return questionText;
+	}
 
 	public void setQuestionNumber(int questionNumber) {  
 		this.questionNumber = questionNumber;
@@ -48,29 +67,20 @@ public class YesNoQuestion implements QuestionStrategy {
 		}
 		return false;
 	}
+	
+	public void setOptions(ArrayList<String> options) {}
+
 
 	/**
-	 * Looks at the given answers for a question, compares them to the valid answers, and adds to the appropriate tally
+	 * adds answer object to this questions list of answers
+	 * converts the string to standardize answer format.
+	 * returns new string
 	 */
-	public HashMap<String, Integer> tallyAnswers() {
-		tally = new HashMap<String, Integer>();
-		tally.put("Yes", 0);
-		tally.put("No", 0);
-
-		for (Answer answer : answers) {
-			String answerText = answer.toString();
-			if (answerText.equalsIgnoreCase("yes") || answerText.equalsIgnoreCase("y")) {
-				tally.put("Yes", tally.get("Yes") + 1);
-			}
-			else if (answerText.equalsIgnoreCase("no") || answerText.equalsIgnoreCase("n")) {
-				tally.put("No", tally.get("No") + 1);
-			}
-		}
-		return tally;
-	}
-	
-	public void addAnswer(Answer answer) {
+	public String addAnswer(Answer answer) {
 		answers.add(answer);
+		String answerText = answer.toString();
+		answerText = formatAnswer(answerText);
+		return answerText;
 	}
 
 	public ArrayList<Answer> getAnswers() {

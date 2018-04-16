@@ -22,10 +22,6 @@ public class Survey {
 	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	private HashMap<Integer, QuestionStrategy> questionNumberMap;
-	private static String option1 = "";
-	private static String option2 = "";
-	private static String option3 = "";
-	private static String option4 = "";
 	private HashMap<String, Integer> answerData;
 
 
@@ -97,12 +93,13 @@ public class Survey {
 	 * Adds the question to the survey's attribute, questionList
 	 * @param questionText
 	 */
-	public void addMultChoiceQuestion(String questionText) {
+	public void addMultChoiceQuestion(String questionText, ArrayList<String> options) {
 		question = new MultipleChoiceQuestion(questionText);
 		counter++;
 		question.setQuestionNumber(counter);
 		questionList.add(question);
 		questionNumberMap.put(counter, question);
+		question.setOptions(options);
 		try {
 			database.addQuestion(counter, questionText);
 		} catch (SQLException e) {
@@ -143,11 +140,7 @@ public class Survey {
   
 		for (QuestionStrategy question : questionList) {
 			if(question.getQuestionType() == 2) {
-				System.out.println("Question " + i + ": " + question);
-				System.out.println("            A: " + option1);
-				System.out.println("            B: " + option2);
-				System.out.println("            C: " + option3);
-				System.out.println("            D: " + option4);
+				System.out.println("Question " + i + ": " + question.displayQuestion());
 			}
 			else {
 				System.out.println("Question " + i + ": " + question);
@@ -184,9 +177,8 @@ public class Survey {
 	public void separateAnswers(ArrayList<Email> emailList, ArrayList<QuestionStrategy> questionList) {
 		for (Email email : emailList) {
 			String surveyAnswers = email.getMessage();
-			String[] answersPerEmail = surveyAnswers.split("\n");
-
-
+			String[] answersPerEmail = surveyAnswers.split("\n"); 
+			
 			for (String line : answersPerEmail) {
 				try {
 					String questionNumberAsString = line.substring(0, 1);
@@ -199,7 +191,7 @@ public class Survey {
 						answerText = answerText.trim();
 						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
-						currentQuestion.addAnswer(answer);
+						answerText = currentQuestion.addAnswer(answer);
 
 						// using db 
 						try {
@@ -294,7 +286,7 @@ public class Survey {
 	 * Runs the main survey maker UI/O
 	 * 
 	 * @param args
-	 */
+	 
 	public static void main(String args[]) {
 
 		System.out.println("-----------------------------------------------------------------");
@@ -317,7 +309,7 @@ public class Survey {
 		Scanner sc = new Scanner(System.in);
 		boolean done = false;
 
-
+		
 		while (!done) {
 			System.out.println("What would you like to do?");
 			System.out.println("1: Add a yes/no question");
@@ -346,12 +338,13 @@ public class Survey {
 
 					System.out.println("Please enter 4 multiple choice answer options");
 					Scanner mcScanner2 = new Scanner(System.in);
-					option1 = mcScanner2.nextLine();
-					option2 = mcScanner2.nextLine();
-					option3 = mcScanner2.nextLine();
-					option4 = mcScanner2.nextLine();
-
-					survey.addMultChoiceQuestion(mcQuestion);
+					
+					ArrayList<String> options = new ArrayList<String>();
+					while(mcScanner2.hasNextLine()) {
+						options.add(mcScanner2.nextLine());
+					}
+					
+					survey.addMultChoiceQuestion(mcQuestion, options);
 
 					break;
 
@@ -394,6 +387,6 @@ public class Survey {
 		survey.separateAnswers(survey.emailList, survey.questionList);
 		survey.printReport();
 
-	} 
+	} */
 	
 }
