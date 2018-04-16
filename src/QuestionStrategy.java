@@ -19,7 +19,7 @@ public interface QuestionStrategy {
 	public void setQuestionNumber(int questionNumber);
 
 	public int getQuestionType();
-
+	
 	public void setOptions(ArrayList<String> options);
 
 }
