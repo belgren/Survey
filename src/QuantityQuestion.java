@@ -28,6 +28,8 @@ public class QuantityQuestion implements QuestionStrategy {
 		//validAnswers = new ArrayList<String>();
 	} 
 
+	public void setOptions(ArrayList<String> options) {}
+	
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
 	}
@@ -48,7 +50,7 @@ public class QuantityQuestion implements QuestionStrategy {
 
 	/**
 	 * This method will tally the amount of each answer to a certain question
-	 */
+	 
 	public HashMap<String, Integer> tallyAnswers() {
 
 		for (Answer answer : answers) {
@@ -61,7 +63,7 @@ public class QuantityQuestion implements QuestionStrategy {
 			}
 		}
 		return tally;
-	}
+	}*/
 
 	public void addAnswer(Answer answer) {
 		answers.add(answer);

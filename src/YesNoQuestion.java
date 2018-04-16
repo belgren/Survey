@@ -51,7 +51,7 @@ public class YesNoQuestion implements QuestionStrategy {
 
 	/**
 	 * Looks at the given answers for a question, compares them to the valid answers, and adds to the appropriate tally
-	 */
+	 
 	public HashMap<String, Integer> tallyAnswers() {
 		tally = new HashMap<String, Integer>();
 		tally.put("Yes", 0);
@@ -67,6 +67,9 @@ public class YesNoQuestion implements QuestionStrategy {
 			}
 		}
 		return tally;
+	}*/
+	
+	public void setOptions(ArrayList<String> options) {
 	}
 	
 	public void addAnswer(Answer answer) {

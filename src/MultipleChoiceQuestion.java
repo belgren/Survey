@@ -14,6 +14,11 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 	private HashMap<String, Integer> tally;
 	public int questionNumber;
 	private int questionType;
+	private String optionA;
+	private String optionB;
+	private String optionC;
+	private String optionD;
+	private ArrayList<String> options;
 	
 
 	/**
@@ -24,6 +29,7 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 
 		this.questionText = questionText;
 		questionType = 2;
+		options = new ArrayList<String>();
 		answers = new ArrayList<Answer>();
 		tally = new HashMap<String, Integer>();
 		validAnswers = new ArrayList<String>();
@@ -33,12 +39,53 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		validAnswers.add("D");
 	} 
 
+	public void setOptions(ArrayList<String> options) {
+		this.options = options;
+	}
+	
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
 	}
 	
 	public int getQuestionType() {
 		return questionType;
+	}
+	
+	public void setOptionA(String optionA) {
+		this.optionA = optionA;
+	}
+	
+	public void setOptionB(String optionB) {
+		this.optionB = optionB;
+	}
+	
+	public void setOptionC(String optionC) {
+		this.optionC = optionC;
+	}
+	
+	public void setOptionD(String optionD) {
+		this.optionD = optionD;
+	}
+	
+	public String getOptionA() {
+		return optionA;
+	}
+	
+	public String getOptionB() {
+		return optionB;
+	}
+	
+	public String getOptionC() {
+		return optionC;
+	}
+	
+	public String getOptionD() {
+		return optionD;
+	}
+	
+	public String displayQuestion() {
+		String mcText = questionText + "\nA: " + options.get(0) + "\nB: " + options.get(1) + "\nC: " + options.get(2) + "\nD: " + options.get(3);
+		return mcText;
 	}
 	
 	public boolean isValidAnswer(String trialAnswer) {
@@ -52,7 +99,7 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 	
 	/**
 	 * This method will tally the amount of each answer to a certain question
-	 */
+	 
 	public HashMap<String, Integer> tallyAnswers() {
 		
 		tally.put("A", 0);
@@ -71,7 +118,7 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 			}
 		}
 		return tally;
-	}
+	}*/
 
 	public void addAnswer(Answer answer) {
 		answers.add(answer);

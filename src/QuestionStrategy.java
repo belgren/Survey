@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public interface QuestionStrategy {
 
-	public HashMap<String, Integer> tallyAnswers();
+	//public HashMap<String, Integer> tallyAnswers();
 
 	public String toString();
 	
@@ -19,6 +19,8 @@ public interface QuestionStrategy {
 	public void setQuestionNumber(int questionNumber);
 	
 	public int getQuestionType();
+	
+	public void setOptions(ArrayList<String> options);
 	
 	//public boolean isValidAnswer(String trialAnswer);
 }
