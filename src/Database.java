@@ -18,6 +18,7 @@ public class Database {
 	private HashMap<Integer, ResultSet> separatedReports;
 	private ResultSet currentReport;
 	private HashMap<String, Integer> tuple;
+	HashMap<Integer, String> questionTableContents;
 
 	
 	/**
@@ -35,6 +36,23 @@ public class Database {
 		}
 	}
   
+	
+	public HashMap<Integer, String> getQuestions() throws SQLException{
+		questionTableContents = new HashMap<Integer, String>();
+		
+		String choose_database = "use StrategyDatabase;";
+		stmt.execute(choose_database);
+		
+		String getQuestionsQuery = "SELECT QID, QuestionText FROM Question;";
+		ResultSet report = stmt.executeQuery(getQuestionsQuery);
+		
+		while(report.next()) {
+			int qid = report.getInt(1);
+			String qText = report.getString(2);
+			questionTableContents.put(qid, qText);
+		}
+		return questionTableContents;
+	}
 	/**
 	 * Creates a new database called StrategyDatabase and performs the necessary
 	 * setup tasks: deletes Question and Answer tables if they exist from a previous
@@ -109,7 +127,7 @@ public class Database {
 
 		pstmt.executeUpdate();
 	}
-
+  
 
 	/** 
 	 * Generates a SQL report summarizing the answer data for the question identefied 
@@ -135,18 +153,4 @@ public class Database {
 		return tuple;
 	}
 	
-	public static void main(String args[]) {
-		Database db = new Database();
-		try {
-			db.createDatabase();
-			db.addQuestion(1, "Q1");
-			db.addAnswer("ONE", 1);
-			db.addAnswer("TWO", 1);
-
-		}
-		catch(SQLException e) { 
-			e.printStackTrace();
-		}
-		
-	}
 }
