@@ -74,7 +74,7 @@ public class SurveyDisplay {
 				+ "Please email your survey answers to cp274survey@gmail.com\n      "
 				+ "Email subject must be \"" + currentSurvey.getSurveyName() + "\".\n      "
 				+ "Answers should be in the format:\n      "
-				+ "1 Answer\n      2 Answer\n      etc.");
+				+ "1 A\n      2 yes\n      etc.\n");
 		instructions.setWrapStyleWord(true);
 		instructions.setToolTipText("");
 		instructions.setBackground(new Color(255, 255, 255));
