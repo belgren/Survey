@@ -53,6 +53,23 @@ public class Database {
 		}
 		return questionTableContents;
 	}
+	
+	public HashMap<String, Integer> getAnswers() throws SQLException{
+		tuple = new HashMap<String, Integer>();
+
+		String choose_database = "use StrategyDatabase;";
+		stmt.execute(choose_database);
+		
+		String getAnswersQuery = "SELECT AnswerText, count(*) FROM Answer GROUP BY AnswerText;";
+		ResultSet report = stmt.executeQuery(getAnswersQuery);
+		
+		while(report.next()) {
+			tuple.put(report.getString(1), report.getInt(2));
+		}
+		return tuple;
+	}
+	
+	
 	/**
 	 * Creates a new database called StrategyDatabase and performs the necessary
 	 * setup tasks: deletes Question and Answer tables if they exist from a previous
