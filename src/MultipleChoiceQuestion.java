@@ -63,7 +63,7 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 
 	public String addAnswer(Answer answer) {
 		answers.add(answer);
-		
+		return answer.toString();
 	}
 
 	public ArrayList<Answer> getAnswers() {

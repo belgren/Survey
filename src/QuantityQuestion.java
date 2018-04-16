@@ -29,7 +29,7 @@ public class QuantityQuestion implements QuestionStrategy {
 	} 
 
 	public String displayQuestion() {
-		return null;
+		return this.toString();
 	}
 	
 	public void setOptions(ArrayList<String> options) {}
@@ -56,9 +56,5 @@ public class QuantityQuestion implements QuestionStrategy {
 
 	public String toString() {
 		return this.questionText;
-	}
-
-	public String displayQuestion() {
-		return this.toString();
 	}
 }

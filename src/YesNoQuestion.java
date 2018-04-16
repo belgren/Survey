@@ -30,7 +30,7 @@ public class YesNoQuestion implements QuestionStrategy {
 		validAnswers.add("no");
 		answers = new ArrayList<Answer>();
  
-	} 
+	}   
 	
 	public String displayQuestion() {
 		return this.toString();
@@ -51,10 +51,6 @@ public class YesNoQuestion implements QuestionStrategy {
 		return questionText;
 	}
 
-	public String displayQuestion() {
-		return null;
-	}
-	
 	public void setQuestionNumber(int questionNumber) {  
 		this.questionNumber = questionNumber;
 	}

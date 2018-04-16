@@ -21,7 +21,5 @@ public interface QuestionStrategy {
 	public int getQuestionType();
 	
 	public void setOptions(ArrayList<String> options);
-	
-	public String displayQuestion();
-	
+		
 }
