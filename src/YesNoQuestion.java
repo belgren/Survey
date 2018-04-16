@@ -69,8 +69,7 @@ public class YesNoQuestion implements QuestionStrategy {
 		return tally;
 	}*/
 	
-	public void setOptions(ArrayList<String> options) {
-	}
+	public void setOptions(ArrayList<String> options) {}
 	
 	public void addAnswer(Answer answer) {
 		answers.add(answer);
