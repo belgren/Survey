@@ -58,7 +58,7 @@ public class SurveyDisplay {
 
 		label = new JTextArea();
 		for(QuestionStrategy q : currentSurvey.getQuestionList()) {
-			label.append("Question " + q.getQuestionNumber() +" : " + q.toString() + "\n");
+			label.append("Question " + q.getQuestionNumber() +" : " + q.displayQuestion() + "\n");
 		}
 
 		instructions = new JTextArea();

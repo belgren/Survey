@@ -42,13 +42,13 @@ public class YesNoQuestion implements QuestionStrategy {
 	 * @return
 	 */
 	public String formatAnswer(String answerText) {
-		if (questionText.equalsIgnoreCase("y") | questionText.equalsIgnoreCase("yes")) {
-			return "Yes";  
+		if (answerText.equalsIgnoreCase("y") | answerText.equalsIgnoreCase("yes")) {
+			return "Yes";    
 		}
-		else if (questionText.equalsIgnoreCase("n") | questionText.equalsIgnoreCase("no") ) {
+		else if (answerText.equalsIgnoreCase("n") | answerText.equalsIgnoreCase("no") ) {
 			return "No";
 		}
-		return questionText;
+		return answerText;
 	}
 
 	public void setQuestionNumber(int questionNumber) {  

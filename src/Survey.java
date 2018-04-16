@@ -58,7 +58,7 @@ public class Survey {
 	
 
 		database = new Database();
-		try {
+		try {  
 			database.createDatabase();
 		} catch (SQLException e) {
 			System.out.println("Error creating Database");
@@ -191,7 +191,7 @@ public class Survey {
 						answerText = answerText.trim();
 						Answer answer = new Answer(answerText);
 						answer.setQuestionNumber(questionNumber);
-						answerText = currentQuestion.addAnswer(answer);
+						//answerText = currentQuestion.addAnswer(answer);
 
 						// using db 
 						try {
@@ -206,34 +206,6 @@ public class Survey {
 			}
 		}
 	}
-
-	/**
-	 * Calls tallyAnswers for the appropriate question, adds the resulting HashMap
-	 * to an ArrayList of HashMaps Prints the results of each HashMap
-	 * 
-	 * @return
-	 
-	public ArrayList<HashMap<String, Integer>> tallySurvey() {
-		for (QuestionStrategy question : questionList) {
-			if (question.getAnswers().isEmpty()) {
-				System.out.println("\nNo answers provided for question: " + question);
-			} else {
-				System.out.println("\nTally for question: " + question);
-			}
-			// hashmap of answers and their tally for all answers for a given question
-			HashMap<String, Integer> answerTallyHashMap = question.tallyAnswers();
-			// Adding one question's tally map to a list of all maps for all question in a
-			// survey
-			allAnswerTallys.add(answerTallyHashMap);
-			// print one
-			for (String key : answerTallyHashMap.keySet()) {
-				int occurances = answerTallyHashMap.get(key);
-				System.out.println("Response: '" + key + "' -- Count: " + occurances);
-			}
-		}
-		return allAnswerTallys;
-	}
-   */
 
 	/**
 	 * Loops through the question numbers in the hashmap that keeps track of them,

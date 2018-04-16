@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -19,10 +20,6 @@ public class SurveyBuilderMC {
 	private JTextField textField;
 	private Survey currentSurvey;
 	private String questionText;
-	private String AText;
-	private String BText;
-	private String CText;
-	private String DText;
 
 	/**
 	 * Launch the application.
@@ -122,11 +119,13 @@ public class SurveyBuilderMC {
 		btnAddQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				questionText = textBox.getText();
-				AText = optionA.getText();
-				BText = optionB.getText();
-				CText = optionC.getText();
-				DText = optionD.getText();
-				currentSurvey.addMultChoiceQuestion(questionText);
+
+				ArrayList<String> options = new ArrayList<String>();
+				options.add(optionA.getText());
+				options.add(optionB.getText());
+				options.add(optionC.getText());
+				options.add(optionD.getText());
+				currentSurvey.addMultChoiceQuestion(questionText, options);
 			}
 		});
 		
