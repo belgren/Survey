@@ -52,18 +52,10 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		return mcText;
 	}
 	
-	public boolean isValidAnswer(String trialAnswer) {
-		for (String ans : validAnswers) {
-			if (ans.equalsIgnoreCase(trialAnswer)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public String addAnswer(Answer answer) {
 		answers.add(answer);
-		return answer.toString();
+		String answerText = answer.toString().toUpperCase();
+		return answerText;
 	}
 
 	public ArrayList<Answer> getAnswers() {
