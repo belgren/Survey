@@ -8,45 +8,41 @@ import org.junit.Test;
 
 public class TestSurvey {
 	
-	Survey testSurvey;
-	Email email1;
-	Email email2;
-	ArrayList<Email> emailList; 
-	ArrayList<QuestionStrategy> questionList;
-	QuestionStrategy question1;
-	QuestionStrategy question2;
-	Answer answer1;
-	Answer answer2;
-	Answer answer3;
-	Answer answer4;
-	Answer answer5;
+	private Survey testSurvey;
+	private Email email1;
+	private Email email2;
+	private ArrayList<Email> emailList; 
+	private ArrayList<QuestionStrategy> questionList;
+	private QuestionStrategy question1;
 	
-	
+	private Answer answer1;
+
 	
 	@Before
 	public void setUp() throws Exception {
-		testSurvey = Survey.getInstance("tester");
-		email1 = new Email( "subject1","fromAddress1", "sentDate1", "messagecontent1");
-		email2 = new Email( "subject2","fromAddress2", "sentDate2", "messagecontent2");
+		testSurvey = Survey.getInstance("tester");  
+		email1 = new Email( "subject1","fromAddress1", "sentDate1", "1 yes");
+		email2 = new Email( "subject2","fromAddress2", "sentDate2", "2 no");
+		
 		emailList = new ArrayList<Email>();
 		emailList.add(email1);
 		emailList.add(email2);
-		questionList = new ArrayList<QuestionStrategy>();
-		question1 = new YesNoQuestion("Are you happy?");
-		question2 = new YesNoQuestion("Are you sad?");
-		questionList.add(question1);
-		questionList.add(question2);
-		answer1 = new Answer("yes");
-		answer2 = new Answer("yes");
-		answer3 = new Answer("no");
-		answer4 = new Answer("yes");
-		answer5 = new Answer("no");
+		testSurvey.addYesNoQuestion("question 1");
+		questionList = testSurvey.getQuestionList();
 	}
 	
-	//Test separate answers method
+	
+	/**
+	 * Test separate answers method. This test the functionality of majority of the project.
+	 * By calling the separate answers method, the answer object is added to the list of answers
+	 * which is an attribute of the question object. This test confirms this function by retreiving 
+	 * the answer text from that attribute.
+	 */
 	@Test
 	public void testSeparateAnswers() {
-		testSurvey.separateAnswers(emailList, questionList);
-		assertEquals("messagecontent1", question1.getAnswers().get(0).toString());
+		testSurvey.separateAnswers(this.emailList, this.questionList);
+		QuestionStrategy question = this.questionList.get(0);
+		Answer answer = question.getAnswers().get(0);
+		assertEquals(answer.toString(), "yes");
 	}
 }
