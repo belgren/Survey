@@ -32,6 +32,10 @@ public class YesNoQuestion implements QuestionStrategy {
 
 	} 
 
+	public String displayQuestion() {
+		return null;
+	}
+	
 	public void setQuestionNumber(int questionNumber) {  
 		this.questionNumber = questionNumber;
 	}
@@ -48,26 +52,6 @@ public class YesNoQuestion implements QuestionStrategy {
 		}
 		return false;
 	}
-
-	/**
-	 * Looks at the given answers for a question, compares them to the valid answers, and adds to the appropriate tally
-	 
-	public HashMap<String, Integer> tallyAnswers() {
-		tally = new HashMap<String, Integer>();
-		tally.put("Yes", 0);
-		tally.put("No", 0);
-
-		for (Answer answer : answers) {
-			String answerText = answer.toString();
-			if (answerText.equalsIgnoreCase("yes") || answerText.equalsIgnoreCase("y")) {
-				tally.put("Yes", tally.get("Yes") + 1);
-			}
-			else if (answerText.equalsIgnoreCase("no") || answerText.equalsIgnoreCase("n")) {
-				tally.put("No", tally.get("No") + 1);
-			}
-		}
-		return tally;
-	}*/
 	
 	public void setOptions(ArrayList<String> options) {}
 	

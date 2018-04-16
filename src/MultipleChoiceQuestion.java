@@ -14,10 +14,6 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 	private HashMap<String, Integer> tally;
 	public int questionNumber;
 	private int questionType;
-	private String optionA;
-	private String optionB;
-	private String optionC;
-	private String optionD;
 	private ArrayList<String> options;
 	
 
@@ -51,38 +47,6 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		return questionType;
 	}
 	
-	public void setOptionA(String optionA) {
-		this.optionA = optionA;
-	}
-	
-	public void setOptionB(String optionB) {
-		this.optionB = optionB;
-	}
-	
-	public void setOptionC(String optionC) {
-		this.optionC = optionC;
-	}
-	
-	public void setOptionD(String optionD) {
-		this.optionD = optionD;
-	}
-	
-	public String getOptionA() {
-		return optionA;
-	}
-	
-	public String getOptionB() {
-		return optionB;
-	}
-	
-	public String getOptionC() {
-		return optionC;
-	}
-	
-	public String getOptionD() {
-		return optionD;
-	}
-	
 	public String displayQuestion() {
 		String mcText = questionText + "\nA: " + options.get(0) + "\nB: " + options.get(1) + "\nC: " + options.get(2) + "\nD: " + options.get(3);
 		return mcText;
@@ -96,29 +60,6 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		}
 		return false;
 	}
-	
-	/**
-	 * This method will tally the amount of each answer to a certain question
-	 
-	public HashMap<String, Integer> tallyAnswers() {
-		
-		tally.put("A", 0);
-		tally.put("B", 0);
-		tally.put("C", 0);
-		tally.put("D", 0);
-		
-		for (Answer answer : answers) {
-			String answerText = answer.toString().toUpperCase();
-			if (isValidAnswer(answerText)) {
-				if (tally.keySet().contains(answerText)) {
-					tally.put(answerText, tally.get(answerText) + 1);
-				} else {
-					tally.put(answerText, 1);
-				}
-			}
-		}
-		return tally;
-	}*/
 
 	public void addAnswer(Answer answer) {
 		answers.add(answer);

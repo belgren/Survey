@@ -28,6 +28,10 @@ public class QuantityQuestion implements QuestionStrategy {
 		//validAnswers = new ArrayList<String>();
 	} 
 
+	public String displayQuestion() {
+		return null;
+	}
+	
 	public void setOptions(ArrayList<String> options) {}
 	
 	public void setQuestionNumber(int questionNumber) {
@@ -37,33 +41,7 @@ public class QuantityQuestion implements QuestionStrategy {
 	public int getQuestionType() {
 		return questionType;
 	}
-	
-	/*
-	public boolean isValidAnswer(String trialAnswer) {
-		for (String ans : validAnswers) {
-			if (ans.equalsIgnoreCase(trialAnswer)) {
-				return true;
-			}
-		}
-		return false;
-	}*/
 
-	/**
-	 * This method will tally the amount of each answer to a certain question
-	 
-	public HashMap<String, Integer> tallyAnswers() {
-
-		for (Answer answer : answers) {
-			String answerText = answer.toString().toLowerCase();
-			String capitalText = answerText.substring(0, 1).toUpperCase() + answerText.substring(1);
-			if (tally.keySet().contains(capitalText)) {
-				tally.put(capitalText, tally.get(capitalText) + 1);
-			} else {
-				tally.put(capitalText, 1);
-			}
-		}
-		return tally;
-	}*/
 
 	public void addAnswer(Answer answer) {
 		answers.add(answer);
