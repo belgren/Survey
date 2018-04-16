@@ -53,8 +53,9 @@ public class DisplayResults {
 
 		label = new JTextArea();
 		for(QuestionStrategy q : currentSurvey.getQuestionList()) {
-			label.append("Question " + q.getQuestionNumber() +" : " + q.toString() + "\n");
+			label.append("");
 		}
+		label.setEditable(false);
 
 
 		JScrollPane scrollPane = new JScrollPane(label);

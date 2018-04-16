@@ -49,6 +49,7 @@ public class SurveyBuilderMain {
 		frame.getContentPane().setLayout(null);
 		
 		JButton qqButton = new JButton("Add Quantity Question");
+		qqButton.setEnabled(false);
 		qqButton.setBounds(44, 370, 365, 52);
 		frame.getContentPane().add(qqButton);
 		

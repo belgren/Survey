@@ -69,6 +69,7 @@ public class SurveyMenu {
 		frame.getContentPane().setLayout(null);
 
 		JButton sendToFile = new JButton("Send To File");
+		sendToFile.setEnabled(false);
 		sendToFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				surveyNameInput = surveyName.getText();
@@ -110,11 +111,17 @@ public class SurveyMenu {
 		displayOnScreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				surveyNameInput = surveyName.getText();
-				survey = Survey.getInstance(surveyNameInput);
-				SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
-				homeScreen.newMainBuilder();
-				frame.dispose();
-				
+				if (surveyNameInput.equals("")) {
+					ErrorWindow noSurveyNameError = new ErrorWindow("No survey name was given.");
+					noSurveyNameError.newErrorBuilder();
+					frame.dispose();
+				}
+				else {
+					survey = Survey.getInstance(surveyNameInput);
+					SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
+					homeScreen.newMainBuilder();
+					frame.dispose();
+				}
 			}
 		});
 
