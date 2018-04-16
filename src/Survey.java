@@ -8,10 +8,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 /**
- * Survey class, which creates the survey. Also has a main the does UI/O.
- * 
- * @author Jordan
- *
+ * Survey class, which creates the survey
  */
 public class Survey {
 
@@ -24,14 +21,11 @@ public class Survey {
 	private HashMap<Integer, QuestionStrategy> questionNumberMap;
 	private HashMap<String, Integer> answerData;
 
-
 	private Database database;
 	private ResultSet report;
 	HashMap<Integer, ResultSet> rsMap;
 
-
 	private static Survey surveyInstance;
-	
 
 	//Get the only object available
 	public static Survey getInstance(String name){
@@ -43,9 +37,8 @@ public class Survey {
 	}
 	
 	/**
-	 * Constructor for survey. Sets up survey name, initializes question counter to
-	 * 0, initializes allAnswerTallys
-	 * 
+	 * Constructor for survey. Sets up survey name, initializes question counter to 0,
+	 * instantiates various fields and creates the database
 	 * @param name
 	 */
 	private Survey(String name) {
@@ -56,7 +49,6 @@ public class Survey {
 		emailList = new ArrayList<Email>();
 		questionList = new ArrayList<QuestionStrategy>();
 	
-
 		database = new Database();
 		try {  
 			database.createDatabase();
@@ -67,11 +59,10 @@ public class Survey {
 	}
 
 	/**
-	 * creates a question object with the given question text. Adds the question to
-	 * the survey's attribute, questionList Assigns question number based on
+	 * Creates a yes/no question object with the given question text. Adds the question to
+	 * the survey's attribute, questionList. Assigns question number based on
 	 * incrementing counter. Adds the new question to the Question table in
 	 * SurveyDatabase.
-	 * 
 	 * @param questionText
 	 */
 	public void addYesNoQuestion(String questionText) {
@@ -89,8 +80,10 @@ public class Survey {
 	}
 
 	/**
-	 * creates a multiple choice question object with the given question text.
-	 * Adds the question to the survey's attribute, questionList
+	 * Creates a multiple choice question object with the given question text.
+	 * Adds the question to the survey's attribute, questionList. Assigns question number based on
+	 * incrementing counter. Adds the new question to the Question table in
+	 * SurveyDatabase.
 	 * @param questionText
 	 */
 	public void addMultChoiceQuestion(String questionText, ArrayList<String> options) {
@@ -109,8 +102,10 @@ public class Survey {
 	}
 
 	/**
-	 * creates a quantity question object with the given question text.
-	 * Adds the question to the survey's attribute, questionList
+	 * Creates a quantity question object with the given question text.
+	 * Adds the question to the survey's attribute, questionList. Assigns question number based on
+	 * incrementing counter. Adds the new question to the Question table in
+	 * SurveyDatabase.
 	 * @param questionText
 	 */
 	public void addQuantityQuestion(String questionText) {
@@ -128,28 +123,6 @@ public class Survey {
 	}
 
 	/**
-	 * Prints survey instructions followed by survey questions
-	 */
-	public void showSurvey() {
-		int i = 1;
-		System.out.println("\nWelcome to " + surveyName + "!");
-		System.out.println("\nInstructions:");
-		System.out.println("Please email your survey answers to cp274survey@gmail.com");
-		System.out.println("Email subject must be \"" + surveyName + "\"");
-		System.out.println("Separate question answers by line\n");
-  
-		for (QuestionStrategy question : questionList) {
-			if(question.getQuestionType() == 2) {
-				System.out.println("Question " + i + ": " + question.displayQuestion());
-			}
-			else {
-				System.out.println("Question " + i + ": " + question);
-			}
-			i++;
-		}
-	}
-
-	/**
 	 * Gets emails and creates list of email objects.
 	 */
 	public void getSurveyEmailData() {
@@ -162,7 +135,6 @@ public class Survey {
 		emailList = reader.downloadEmails(protocol, host, port, userName, password);
 	} 
 
-
 	/**
 	 * Loops through the list of emails submitted and for a survey, splits each
 	 * email up by line and loops through the lines. Checks if the line has a line
@@ -170,9 +142,8 @@ public class Survey {
 	 * in the hashmap of questions. Then, creates an answer object containing the
 	 * test of the rest of the line and adds that answer to the corresponding
 	 * question's list of answers.
-	 * 
 	 * @param emailList
-	 * @return 2D array of Answer objects
+	 * @param questionList
 	 */
 	public void separateAnswers(ArrayList<Email> emailList, ArrayList<QuestionStrategy> questionList) {
 		for (Email email : emailList) {
@@ -214,9 +185,7 @@ public class Survey {
 	 * Loops through the question numbers in the hashmap that keeps track of them,
 	 * calling the printSeparatedReport method on each qid. This method generates a
 	 * new report that displays each answer and the number of occurrences, for the
-	 * Inputed question.
-	 * 
-	 * @param questions
+	 * inputed question.
 	 */
 	public void printReport() {
 		for (int qid : this.questionNumberMap.keySet()) {
@@ -251,117 +220,8 @@ public class Survey {
 	public int getQuestionNumber() {
 		return questionList.size();
 	}
-
 	
 	public ArrayList<Email> getEmailList() {
 		return emailList;
 	}
-	
-	/**
-	 * Runs the main survey maker UI/O
-	 * 
-	 * @param args
-	 
-	public static void main(String args[]) {
-
-		System.out.println("-----------------------------------------------------------------");
-		System.out.println("                          Survey Maker                           ");
-		System.out.println("-----------------------------------------------------------------");
-
-		String surveyName;
-		do {
-			System.out.println("Please enter survey name:");
-			Scanner nameScanner = new Scanner(System.in);
-			surveyName = nameScanner.nextLine();
-			if (surveyName.equals("")) {
-				System.out.println("No name entered, try again");
-			}
-
-		} while (surveyName.equals(""));
-
-		Survey survey = new Survey(surveyName);
-
-		Scanner sc = new Scanner(System.in);
-		boolean done = false;
-
-		
-		while (!done) {
-			System.out.println("What would you like to do?");
-			System.out.println("1: Add a yes/no question");
-			System.out.println("2: Add a multiple choice question");
-			System.out.println("3: Add a quantity question");
-			System.out.println("4: Finish and create survey");
-
-			try {
-				int questionType = sc.nextInt();
-
-				switch (questionType) { 
-				case 1:
-					System.out.println("Please enter the yes/no question you would like to add.");
-					Scanner ynScanner = new Scanner(System.in);
-					String ynQuestion = ynScanner.nextLine();
-
-					survey.addYesNoQuestion(ynQuestion);
-
-					break;
-
-				case 2:
-
-					System.out.println("Please enter the multiple choice question you would like to add.");
-					Scanner mcScanner1 = new Scanner(System.in);
-					String mcQuestion = mcScanner1.nextLine();
-
-					System.out.println("Please enter 4 multiple choice answer options");
-					Scanner mcScanner2 = new Scanner(System.in);
-					
-					ArrayList<String> options = new ArrayList<String>();
-					while(mcScanner2.hasNextLine()) {
-						options.add(mcScanner2.nextLine());
-					}
-					
-					survey.addMultChoiceQuestion(mcQuestion, options);
-
-					break;
-
-				case 3:
-					System.out.println("Please enter the quantity question you would like to add.");
-					Scanner qScanner = new Scanner(System.in);
-					String qQuestion = qScanner.nextLine();
-
-					survey.addQuantityQuestion(qQuestion);
-
-					break;
-
-				case 4:
-
-					if (survey.questionList.isEmpty()) {
-						System.out.println("Survey has no questions. Please add a question.\n");
-						break;
-					} else {
-						survey.showSurvey();
-						done = true;
-						break;
-					}
-				default:
-					System.out.println("Please enter a valid option between 1 and 2\n");
-				}
-			} catch (InputMismatchException ex) {
-				sc.nextLine();
-				System.out.println("Please enter a valid option between 1 and 4\n");
-			}
-		}
-
-		System.out.print("\nPress enter to tally results");
-		Scanner in = new Scanner(System.in);
-		in.nextLine();
-		System.out.println("\nFetching Email data. . . .");
-		survey.getSurveyEmailData();
-
-		System.out.println("\nThere were " + emailList.size() + " responses to the survey!");
-
-		survey.separateAnswers(survey.emailList, survey.questionList);
-		survey.printReport();
-
-	} */
-	
 }

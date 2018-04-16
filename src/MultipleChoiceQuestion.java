@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 /**
  * Concrete subclass of question defining the multiple choice question type.
- * Contains a an ArrayList of answer objects
- * that will be filled in when the survey is conducted.
+ * Contains a an ArrayList of answer objects that will be filled in when the survey is conducted
+ * and a method to display the question
  */
 public class MultipleChoiceQuestion implements QuestionStrategy {
   
@@ -18,7 +18,7 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 	
 
 	/**
-	 * Sets up valid answers for multiple choice questions
+	 * Constructor instantiates fields and sets up valid answers for multiple choice questions.  
 	 * @param questionText
 	 */
 	public MultipleChoiceQuestion(String questionText) {
@@ -35,6 +35,10 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		validAnswers.add("D");
 	} 
 	
+	/**
+	 * Checks if an answer to a question is valid
+	 * @param trialAnswer
+	 */
 	public boolean isValidAnswer(String trialAnswer) {
 		for (String ans : validAnswers) {
 			if (ans.equalsIgnoreCase(trialAnswer)) {
@@ -42,6 +46,30 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Displays multiple choice question with all of its answer options 
+	 */
+	public String displayQuestion() {
+		String mcText = questionText + "\n          "
+				+ "A: " + options.get(0) + "\n          "
+				+ "B: " + options.get(1) + "\n          "
+				+ "C: " + options.get(2) + "\n          "
+				+ "D: " + options.get(3);
+		return mcText;
+	}
+	
+	/**
+	 * Adds answer to answers array and 
+	 * converts the string to standard answer format
+	 * @param answer
+	 * @return answerText string of answer in upper case
+	 */
+	public String addAnswer(Answer answer) {
+		answers.add(answer);
+		String answerText = answer.toString().toUpperCase();
+		return answerText;
 	}
 
 	public void setOptions(ArrayList<String> options) {
@@ -56,21 +84,9 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		return questionType;
 	}
 	
-	public String displayQuestion() {
-		String mcText = questionText + "\n\tA: " + options.get(0) + "\n\tB: " + options.get(1) + "\n\tC: " + options.get(2) + "\n\tD: " + options.get(3);
-		return mcText;
-	}
-	
-	public String addAnswer(Answer answer) {
-		answers.add(answer);
-		String answerText = answer.toString().toUpperCase();
-		return answerText;
-	}
-
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
 	}
-
 
 	public String toString() {
 		return this.questionText;

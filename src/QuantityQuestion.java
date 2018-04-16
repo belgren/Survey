@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 /**
  * Concrete subclass of question defining the quantity question type.
- * Contains a tally answers method, and an ArrayList of answer objects
- * that will be filled in when the survey is conducted.
+ * Contains an ArrayList of answer objects that will be filled in when the survey is conducted
+ * and a method to display the question
  */
 public class QuantityQuestion implements QuestionStrategy {
 
@@ -16,7 +16,7 @@ public class QuantityQuestion implements QuestionStrategy {
 	private int questionType;
 
 	/**
-	 * Sets up valid answers for multiple choice questions
+	 * Constructor instantiates fields for quantity questions.  
 	 * @param questionText
 	 */
 	public QuantityQuestion(String questionText) {
@@ -28,8 +28,25 @@ public class QuantityQuestion implements QuestionStrategy {
 		//validAnswers = new ArrayList<String>();
 	} 
 
+	/**
+	 * Displays quantity question
+	 */
 	public String displayQuestion() {
 		return this.toString();
+	}
+	
+	/**
+	 * Adds answer object to this questions list of answers
+	 * Converts the string to standard answer format
+	 * and returns the string
+	 * @param answer
+	 * @return capitalText
+	 */
+	public String addAnswer(Answer answer) {
+		answers.add(answer);
+		String answerText = answer.toString().toLowerCase();
+		String capitalText = answerText.substring(0, 1).toUpperCase() + answerText.substring(1);
+		return capitalText;
 	}
 	
 	public boolean isValidAnswer(String trialAnswer) {
@@ -44,13 +61,6 @@ public class QuantityQuestion implements QuestionStrategy {
 	
 	public int getQuestionType() {
 		return questionType;
-	}
-
-
-	public String addAnswer(Answer answer) {
-		answers.add(answer);
-		String answerText = answer.toString().toLowerCase();
-		return answerText;
 	}
 
 	public ArrayList<Answer> getAnswers() {

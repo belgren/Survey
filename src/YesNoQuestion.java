@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 /**
  * Concrete subclass of question defining the yes/no question type.
- * Contains a tally answers method, and an ArrayList of answer objects
- * that will be filled in when the survey is conducted.
+ * Contains an ArrayList of answer objects that will be filled in when the survey is conducted
+ * and a method to display the question
  */
 public class YesNoQuestion implements QuestionStrategy {
 
@@ -16,7 +16,7 @@ public class YesNoQuestion implements QuestionStrategy {
 	private int questionType;
 
 	/**
-	 * Sets up valid answers for yes/no questions
+	 * Constructor instantiates fields and sets up valid answers for yes/no questions.  
 	 * @param questionText
 	 */
 	public YesNoQuestion(String questionText) {
@@ -29,15 +29,17 @@ public class YesNoQuestion implements QuestionStrategy {
 		validAnswers.add("yes");  
 		validAnswers.add("no");
 		answers = new ArrayList<Answer>();
- 
 	}   
 	
+	/**
+	 * Displays the yes/no question
+	 */
 	public String displayQuestion() {
 		return this.toString();
 	}
 	
 	/**
-	 * formatting method to standardize all forms of yes/no to be 'Yes' or 'No'
+	 * Formatting method to standardize all forms of yes/no to be 'Yes' or 'No'
 	 * @param questionText
 	 * @return
 	 */
@@ -51,6 +53,10 @@ public class YesNoQuestion implements QuestionStrategy {
 		return answerText;
 	}
 	
+	/**
+	 * Checks if an answer to a yes/no question is valid
+	 * @param trialAnswer
+	 */
 	public boolean isValidAnswer(String trialAnswer) {
 		for (String ans : validAnswers) {
 			if (ans.equalsIgnoreCase(trialAnswer)) {
@@ -60,6 +66,20 @@ public class YesNoQuestion implements QuestionStrategy {
 		return false;
 	}
 
+	/**
+	 * Adds answer object to this questions list of answers
+	 * Converts the string to standard answer format
+	 * and returns the string
+	 * @param answer
+	 * @return answerText
+	 */
+	public String addAnswer(Answer answer) {
+		answers.add(answer);
+		String answerText = answer.toString();
+		answerText = formatAnswer(answerText);
+		return answerText;
+	}
+	
 	public void setQuestionNumber(int questionNumber) {  
 		this.questionNumber = questionNumber;
 	}
@@ -69,19 +89,6 @@ public class YesNoQuestion implements QuestionStrategy {
 	}
 	
 	public void setOptions(ArrayList<String> options) {}
-
-
-	/**
-	 * adds answer object to this questions list of answers
-	 * converts the string to standardize answer format.
-	 * returns new string
-	 */
-	public String addAnswer(Answer answer) {
-		answers.add(answer);
-		String answerText = answer.toString();
-		answerText = formatAnswer(answerText);
-		return answerText;
-	}
 
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
