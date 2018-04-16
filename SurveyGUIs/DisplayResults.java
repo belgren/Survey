@@ -20,7 +20,20 @@ public class DisplayResults {
 	private Survey currentSurvey;
 	private JTextArea label;
 	private JLabel Background;
+	private String results;
 
+
+	/**
+	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
+	 */
+	public DisplayResults(Survey survey, String report) {
+		this.results = report;
+		currentSurvey = null;
+		currentSurvey = survey;
+		initialize();
+	}
+
+	
 	/**
 	 * Method which launches the window
 	 */
@@ -28,7 +41,7 @@ public class DisplayResults {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DisplayResults window = new DisplayResults(currentSurvey);
+					DisplayResults window = new DisplayResults(currentSurvey, results);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,16 +49,7 @@ public class DisplayResults {
 			}
 		});
 	}
-
-	/**
-	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
-	 */
-	public DisplayResults(Survey survey) {
-		currentSurvey = null;
-		currentSurvey = survey;
-		initialize();
-	}
-
+	
 	/**
 	 * Initialize the contents of the frame
 	 */
@@ -57,9 +61,9 @@ public class DisplayResults {
 
 		//Eventually this will display the answers in the text area
 		label = new JTextArea();
-		for(QuestionStrategy q : currentSurvey.getQuestionList()) {
-			label.append("");
-		}
+		//for(QuestionStrategy q : currentSurvey.getQuestionList()) {
+			label.append(results);
+		//}
 		label.setEditable(false);
 
 

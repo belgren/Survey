@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.*;
-import java.lang.NumberFormatException;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
@@ -24,6 +23,7 @@ public class Survey {
 	private Database database;
 	private ResultSet report;
 	HashMap<Integer, ResultSet> rsMap;
+	private String returnValue;
 
 	private static Survey surveyInstance;
 
@@ -187,22 +187,44 @@ public class Survey {
 	 * new report that displays each answer and the number of occurrences, for the
 	 * inputed question.
 	 */
-	public void printReport() {
+	public String printReport() {
+		returnValue = "";
 		for (int qid : this.questionNumberMap.keySet()) {
-			System.out.print("\n\nQuestion " + qid + ":  ");
-			System.out.println(questionNumberMap.get(qid).toString());
+
+			returnValue += "\n\nQuestion " + qid + ":  ";
+
+			returnValue += questionNumberMap.get(qid).toString();
+			
+			QuestionStrategy currentQuestion = questionNumberMap.get(qid);
+
+			ArrayList<String> options = currentQuestion.getOptions();
+
+
 			try {
 				answerData = database.printSeparatedReport(qid);
 			} catch (SQLException e) { 
 				e.printStackTrace();
 				System.out.println("Error in printReport");
 			}
-			for (String answer : answerData.keySet()) {
-				//string answer = answer text
-				int count = answerData.get(answer);
-				System.out.print("\nAnswer: " + answer + " ===== Tally: " + answerData.get(answer));
+			
+			if (options != null) { //question is of type multiple choice
+				int i = 0;
+				for (String answer : answerData.keySet()) {
+					int count = answerData.get(answer);		
+					returnValue += "\nAnswer: " + options.get(i) + " ===== Tally: " + count;
+					i++;
+				}
 			}
+			else {
+				for (String answer : answerData.keySet()) {
+					int count = answerData.get(answer);		
+					returnValue += "\nAnswer: " + answer + " ===== Tally: " + count;
+				}
+			}
+			
 		}
+		//System.out.println(returnValue);
+		return returnValue;
 	}
 	
 	public String getSurveyName(){

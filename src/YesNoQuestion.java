@@ -65,6 +65,10 @@ public class YesNoQuestion implements QuestionStrategy {
 		}
 		return false;
 	}
+	
+	public ArrayList<String> getOptions(){
+		return null;
+	}
 
 	/**
 	 * Adds answer object to this questions list of answers

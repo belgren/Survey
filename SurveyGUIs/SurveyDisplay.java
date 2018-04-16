@@ -28,6 +28,7 @@ public class SurveyDisplay {
 	private JLabel Background;
 	private JButton resultButton;
 	private JTextArea instructions;
+	private String report;
 
 	/**
 	 * Method which launches the window.
@@ -99,12 +100,12 @@ public class SurveyDisplay {
 		resultButton = new JButton("Get Survey Results");
 		resultButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DisplayResults newResults = new DisplayResults(currentSurvey);
-				newResults.newDisplayResultsBuilder();
-				System.out.println("\nFetching Email data. . . .");
+				//System.out.println("\nFetching Email data. . . .");
 				currentSurvey.getSurveyEmailData();
 				currentSurvey.separateAnswers(currentSurvey.getEmailList(), currentSurvey.getQuestionList());
-				currentSurvey.printReport();
+				report = currentSurvey.printReport();
+				DisplayResults newResults = new DisplayResults(currentSurvey, report);
+				newResults.newDisplayResultsBuilder();
 				frame.dispose();
 			}
 		});

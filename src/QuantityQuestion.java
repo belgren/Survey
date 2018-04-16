@@ -27,6 +27,11 @@ public class QuantityQuestion implements QuestionStrategy {
 		tally = new HashMap<String, Integer>();
 		//validAnswers = new ArrayList<String>();
 	} 
+	
+	public ArrayList<String> getOptions(){
+		return null;
+	}
+
 
 	/**
 	 * Displays quantity question

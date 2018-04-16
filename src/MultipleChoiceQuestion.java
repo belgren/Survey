@@ -76,6 +76,10 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		this.options = options;
 	}
 	
+	public ArrayList<String> getOptions(){
+		return this.options;
+	}
+	
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
 	}
