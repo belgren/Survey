@@ -228,7 +228,7 @@ public class Survey {
 			else {
 				for (String answer : answerData.keySet()) {
 					int count = answerData.get(answer);		
-					returnValue += "\nAnswer: " + answer + " ===== Tally: " + count;
+					returnValue += "\nAnswer: " + answer + " ➪ Tally: " + count;
 				}
 			}
 			
