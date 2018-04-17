@@ -97,7 +97,6 @@ public class SurveyMenu implements GUIWindow{
 		
 		//Currently un-clickable button that will eventually send the results to a file upon completion of the survey
 		JButton sendToFile = new JButton("Send To File");
-		sendToFile.setEnabled(false);
 		sendToFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				writeFile = true;

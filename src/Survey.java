@@ -245,11 +245,11 @@ public class Survey {
 	        writer = new FileWriter(file);
 	        writer.write("Test" + surveySummary);
 	    } catch (IOException e) {
-	        e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
+	        e.printStackTrace(); 
 	    } finally {
 	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
 	    }
-	    String message = "Survey results file is located at " + file.getAbsolutePath();
+	    String message = "Survey results file is located at: \n" + file.getAbsolutePath();
 	    return message;
 	}
 	

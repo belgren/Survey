@@ -66,7 +66,7 @@ public class SurveyBuilderQQ {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
-				mainMenu.newMainBuilder();
+				mainMenu.newDisplayBuilder();
 				frame.dispose();
 
 
@@ -84,13 +84,13 @@ public class SurveyBuilderQQ {
 				questionText = textBox.getText();
 				if (questionText.equals("")) {
 					ErrorWindow noSurveyNameError = new ErrorWindow("No question was given.");
-					noSurveyNameError.newErrorBuilder();
+					noSurveyNameError.newDisplayBuilder();
 					frame.dispose();
 				}
 				else {
 					currentSurvey.addQuantityQuestion(questionText);;
 					SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
-					mainMenu.newMainBuilder();
+					mainMenu.newDisplayBuilder();
 					frame.dispose();
 				}
 			}
