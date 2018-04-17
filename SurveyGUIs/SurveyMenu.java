@@ -34,6 +34,7 @@ public class SurveyMenu implements GUIWindow{
 	private JTextField surveyName;
 	private String surveyNameInput;
 	private Survey survey;
+	public static boolean writeFile;
 
 	/**
 	 * Launch the application.
@@ -49,6 +50,11 @@ public class SurveyMenu implements GUIWindow{
 				}
 			}
 		});
+	}
+	
+	
+	public boolean getWriteFile() {
+		return writeFile;
 	}
 	
 	public void newDisplayBuilder() {
@@ -71,6 +77,7 @@ public class SurveyMenu implements GUIWindow{
 	 */
 	public SurveyMenu() {
 		surveyNameInput = "";
+		writeFile = false;
 		initialize();
 		
 	}
@@ -93,6 +100,7 @@ public class SurveyMenu implements GUIWindow{
 		sendToFile.setEnabled(false);
 		sendToFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				writeFile = true;
 				surveyNameInput = surveyName.getText();
 				survey = Survey.getInstance(surveyNameInput);
 				SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);

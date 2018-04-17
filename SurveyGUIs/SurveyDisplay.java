@@ -104,7 +104,14 @@ public class SurveyDisplay implements GUIWindow{
 				//System.out.println("\nFetching Email data. . . .");
 				currentSurvey.getSurveyEmailData();
 				currentSurvey.separateAnswers(currentSurvey.getEmailList(), currentSurvey.getQuestionList());
-				report = currentSurvey.printReport();
+				if (! SurveyMenu.writeFile) {
+					report = currentSurvey.printReport();
+				}
+				else {
+					report = currentSurvey.makeReportFile();
+				}
+				
+				
 				DisplayResults newResults = new DisplayResults(currentSurvey, report);
 				newResults.newDisplayBuilder();
 				frame.dispose();
