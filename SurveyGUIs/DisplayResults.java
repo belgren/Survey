@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
  * @author darrylfilmore
  *
  */
-public class DisplayResults {
+public class DisplayResults implements GUIWindow{
 
 	private JFrame frame;
 	private Survey currentSurvey;
@@ -37,7 +37,7 @@ public class DisplayResults {
 	/**
 	 * Method which launches the window
 	 */
-	public void newDisplayResultsBuilder() {
+	public void newDisplayBuilder() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -53,7 +53,7 @@ public class DisplayResults {
 	/**
 	 * Initialize the contents of the frame
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +69,6 @@ public class DisplayResults {
 
 		JScrollPane scrollPane = new JScrollPane(label);
 		scrollPane.setBounds(23, 83, 448, 369);
-		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().add(scrollPane);
 		frame.setResizable(false);
 

@@ -20,14 +20,14 @@ import java.awt.event.ActionEvent;
  * @author darrylfilmore
  *
  */
-public class SurveyBuilderMain {
+public class SurveyBuilderMain implements GUIWindow{
 
 	private JFrame frame;
 	private Survey currentSurvey;
 	/**
 	 * Method which launches the window
 	 */
-	public void newMainBuilder() {
+	public void newDisplayBuilder() {
 		try {
 			SurveyBuilderMain window = new SurveyBuilderMain(currentSurvey);
 			window.frame.setVisible(true);
@@ -48,7 +48,7 @@ public class SurveyBuilderMain {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 0, 450, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +66,7 @@ public class SurveyBuilderMain {
 		ynButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SurveyBuilderYN newYN = new SurveyBuilderYN(currentSurvey);
-				newYN.newYNQuestion();
+				newYN.newDisplayBuilder();
 				frame.dispose();
 			}
 		});
@@ -79,7 +79,7 @@ public class SurveyBuilderMain {
 		mcButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SurveyBuilderMC newMC = new SurveyBuilderMC(currentSurvey);
-				newMC.newMCQuestion();
+				newMC.newDisplayBuilder();
 				frame.dispose();
 			}
 		});
@@ -98,7 +98,7 @@ public class SurveyBuilderMain {
 		btnCreateSurvey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SurveyDisplay newSurvey = new SurveyDisplay(currentSurvey);
-				newSurvey.newSurveyDisplay();
+				newSurvey.newDisplayBuilder();
 				frame.dispose();
 			}
 		});
