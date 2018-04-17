@@ -109,10 +109,16 @@ public class SurveyMenu {
 		nameText.setBounds(6, 210, 438, 25);
 		frame.getContentPane().add(nameText);
 
-		JLabel title = new JLabel("Survey Maker");
+		JLabel title = new JLabel("Surveza");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		title.setBounds(102, 0, 287, 72);
 		frame.getContentPane().add(title);
+		
+		JLabel lblPoweredByKwaltrix = new JLabel("<html> Powered by Kwaltrix<sup>TM</sup> </html>");
+		lblPoweredByKwaltrix.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		lblPoweredByKwaltrix.setBounds(332, 51, 112, 16);
+		frame.getContentPane().add(lblPoweredByKwaltrix);
 
 		JLabel surveyResultsLbl = new JLabel("How would you like to save the survey results?");
 		surveyResultsLbl.setHorizontalAlignment(SwingConstants.CENTER);

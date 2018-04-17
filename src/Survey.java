@@ -235,7 +235,7 @@ public class Survey {
 	
 	public String makeReportFile(){
 		surveySummary = this.printReport();
-		File file = new File("SurveyReport.txt");
+		File file = new File(surveyName.trim() + ".txt");
 	    FileWriter writer = null;
 	    try {
 	        writer = new FileWriter(file);
