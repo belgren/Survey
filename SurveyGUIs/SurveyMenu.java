@@ -124,14 +124,13 @@ public class SurveyMenu {
 				if (surveyNameInput.equals("")) {
 					ErrorWindow noSurveyNameError = new ErrorWindow("No survey name was given.");
 					noSurveyNameError.newErrorBuilder();
-					frame.dispose();
 				}
 				else {
 					survey = Survey.getInstance(surveyNameInput);
 					SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
 					homeScreen.newMainBuilder();
 					frame.dispose();
-				}
+				}	
 			}
 		});
 
