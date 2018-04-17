@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.lang.*;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.io.File;
@@ -18,14 +15,12 @@ public class Survey {
 	private ArrayList<QuestionStrategy> questionList;
 	private static ArrayList<Email> emailList;
 	private int counter;
-	private ArrayList<HashMap<String, Integer>> allAnswerTallys;
 	private String surveyName;
 	private HashMap<Integer, QuestionStrategy> questionNumberMap;
 	private HashMap<String, Integer> answerData;
 
 	private Database database;
-	private ResultSet report;
-	HashMap<Integer, ResultSet> rsMap;
+	private HashMap<Integer, ResultSet> rsMap;
 	private String returnValue;
 	private String surveySummary;
 
@@ -48,7 +43,6 @@ public class Survey {
 	private Survey(String name) {
 		surveyName = name;
 		counter = 0;
-		allAnswerTallys = new ArrayList<HashMap<String, Integer>>();
 		questionNumberMap = new HashMap<Integer, QuestionStrategy>();
 		emailList = new ArrayList<Email>();
 		questionList = new ArrayList<QuestionStrategy>();
@@ -246,13 +240,14 @@ public class Survey {
 	    FileWriter writer = null;
 	    try {
 	        writer = new FileWriter(file);
-	        writer.write("Test" + surveySummary);
+	        writer.write(surveySummary);
 	    } catch (IOException e) {
 	        e.printStackTrace(); 
 	    } finally {
 	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
 	    }
-	    String message = "Survey results file is located at: \n" + file.getAbsolutePath();
+	    String message = "Results from: " + surveyName + "\n";
+	    message += "Survey results file is located at: \n" + file.getAbsolutePath();
 	    return message;
 	}
 	

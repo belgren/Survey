@@ -1,34 +1,22 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import javax.swing.JTextArea;
-import javax.swing.UIManager;
-import javax.swing.DropMode;
 import java.awt.Color;
-import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Canvas;
-import java.awt.Button;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 /**
  * GUI class that displays the survey creation menu
  * This file runs all the other files!
- * @author darrylfilmore
  *
  */
-public class SurveyMenu implements GUIWindow{
+public class SurveyMenu {
 
 	private JFrame frame;
 	private JTextField surveyName;
@@ -87,7 +75,6 @@ public class SurveyMenu implements GUIWindow{
 	 */
 	public void initialize() {
 		frame = new JFrame();
-		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(245, 245, 245));
 		frame.setBackground(Color.WHITE);
 		frame.setBounds(0, 0, 450, 400);
@@ -95,7 +82,7 @@ public class SurveyMenu implements GUIWindow{
 		frame.getContentPane().setLayout(null);
 
 		
-		//Currently un-clickable button that will eventually send the results to a file upon completion of the survey
+		//Sends the results to a file upon completion of the survey
 		JButton sendToFile = new JButton("Send To File");
 		sendToFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,7 +121,7 @@ public class SurveyMenu implements GUIWindow{
 		frame.getContentPane().add(sendToFile);
 
 		
-		//Button that currently displays the results in terminal and sends the user to the next step of the survey making process
+		//Button that tells the survey to display results in a new window and sends the user to the next step of the survey making process
 		//Only works if the survey has a name, if not, pops up and error message
 		JButton displayOnScreen = new JButton("Display On Screen");
 		displayOnScreen.setBounds(239, 335, 138, 37);

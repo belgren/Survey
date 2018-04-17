@@ -1,6 +1,5 @@
 import java.awt.EventQueue;
 import java.awt.Font;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,13 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 /**
  * GUI class that displays the Multiple Choice question building window
- * @author darrylfilmore
  *
  */
-public class SurveyBuilderMC implements GUIWindow{
+public class SurveyBuilderMC {
 
 	private JFrame frame;
-	private JTextField textField;
 	private Survey currentSurvey;
 	private String questionText;
 
@@ -60,6 +57,7 @@ public class SurveyBuilderMC implements GUIWindow{
 		
 		JTextArea textBox = new JTextArea();
 		textBox.setBounds(49, 171, 355, 58);
+		textBox.setLineWrap(true);
 		textBox.setBackground(UIManager.getColor("window"));
 		frame.getContentPane().add(textBox);
 		
@@ -69,7 +67,7 @@ public class SurveyBuilderMC implements GUIWindow{
 		optionALabel.setBounds(49, 241, 179, 36);
 		frame.getContentPane().add(optionALabel);
 		
-		JTextArea optionA = new JTextArea();
+		JTextField optionA = new JTextField();
 		optionA.setBackground(SystemColor.window);
 		optionA.setBounds(49, 270, 179, 29);
 		frame.getContentPane().add(optionA);
@@ -79,7 +77,7 @@ public class SurveyBuilderMC implements GUIWindow{
 		optionBLabel.setBounds(230, 241, 174, 36);
 		frame.getContentPane().add(optionBLabel);
 		
-		JTextArea optionB = new JTextArea();
+		JTextField optionB = new JTextField();
 		optionB.setBackground(SystemColor.window);
 		optionB.setBounds(230, 270, 174, 29);
 		frame.getContentPane().add(optionB);
@@ -89,7 +87,7 @@ public class SurveyBuilderMC implements GUIWindow{
 		optionCLabel.setBounds(49, 324, 174, 36);
 		frame.getContentPane().add(optionCLabel);
 		
-		JTextArea optionC = new JTextArea();
+		JTextField optionC = new JTextField();
 		optionC.setBackground(SystemColor.window);
 		optionC.setBounds(49, 353, 179, 29);
 		frame.getContentPane().add(optionC);
@@ -99,7 +97,7 @@ public class SurveyBuilderMC implements GUIWindow{
 		optionDLabel.setBounds(230, 324, 174, 36);
 		frame.getContentPane().add(optionDLabel);
 		
-		JTextArea optionD = new JTextArea();
+		JTextField optionD = new JTextField();
 		optionD.setBackground(SystemColor.window);
 		optionD.setBounds(230, 353, 174, 29);
 		frame.getContentPane().add(optionD);

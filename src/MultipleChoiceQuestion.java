@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Concrete subclass of question defining the multiple choice question type.
@@ -8,12 +7,10 @@ import java.util.HashMap;
  */
 public class MultipleChoiceQuestion implements QuestionStrategy {
   
-	public ArrayList<String> validAnswers;
+	private ArrayList<String> validAnswers;
 	private String questionText;
 	private ArrayList<Answer> answers;
-	private HashMap<String, Integer> tally;
-	public int questionNumber;
-	private int questionType;
+	private int questionNumber;
 	private ArrayList<String> options;
 	
 
@@ -24,10 +21,8 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 	public MultipleChoiceQuestion(String questionText) {
 
 		this.questionText = questionText;
-		questionType = 2;
 		options = new ArrayList<String>();
 		answers = new ArrayList<Answer>();
-		tally = new HashMap<String, Integer>();
 		validAnswers = new ArrayList<String>();
 		validAnswers.add("A");
 		validAnswers.add("B");
@@ -84,16 +79,12 @@ public class MultipleChoiceQuestion implements QuestionStrategy {
 		this.questionNumber = questionNumber;
 	}
 	
-	public int getQuestionType() {
-		return questionType;
+	public String toString() {
+		return questionText;
 	}
 	
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
-	}
-
-	public String toString() {
-		return this.questionText;
 	}
 	
 	public int getQuestionNumber() {

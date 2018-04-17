@@ -3,7 +3,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -11,15 +10,13 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 /**
  * GUI class that displays the results of the survey (this class is not fully functional yet).
- * @author darrylfilmore
  *
  */
-public class DisplayResults implements GUIWindow{
+public class DisplayResults {
 
 	private JFrame frame;
 	private Survey currentSurvey;
 	private JTextArea label;
-	private JLabel Background;
 	private String results;
 
 
@@ -55,33 +52,30 @@ public class DisplayResults implements GUIWindow{
 	 */
 	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 500);
+		frame.setBounds(0, 0, 946, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 
-		//Eventually this will display the answers in the text area
 		label = new JTextArea();
-		//for(QuestionStrategy q : currentSurvey.getQuestionList()) {
-			label.append(results);
-		//}
+		label.append(results);
+		frame.getContentPane().setLayout(null);
 		label.setEditable(false);
 
 
 		JScrollPane scrollPane = new JScrollPane(label);
-		scrollPane.setBounds(23, 83, 448, 369);
+		scrollPane.setBounds(91, 83, 764, 491);
 		frame.getContentPane().add(scrollPane);
 		frame.setResizable(false);
 
 		JLabel surveyTitle = new JLabel(currentSurvey.getSurveyName() + " Results");
-		surveyTitle.setBounds(23, 6, 429, 48);
+		surveyTitle.setBounds(258, 6, 429, 48);
+		surveyTitle.setForeground(Color.LIGHT_GRAY);
 		frame.getContentPane().add(surveyTitle);
 		surveyTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		surveyTitle.setHorizontalAlignment(SwingConstants.CENTER);
-
-		Background = new JLabel("");
-		Background.setIcon(new ImageIcon(SurveyDisplay.class.getResource("/resources/arcticsea.jpg")));
-		Background.setBounds(0, 0, 500, 478);
-		frame.getContentPane().add(Background);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(DisplayResults.class.getResource("/resources/26_arctic.jpg")));
+		lblNewLabel.setBounds(0, 0, 946, 750);
+		frame.getContentPane().add(lblNewLabel);
 	}
-
 }

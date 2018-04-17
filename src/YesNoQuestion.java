@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Concrete subclass of question defining the yes/no question type.
@@ -8,12 +7,10 @@ import java.util.HashMap;
  */
 public class YesNoQuestion implements QuestionStrategy {
 
-	public ArrayList<String> validAnswers;
+	private ArrayList<String> validAnswers;
 	private String questionText;
 	private ArrayList<Answer> answers;
-	private HashMap<String, Integer> tally;
-	public int questionNumber;
-	private int questionType;
+	private int questionNumber;
 
 	/**
 	 * Constructor instantiates fields and sets up valid answers for yes/no questions.  
@@ -22,7 +19,6 @@ public class YesNoQuestion implements QuestionStrategy {
 	public YesNoQuestion(String questionText) {
 		
 		this.questionText = questionText;
-		questionType = 1;
 		validAnswers = new ArrayList<String>();
 		validAnswers.add("y");
 		validAnswers.add("n");
@@ -88,18 +84,14 @@ public class YesNoQuestion implements QuestionStrategy {
 		this.questionNumber = questionNumber;
 	}
 	
-	public int getQuestionType() {
-		return questionType;
-	}
-	
 	public void setOptions(ArrayList<String> options) {}
 
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
 	}
-
+	
 	public String toString() {
-		return this.questionText;
+		return questionText;
 	}
 	
 	public int getQuestionNumber() {

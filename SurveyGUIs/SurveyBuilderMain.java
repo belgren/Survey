@@ -1,26 +1,16 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.event.ItemEvent;
-import java.util.ArrayList;
-
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 /**
  * GUI class that displays the main survey building menu
- * @author darrylfilmore
  *
  */
-public class SurveyBuilderMain implements GUIWindow{
+public class SurveyBuilderMain {
 
 	private JFrame frame;
 	private Survey currentSurvey;
@@ -54,7 +44,7 @@ public class SurveyBuilderMain implements GUIWindow{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		//Button that cannot be pushed right now
+		
 		JButton qqButton = new JButton("Add Short Answer");
 		qqButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

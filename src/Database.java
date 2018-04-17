@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 public class Database {
 
@@ -21,10 +20,6 @@ public class Database {
 	private Connection conn;
 	public static final String PORT_NUMBER = "8889";
 
-	private HashMap<String, Integer> answersTally;
-	private ArrayList<Integer> questionNumbers;
-	private HashMap<Integer, ResultSet> separatedReports;
-	private ResultSet currentReport;
 	private HashMap<String, Integer> tuple;
 	HashMap<Integer, String> questionTableContents;
 
@@ -32,7 +27,7 @@ public class Database {
 	 * Constructor that establishes a new connection and creates a new statement
 	 */
 	public Database() {
-		separatedReports = new HashMap<Integer, ResultSet>();
+		
 		try {
 			// Allocate a database "Connection" object
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:" + PORT_NUMBER + "/", "root", "root"); // MySQL

@@ -1,6 +1,5 @@
 /**
  * Class to create email objects.
- * @author Jordan
  *
  */
 public class Email {

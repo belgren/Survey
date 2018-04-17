@@ -8,12 +8,9 @@ import java.util.HashMap;
  */
 public class ShortAnswerQuestion implements QuestionStrategy {
 
-	//public ArrayList<String> validAnswers;
 	private String questionText;
 	private ArrayList<Answer> answers;
-	private HashMap<String, Integer> tally;
-	public int questionNumber;
-	private int questionType;
+	private int questionNumber;
 
 	/**
 	 * Constructor instantiates fields for short answer questions.  
@@ -22,10 +19,7 @@ public class ShortAnswerQuestion implements QuestionStrategy {
 	public ShortAnswerQuestion(String questionText) {
 
 		this.questionText = questionText;
-		questionType = 3;
 		answers = new ArrayList<Answer>();
-		tally = new HashMap<String, Integer>();
-		//validAnswers = new ArrayList<String>();
 	} 
 	
 	public ArrayList<String> getOptions(){
@@ -63,18 +57,13 @@ public class ShortAnswerQuestion implements QuestionStrategy {
 	public void setQuestionNumber(int questionNumber) {
 		this.questionNumber = questionNumber;
 	}
-	
-	public int getQuestionType() {
-		return questionType;
-	}
 
 	public ArrayList<Answer> getAnswers() {
 		return this.answers;
 	}
-
-
+	
 	public String toString() {
-		return this.questionText;
+		return questionText;
 	}
 	
 	public int getQuestionNumber() {

@@ -1,6 +1,5 @@
 import java.awt.EventQueue;
 import java.awt.Font;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,13 +12,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 /**
  * GUI class that displays the Yes/No question building window
- * @author darrylfilmore
  *
  */
 public class SurveyBuilderSA {
 
 	private JFrame frame;
-	private JTextField textField;
 	private Survey currentSurvey;
 	private String questionText;
 
@@ -58,6 +55,7 @@ public class SurveyBuilderSA {
 
 		JTextArea textBox = new JTextArea();
 		textBox.setBounds(49, 190, 355, 127);
+		textBox.setLineWrap(true);
 		textBox.setBackground(UIManager.getColor("window"));
 		frame.getContentPane().add(textBox);
 

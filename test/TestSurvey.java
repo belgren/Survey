@@ -1,7 +1,6 @@
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,9 +12,7 @@ public class TestSurvey {
 	private Email email2;
 	private ArrayList<Email> emailList; 
 	private ArrayList<QuestionStrategy> questionList;
-	private QuestionStrategy question1;
 	
-	private Answer answer1;
 
 	
 	@Before

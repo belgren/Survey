@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -6,21 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 /**
  * GUI class that displays the survey
- * @author darrylfilmore
  *
  */
-public class SurveyDisplay implements GUIWindow{
+public class SurveyDisplay {
 
 	private JFrame frame;
 	private Survey currentSurvey;
@@ -60,7 +56,7 @@ public class SurveyDisplay implements GUIWindow{
 	 */
 	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 500);
+		frame.setBounds(0, 0, 946, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -80,28 +76,28 @@ public class SurveyDisplay implements GUIWindow{
 		instructions.setWrapStyleWord(true);
 		instructions.setToolTipText("");
 		instructions.setBackground(new Color(255, 255, 255));
-		instructions.setBounds(23, 71, 448, 118);
+		instructions.setBounds(258, 66, 429, 118);
 		instructions.setEditable(false);
 		frame.getContentPane().add(instructions);
 
 
 		JScrollPane scrollPane = new JScrollPane(label);
-		scrollPane.setBounds(23, 205, 448, 219);
+		scrollPane.setBounds(159, 206, 628, 458);
 		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().add(scrollPane);
 		frame.setResizable(false);
 
 		JLabel surveyTitle = new JLabel(currentSurvey.getSurveyName());
-		surveyTitle.setBounds(23, 6, 429, 48);
+		surveyTitle.setForeground(Color.LIGHT_GRAY);
+		surveyTitle.setBounds(258, 6, 429, 48);
 		frame.getContentPane().add(surveyTitle);
 		surveyTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		surveyTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
-		//Displays survey results in terminal (for now)
+		//Displays results in new window
 		resultButton = new JButton("Get Survey Results");
 		resultButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println("\nFetching Email data. . . .");
 				currentSurvey.getSurveyEmailData();
 				currentSurvey.separateAnswers(currentSurvey.getEmailList(), currentSurvey.getQuestionList());
 				if (! SurveyMenu.writeFile) {
@@ -117,12 +113,12 @@ public class SurveyDisplay implements GUIWindow{
 				frame.dispose();
 			}
 		});
-		resultButton.setBounds(280, 432, 191, 29);
+		resultButton.setBounds(647, 676, 251, 46);
 		frame.getContentPane().add(resultButton);
 
 		Background = new JLabel("");
-		Background.setIcon(new ImageIcon(SurveyDisplay.class.getResource("/resources/arcticsea.jpg")));
-		Background.setBounds(0, 0, 500, 478);
+		Background.setIcon(new ImageIcon(SurveyDisplay.class.getResource("/resources/SurveyDisplay.jpg")));
+		Background.setBounds(0, 0, 946, 750);
 		frame.getContentPane().add(Background);
 	}
 }
