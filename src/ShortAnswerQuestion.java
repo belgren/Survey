@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Concrete subclass of question defining the quantity question type.
+ * Concrete subclass of question defining the short answer question type.
  * Contains an ArrayList of answer objects that will be filled in when the survey is conducted
  * and a method to display the question
  */
-public class QuantityQuestion implements QuestionStrategy {
+public class ShortAnswerQuestion implements QuestionStrategy {
 
 	//public ArrayList<String> validAnswers;
 	private String questionText;
@@ -16,10 +16,10 @@ public class QuantityQuestion implements QuestionStrategy {
 	private int questionType;
 
 	/**
-	 * Constructor instantiates fields for quantity questions.  
+	 * Constructor instantiates fields for short answer questions.  
 	 * @param questionText
 	 */
-	public QuantityQuestion(String questionText) {
+	public ShortAnswerQuestion(String questionText) {
 
 		this.questionText = questionText;
 		questionType = 3;
@@ -34,7 +34,7 @@ public class QuantityQuestion implements QuestionStrategy {
 
 
 	/**
-	 * Displays quantity question
+	 * Displays short answer question
 	 */
 	public String displayQuestion() {
 		return this.toString();

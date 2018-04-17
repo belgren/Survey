@@ -55,11 +55,11 @@ public class SurveyBuilderMain implements GUIWindow{
 		frame.getContentPane().setLayout(null);
 		
 		//Button that cannot be pushed right now
-		JButton qqButton = new JButton("Add Quantity Question");
+		JButton qqButton = new JButton("Add Short Answer");
 		qqButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SurveyBuilderQQ newQQ = new SurveyBuilderQQ(currentSurvey);
-				newQQ.newQQuestion();
+				SurveyBuilderSA newSA = new SurveyBuilderSA(currentSurvey);
+				newSA.newQQuestion();
 				frame.dispose();
 			}
 		});

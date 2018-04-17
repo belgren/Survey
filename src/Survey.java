@@ -112,14 +112,14 @@ public class Survey {
 	}
 
 	/**
-	 * Creates a quantity question object with the given question text.
+	 * Creates a short answer question object with the given question text.
 	 * Adds the question to the survey's attribute, questionList. Assigns question number based on
 	 * incrementing counter. Adds the new question to the Question table in
 	 * SurveyDatabase.
 	 * @param questionText
 	 */
-	public void addQuantityQuestion(String questionText) {
-		question = new QuantityQuestion(questionText);
+	public void addShortAnswerQuestion(String questionText) {
+		question = new ShortAnswerQuestion(questionText);
 		counter++;
 		question.setQuestionNumber(counter);
 		questionList.add(question);

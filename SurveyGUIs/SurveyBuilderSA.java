@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
  * @author darrylfilmore
  *
  */
-public class SurveyBuilderQQ {
+public class SurveyBuilderSA {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -30,7 +30,7 @@ public class SurveyBuilderQQ {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SurveyBuilderQQ window = new SurveyBuilderQQ(currentSurvey);
+					SurveyBuilderSA window = new SurveyBuilderSA(currentSurvey);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class SurveyBuilderQQ {
 	/**
 	 * Constructor which takes in the survey, to allow the survey object to be edited/used 
 	 */
-	public SurveyBuilderQQ(Survey survey) {
+	public SurveyBuilderSA(Survey survey) {
 		currentSurvey = survey;
 		initialize();
 	}
@@ -75,7 +75,7 @@ public class SurveyBuilderQQ {
 		backButton.setBounds(163, 507, 244, 44);
 		frame.getContentPane().add(backButton);
 
-		//Creates a new quantity question if the question field is full, otherwise, takes user to error message
+		//Creates a new short answer question if the question field is full, otherwise, takes user to error message
 		JButton btnAddQuestion = new JButton("Add Question");
 		btnAddQuestion.setBounds(163, 370, 117, 29);
 		frame.getContentPane().add(btnAddQuestion);
@@ -88,7 +88,7 @@ public class SurveyBuilderQQ {
 					frame.dispose();
 				}
 				else {
-					currentSurvey.addQuantityQuestion(questionText);;
+					currentSurvey.addShortAnswerQuestion(questionText);;
 					SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
 					mainMenu.newDisplayBuilder();
 					frame.dispose();
@@ -96,7 +96,7 @@ public class SurveyBuilderQQ {
 			}
 		});
 
-		JLabel descriptorTest = new JLabel("Enter quantity question:");
+		JLabel descriptorTest = new JLabel("Enter short answer question:");
 		descriptorTest.setHorizontalAlignment(SwingConstants.CENTER);
 		descriptorTest.setBounds(44, 154, 365, 36);
 		frame.getContentPane().add(descriptorTest);
