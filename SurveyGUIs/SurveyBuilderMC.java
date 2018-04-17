@@ -18,7 +18,7 @@ import java.awt.SystemColor;
  * @author darrylfilmore
  *
  */
-public class SurveyBuilderMC {
+public class SurveyBuilderMC implements GUIWindow{
 
 	private JFrame frame;
 	private JTextField textField;
@@ -28,7 +28,7 @@ public class SurveyBuilderMC {
 	/**
 	 * Method which launches the window.
 	 */
-	public void newMCQuestion() {
+	public void newDisplayBuilder() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -52,7 +52,7 @@ public class SurveyBuilderMC {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 0, 450, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,7 +110,7 @@ public class SurveyBuilderMC {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
-				mainMenu.newMainBuilder();
+				mainMenu.newDisplayBuilder();
 				frame.dispose();
 				
 				
@@ -128,8 +128,7 @@ public class SurveyBuilderMC {
 				questionText = textBox.getText();
 				if ((questionText.equals("")) || (optionA.getText().equals(""))|| (optionB.getText().equals("")) || (optionC.getText().equals(""))|| (optionD.getText().equals(""))) {
 					ErrorWindow noSurveyNameError = new ErrorWindow("A question field was not filled out.");
-					noSurveyNameError.newErrorBuilder();
-					frame.dispose();
+					noSurveyNameError.newDisplayBuilder();
 				}
 				else {
 					ArrayList<String> options = new ArrayList<String>();
@@ -139,7 +138,7 @@ public class SurveyBuilderMC {
 					options.add(optionD.getText());
 					currentSurvey.addMultChoiceQuestion(questionText, options);
 					SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
-					mainMenu.newMainBuilder();
+					mainMenu.newDisplayBuilder();
 					frame.dispose();
 				}
 			}

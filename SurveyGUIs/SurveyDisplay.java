@@ -20,7 +20,7 @@ import javax.swing.JButton;
  * @author darrylfilmore
  *
  */
-public class SurveyDisplay {
+public class SurveyDisplay implements GUIWindow{
 
 	private JFrame frame;
 	private Survey currentSurvey;
@@ -33,7 +33,7 @@ public class SurveyDisplay {
 	/**
 	 * Method which launches the window.
 	 */
-	public void newSurveyDisplay() {
+	public void newDisplayBuilder() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -58,7 +58,7 @@ public class SurveyDisplay {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +68,7 @@ public class SurveyDisplay {
 		for(QuestionStrategy q : currentSurvey.getQuestionList()) {
 			label.append("Question " + q.getQuestionNumber() +" : " + q.displayQuestion() + "\n\n");
 		}
+		label.setEditable(false);
 
 		//Displays instructions
 		instructions = new JTextArea();
@@ -105,7 +106,7 @@ public class SurveyDisplay {
 				currentSurvey.separateAnswers(currentSurvey.getEmailList(), currentSurvey.getQuestionList());
 				report = currentSurvey.printReport();
 				DisplayResults newResults = new DisplayResults(currentSurvey, report);
-				newResults.newDisplayResultsBuilder();
+				newResults.newDisplayBuilder();
 				frame.dispose();
 			}
 		});

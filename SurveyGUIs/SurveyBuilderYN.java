@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
  * @author darrylfilmore
  *
  */
-public class SurveyBuilderYN {
+public class SurveyBuilderYN implements GUIWindow{
 
 	private JFrame frame;
 	private JTextField textField;
@@ -26,7 +26,7 @@ public class SurveyBuilderYN {
 	/**
 	 * Method which launches the window.
 	 */
-	public void newYNQuestion() {
+	public void newDisplayBuilder() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,7 +50,7 @@ public class SurveyBuilderYN {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 0, 450, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +66,7 @@ public class SurveyBuilderYN {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
-				mainMenu.newMainBuilder();
+				mainMenu.newDisplayBuilder();
 				frame.dispose();
 
 
@@ -84,13 +84,12 @@ public class SurveyBuilderYN {
 				questionText = textBox.getText();
 				if (questionText.equals("")) {
 					ErrorWindow noSurveyNameError = new ErrorWindow("No question was given.");
-					noSurveyNameError.newErrorBuilder();
-					frame.dispose();
+					noSurveyNameError.newDisplayBuilder();
 				}
 				else {
 					currentSurvey.addYesNoQuestion(questionText);
 					SurveyBuilderMain mainMenu = new SurveyBuilderMain(currentSurvey);
-					mainMenu.newMainBuilder();
+					mainMenu.newDisplayBuilder();
 					frame.dispose();
 				}
 			}

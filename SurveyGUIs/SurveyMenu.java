@@ -28,7 +28,7 @@ import javax.swing.JTextField;
  * @author darrylfilmore
  *
  */
-public class SurveyMenu {
+public class SurveyMenu implements GUIWindow{
 
 	private JFrame frame;
 	private JTextField surveyName;
@@ -39,7 +39,6 @@ public class SurveyMenu {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -51,7 +50,22 @@ public class SurveyMenu {
 			}
 		});
 	}
+	
+	public void newDisplayBuilder() {
 
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SurveyMenu window = new SurveyMenu();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	
 	/**
 	 * Create the application.
 	 */
@@ -64,7 +78,7 @@ public class SurveyMenu {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(245, 245, 245));
@@ -82,7 +96,7 @@ public class SurveyMenu {
 				surveyNameInput = surveyName.getText();
 				survey = Survey.getInstance(surveyNameInput);
 				SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
-				homeScreen.newMainBuilder();
+				homeScreen.newDisplayBuilder();
 				frame.dispose();
 			}
 		});
@@ -123,12 +137,12 @@ public class SurveyMenu {
 				surveyNameInput = surveyName.getText();
 				if (surveyNameInput.equals("")) {
 					ErrorWindow noSurveyNameError = new ErrorWindow("No survey name was given.");
-					noSurveyNameError.newErrorBuilder();
+					noSurveyNameError.newDisplayBuilder();
 				}
 				else {
 					survey = Survey.getInstance(surveyNameInput);
 					SurveyBuilderMain homeScreen = new SurveyBuilderMain(survey);
-					homeScreen.newMainBuilder();
+					homeScreen.newDisplayBuilder();
 					frame.dispose();
 				}	
 			}
