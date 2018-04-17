@@ -31,7 +31,6 @@ public class Survey {
 		if(surveyInstance == null) {
 			surveyInstance = new Survey(name);
 		}
-		
 		return surveyInstance;
 	}
 	
@@ -240,14 +239,14 @@ public class Survey {
 	    FileWriter writer = null;
 	    try {
 	        writer = new FileWriter(file);
+	        writer.write("Results from: " + surveyName + "\n\n");
 	        writer.write(surveySummary);
 	    } catch (IOException e) {
 	        e.printStackTrace(); 
 	    } finally {
 	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
 	    }
-	    String message = "Results from: " + surveyName + "\n";
-	    message += "Survey results file is located at: \n" + file.getAbsolutePath();
+	    String message = "Survey results file is located at: \n" + file.getAbsolutePath();
 	    return message;
 	}
 	
