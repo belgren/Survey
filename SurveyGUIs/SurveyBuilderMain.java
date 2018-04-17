@@ -43,6 +43,7 @@ public class SurveyBuilderMain {
 		frame.setBounds(100, 0, 450, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 		
 		
 		JButton qqButton = new JButton("Add Short Answer");

@@ -62,6 +62,7 @@ public class ErrorWindow {
 		JTextArea errorMessage = new JTextArea("\n      " + errorMessageString);
 		errorMessage.setBounds(67, 71, 405, 207);
 		frame.getContentPane().add(errorMessage);
+		frame.setResizable(false);
 
 		JLabel errorTitle = new JLabel("Error");
 		errorTitle.setHorizontalAlignment(SwingConstants.CENTER);

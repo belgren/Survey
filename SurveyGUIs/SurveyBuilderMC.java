@@ -54,6 +54,7 @@ public class SurveyBuilderMC {
 		frame.setBounds(100, 0, 450, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 		
 		JTextArea textBox = new JTextArea();
 		textBox.setBounds(49, 171, 355, 58);

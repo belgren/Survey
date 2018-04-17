@@ -80,6 +80,7 @@ public class SurveyMenu {
 		frame.setBounds(0, 0, 450, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 
 		
 		//Sends the results to a file upon completion of the survey
