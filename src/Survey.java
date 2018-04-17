@@ -221,14 +221,14 @@ public class Survey {
 				int i = 0;
 				for (String answer : answerData.keySet()) {
 					int count = answerData.get(answer)-1;		
-					returnValue += "\nAnswer: " + options.get(i) + " ===== Tally: " + count;
+					returnValue += "\nAnswer: " + options.get(i) + " ➪➪➪ Tally: " + count;
 					i++;
 				}
 			}
 			else {
 				for (String answer : answerData.keySet()) {
 					int count = answerData.get(answer);		
-					returnValue += "\nAnswer: " + answer + " ➪ Tally: " + count;
+					returnValue += "\nAnswer: " + answer + " ➪➪➪ Tally: " + count;
 				}
 			}
 			
