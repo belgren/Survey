@@ -55,7 +55,6 @@ public class ErrorWindow implements GUIWindow{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(139, 0, 0));
 		frame.setBounds(100, 100, 540, 360);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		
