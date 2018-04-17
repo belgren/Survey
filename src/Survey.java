@@ -99,6 +99,12 @@ public class Survey {
 		question.setOptions(options);
 		try {
 			database.addQuestion(counter, questionText);
+			//add valid answers to db, so options are always reported
+			database.addAnswer("A", counter);
+			database.addAnswer("B", counter);
+			database.addAnswer("C", counter);
+			database.addAnswer("D", counter);
+			
 		} catch (SQLException e) {
 			System.out.println("Error adding question " + counter + " to the database.");
 			e.printStackTrace();
@@ -214,7 +220,7 @@ public class Survey {
 			if (options != null) { //question is of type multiple choice
 				int i = 0;
 				for (String answer : answerData.keySet()) {
-					int count = answerData.get(answer);		
+					int count = answerData.get(answer)-1;		
 					returnValue += "\nAnswer: " + options.get(i) + " ===== Tally: " + count;
 					i++;
 				}
