@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.lang.*;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Survey class, which creates the survey
@@ -24,6 +27,7 @@ public class Survey {
 	private ResultSet report;
 	HashMap<Integer, ResultSet> rsMap;
 	private String returnValue;
+	private String surveySummary;
 
 	private static Survey surveyInstance;
 
@@ -225,6 +229,22 @@ public class Survey {
 		}
 		//System.out.println(returnValue);
 		return returnValue;
+	}
+	
+	public String makeReportFile(){
+		surveySummary = this.printReport();
+		File file = new File("SurveyReport.txt");
+	    FileWriter writer = null;
+	    try {
+	        writer = new FileWriter(file);
+	        writer.write("Test" + surveySummary);
+	    } catch (IOException e) {
+	        e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
+	    } finally {
+	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
+	    }
+	    String message = "Survey results file is located at " + file.getAbsolutePath();
+	    return message;
 	}
 	
 	public String getSurveyName(){
