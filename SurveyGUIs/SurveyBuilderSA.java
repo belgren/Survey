@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 /**
@@ -106,6 +105,11 @@ public class SurveyBuilderSA {
 		surveyMakerTitle.setBounds(44, 6, 365, 86);
 		frame.getContentPane().add(surveyMakerTitle);
 
+		JLabel lblPoweredByKwaltrix = new JLabel("<html> Powered by Kwaltrix<sup>TM</sup> </html>");
+		lblPoweredByKwaltrix.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		lblPoweredByKwaltrix.setBounds(6, 556, 121, 16);
+		frame.getContentPane().add(lblPoweredByKwaltrix);
+		
 		JLabel whiteBackground = new JLabel("New label");
 		whiteBackground.setIcon(new ImageIcon(SurveyBuilderMain.class.getResource("/resources/white background.jpg")));
 		whiteBackground.setBounds(44, 138, 365, 349);

@@ -102,7 +102,10 @@ public class SurveyBuilderMain {
 		btnCreateSurvey.setBounds(255, 499, 152, 52);
 		frame.getContentPane().add(btnCreateSurvey);
 		
-		
+		JLabel lblPoweredByKwaltrix = new JLabel("<html> Powered by Kwaltrix<sup>TM</sup> </html>");
+		lblPoweredByKwaltrix.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		lblPoweredByKwaltrix.setBounds(6, 556, 121, 16);
+		frame.getContentPane().add(lblPoweredByKwaltrix);
 		
 		JLabel background = new JLabel("");
 		background.setIcon(new ImageIcon(SurveyBuilderMain.class.getResource("/resources/SurveyMaker.png")));

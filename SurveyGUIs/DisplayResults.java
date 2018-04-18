@@ -73,6 +73,11 @@ public class DisplayResults {
 		surveyTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		surveyTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		JLabel lblPoweredByKwaltrix = new JLabel("<html> Powered by Kwaltrix<sup>TM</sup> </html>");
+		lblPoweredByKwaltrix.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		lblPoweredByKwaltrix.setBounds(6, 706, 121, 16);
+		frame.getContentPane().add(lblPoweredByKwaltrix);
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(DisplayResults.class.getResource("/resources/26_arctic.jpg")));
 		lblNewLabel.setBounds(0, 0, 946, 750);

@@ -115,7 +115,7 @@ public class SurveyBuilderMC {
 				
 			}
 		});
-		backButton.setBounds(163, 507, 244, 44);
+		backButton.setBounds(163, 499, 244, 44);
 		frame.getContentPane().add(backButton);
 		
 		//Creates a new Multiple choice question if all fields are filled, otherwise, takes user to error message
@@ -153,6 +153,11 @@ public class SurveyBuilderMC {
 		surveyMakerTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		surveyMakerTitle.setBounds(44, 6, 365, 86);
 		frame.getContentPane().add(surveyMakerTitle);
+		
+		JLabel lblPoweredByKwaltrix = new JLabel("<html> Powered by Kwaltrix<sup>TM</sup> </html>");
+		lblPoweredByKwaltrix.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		lblPoweredByKwaltrix.setBounds(6, 556, 121, 16);
+		frame.getContentPane().add(lblPoweredByKwaltrix);
 		
 		JLabel whiteBackground = new JLabel("");
 		whiteBackground.setIcon(new ImageIcon(SurveyBuilderMain.class.getResource("/resources/white background.jpg")));

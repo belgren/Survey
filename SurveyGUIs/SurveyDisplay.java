@@ -107,7 +107,6 @@ public class SurveyDisplay {
 					report = currentSurvey.makeReportFile();
 				}
 				
-				
 				DisplayResults newResults = new DisplayResults(currentSurvey, report);
 				newResults.newDisplayBuilder();
 				frame.dispose();
@@ -116,6 +115,11 @@ public class SurveyDisplay {
 		resultButton.setBounds(647, 676, 251, 46);
 		frame.getContentPane().add(resultButton);
 
+		JLabel lblPoweredByKwaltrix = new JLabel("<html> Powered by Kwaltrix<sup>TM</sup> </html>");
+		lblPoweredByKwaltrix.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		lblPoweredByKwaltrix.setBounds(6, 706, 121, 16);
+		frame.getContentPane().add(lblPoweredByKwaltrix);
+		
 		Background = new JLabel("");
 		Background.setIcon(new ImageIcon(SurveyDisplay.class.getResource("/resources/SurveyDisplay.jpg")));
 		Background.setBounds(0, 0, 946, 750);
